@@ -7,7 +7,7 @@ interface PaletteOverviewProps {
   onSelectPalette: (index: number) => void;
 }
 
-const ScaleStrip = ({ scale, label }: { scale: Record<string, string>; label: string }) => (
+const ScaleStrip = ({ scale, label }: { scale: Record<number, string>; label: string }) => (
   <div>
     <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-2">{label}</p>
     <div className="flex h-16">
