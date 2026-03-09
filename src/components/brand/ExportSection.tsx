@@ -33,64 +33,63 @@ const ExportSection = ({ palette }: ExportSectionProps) => {
   ];
 
   return (
-    <section className="w-full bg-background section-rhythm">
+    <section className="w-full bg-background section-padding">
       <div className="max-w-[1920px] mx-auto px-12">
-        <h2 className="text-3xl font-extrabold text-foreground mb-2">Assets & Export</h2>
-        <p className="text-muted-foreground mb-8">Download your complete brand system in multiple formats.</p>
+        <h2 className="text-4xl font-extrabold text-foreground mb-4">Assets & Export</h2>
+        <p className="text-muted-foreground mb-12 max-w-2xl">Download your complete brand system in multiple formats. Ready for production implementation.</p>
 
         {/* Download buttons */}
-        <div className="grid grid-cols-4 gap-4 mb-10">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-16">
           {exports.map(exp => (
-            <button key={exp.label} onClick={exp.action} className="p-6 bg-card border-2 border-border hover:border-primary transition-colors text-left shadow-hard-sm group">
-              <exp.icon className="w-8 h-8 text-primary mb-4" />
-              <p className="text-lg font-bold text-foreground">{exp.label}</p>
-              <p className="text-sm text-muted-foreground">{exp.desc}</p>
-              <div className="mt-4 flex items-center gap-2 text-xs font-bold text-primary">
-                <Download className="w-3 h-3" /> Download
+            <button key={exp.label} onClick={exp.action} className="p-8 bg-white transition-all text-left shadow-hard group hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-hard-lg">
+              <exp.icon className="w-10 h-10 text-primary mb-6 transition-transform group-hover:scale-110" style={{ color: palette.primary[500] }} />
+              <p className="text-xl font-bold text-foreground mb-1">{exp.label}</p>
+              <p className="text-sm text-neutral-500 mb-6">{exp.desc}</p>
+              <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-primary">
+                <Download className="w-3.5 h-3.5" /> Download Asset
               </div>
             </button>
           ))}
         </div>
 
         {/* Code panels */}
-        <div className="grid grid-cols-2 gap-6 mb-10">
-          <div>
-            <div className="flex items-center justify-between mb-2">
-              <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">CSS Variables</p>
-              <button onClick={() => copyToClipboard(cssContent, 'css')} className="text-xs font-bold text-primary flex items-center gap-1">
-                {copiedPanel === 'css' ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
-                {copiedPanel === 'css' ? 'Copied!' : 'Copy'}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+          <div className="flex flex-col">
+            <div className="flex items-center justify-between mb-4">
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-500">System Tokens — CSS Variables</p>
+              <button onClick={() => copyToClipboard(cssContent, 'css')} className="text-[10px] font-bold uppercase tracking-widest text-primary flex items-center gap-2 hover:bg-primary/5 px-2 py-1 transition-all">
+                {copiedPanel === 'css' ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+                {copiedPanel === 'css' ? 'Copied to Clipboard' : 'Copy Property System'}
               </button>
             </div>
-            <pre className="bg-card border border-border p-4 text-xs font-mono text-foreground overflow-auto max-h-64">{cssContent}</pre>
+            <pre className="bg-neutral-900 p-6 text-[13px] font-mono text-neutral-300 overflow-auto max-h-80 shadow-hard leading-relaxed">{cssContent}</pre>
           </div>
-          <div>
-            <div className="flex items-center justify-between mb-2">
-              <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">JSON Tokens</p>
-              <button onClick={() => copyToClipboard(jsonContent, 'json')} className="text-xs font-bold text-primary flex items-center gap-1">
-                {copiedPanel === 'json' ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
-                {copiedPanel === 'json' ? 'Copied!' : 'Copy'}
+          <div className="flex flex-col">
+            <div className="flex items-center justify-between mb-4">
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-500">Data Interchange — JSON Objects</p>
+              <button onClick={() => copyToClipboard(jsonContent, 'json')} className="text-[10px] font-bold uppercase tracking-widest text-primary flex items-center gap-2 hover:bg-primary/5 px-2 py-1 transition-all">
+                {copiedPanel === 'json' ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+                {copiedPanel === 'json' ? 'Copied to Clipboard' : 'Copy Object Data'}
               </button>
             </div>
-            <pre className="bg-card border border-border p-4 text-xs font-mono text-foreground overflow-auto max-h-64">{jsonContent}</pre>
+            <pre className="bg-neutral-900 p-6 text-[13px] font-mono text-neutral-300 overflow-auto max-h-80 shadow-hard leading-relaxed">{jsonContent}</pre>
           </div>
         </div>
 
-        {/* Brand rules */}
-        <div className="border-t-2 border-border pt-8">
-          <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">Brand Usage Rules</p>
-          <div className="grid grid-cols-3 gap-6">
-            <div className="bg-card border border-border p-6">
-              <p className="font-bold text-foreground mb-2">Color Usage</p>
-              <p className="text-sm text-muted-foreground">Primary for interactive elements. Secondary for containers. Accent for CTAs and emphasis. Neutrals for text and surfaces.</p>
+        <div className="pt-12">
+          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-400 mb-8 text-center underline underline-offset-8">Execution Standards & Brand Governance</p>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="bg-white p-8 shadow-hard">
+              <p className="text-[11px] font-bold uppercase tracking-widest text-primary mb-4" style={{ color: palette.primary[600] }}>01 / Color Protocol</p>
+              <p className="text-sm text-neutral-600 leading-relaxed font-medium">Primary for interactive elements. Secondary for containers. Accent for CTAs and emphasis. Neutrals for text and structural surfaces.</p>
             </div>
-            <div className="bg-card border border-border p-6">
-              <p className="font-bold text-foreground mb-2">Typography</p>
-              <p className="text-sm text-muted-foreground">Use display weights for headlines only. Body text should remain regular weight at 16px minimum for readability.</p>
+            <div className="bg-white p-8 shadow-hard">
+              <p className="text-[11px] font-bold uppercase tracking-widest text-primary mb-4" style={{ color: palette.primary[600] }}>02 / Typographic Scale</p>
+              <p className="text-sm text-neutral-600 leading-relaxed font-medium">Use display weights for headlines only. Body text must remain regular weight at 16px minimum to ensure maximum readability.</p>
             </div>
-            <div className="bg-card border border-border p-6">
-              <p className="font-bold text-foreground mb-2">Components</p>
-              <p className="text-sm text-muted-foreground">All components must use 0px border-radius. Maintain 8px grid alignment. Use hard-edge shadows only.</p>
+            <div className="bg-white p-8 shadow-hard">
+              <p className="text-[11px] font-bold uppercase tracking-widest text-primary mb-4" style={{ color: palette.primary[600] }}>03 / Structural Rigidity</p>
+              <p className="text-sm text-neutral-600 leading-relaxed font-medium">All components must adhere to the 0px border-radius standard. Maintain 8px grid alignment. Use hard-edge shadows for depth.</p>
             </div>
           </div>
         </div>

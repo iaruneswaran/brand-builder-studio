@@ -10,65 +10,70 @@ const LayoutSection = ({ palette }: LayoutSectionProps) => {
   const n900 = palette.neutrals[900];
 
   return (
-    <section className="w-full bg-background section-rhythm border-b border-border">
+    <section className="w-full bg-background section-padding mt-12 pt-12 text-foreground">
       <div className="max-w-[1920px] mx-auto px-12">
-        <h2 className="text-3xl font-extrabold text-foreground mb-2">Layout & Grids</h2>
-        <p className="text-muted-foreground mb-8">12-column grid, 8px spacing, and elevation system.</p>
+        <h2 className="text-4xl font-extrabold mb-4">Layout & Grids</h2>
+        <p className="text-muted-foreground mb-12 max-w-2xl">A precision measurement system built on an 8px grid. Use the 12-column foundation for all layouts.</p>
 
-        <div className="grid grid-cols-12 gap-8">
+        <div className="grid grid-cols-12 gap-12">
           {/* Grid demo */}
-          <div className="col-span-8">
-            <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">12-Column Grid</p>
-            <div className="grid grid-cols-12 gap-2 mb-6">
+          <div className="col-span-12 lg:col-span-8">
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground mb-6">Structural Foundation — 12-Column Grid</p>
+            <div className="grid grid-cols-12 gap-3 mb-10">
               {Array.from({ length: 12 }).map((_, i) => (
-                <div key={i} className="h-16 flex items-center justify-center text-xs font-mono font-bold" style={{ backgroundColor: p100, color: getContrastTextColor(p100) }}>{i + 1}</div>
+                <div key={i} className="h-24 flex items-center justify-center text-[11px] font-mono font-bold bg-primary/5 text-primary">
+                  {i + 1}
+                </div>
               ))}
             </div>
 
             {/* Layout examples */}
-            <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">Section Layout Examples</p>
-            <div className="space-y-4">
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground mb-6">Execution Examples</p>
+            <div className="space-y-6">
               {/* Hero */}
-              <div className="h-32 flex items-center px-8" style={{ backgroundColor: p500 }}>
+              <div className="h-40 flex items-center px-10 shadow-hard" style={{ backgroundColor: palette.primary[500] }}>
                 <div>
-                  <p className="text-lg font-extrabold" style={{ color: getContrastTextColor(p500) }}>Hero Section</p>
-                  <p className="text-sm opacity-80" style={{ color: getContrastTextColor(p500) }}>Full-width with CTA</p>
+                  <p className="text-2xl font-bold mb-1" style={{ color: '#FAFAFA' }}>Hero Section</p>
+                  <p className="text-sm opacity-80" style={{ color: '#FAFAFA' }}>Full-width with CTA</p>
                 </div>
               </div>
               {/* Content + sidebar */}
-              <div className="grid grid-cols-12 gap-4">
-                <div className="col-span-8 h-24 p-4 border-2 border-border bg-card">
-                  <p className="text-xs font-bold text-muted-foreground">Content Area (8 cols)</p>
+              <div className="grid grid-cols-12 gap-6">
+                <div className="col-span-8 h-32 p-6 bg-white shadow-hard">
+                  <p className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground">Content Area (8 cols)</p>
                 </div>
-                <div className="col-span-4 h-24 p-4" style={{ backgroundColor: p50 }}>
-                  <p className="text-xs font-bold" style={{ color: getContrastTextColor(p50) }}>Sidebar (4 cols)</p>
+                <div className="col-span-4 h-32 p-6 bg-neutral-100 shadow-hard-sm">
+                  <p className="text-[11px] font-bold uppercase tracking-widest text-neutral-500">Sidebar (4 cols)</p>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Spacing + Elevation */}
-          <div className="col-span-4">
-            <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">Spacing System (8px)</p>
-            <div className="space-y-2 mb-8">
+          <div className="col-span-12 lg:col-span-4 lg:pl-12">
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground mb-6">Spacing System (8px)</p>
+            <div className="space-y-4 mb-12">
               {[4, 8, 16, 24, 32, 48, 64, 96].map(s => (
-                <div key={s} className="flex items-center gap-3">
-                  <div className="h-4" style={{ width: `${s}px`, backgroundColor: p500 }} />
-                  <span className="text-xs font-mono text-muted-foreground">{s}px</span>
+                <div key={s} className="flex items-center gap-4 group">
+                  <div className="h-4 bg-primary transition-all group-hover:bg-primary-600" style={{ width: `${s}px`, backgroundColor: palette.primary[500] }} />
+                  <span className="text-[10px] font-mono font-bold text-muted-foreground">{s}px</span>
                 </div>
               ))}
             </div>
 
-            <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">Elevation</p>
-            <div className="space-y-4">
-              <div className="h-16 bg-card border border-border p-4 shadow-hard-sm">
-                <p className="text-xs font-bold text-foreground">Elevation 1 — Card</p>
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground mb-6">Elevation System</p>
+            <div className="space-y-6">
+              <div className="h-20 bg-white p-5 shadow-hard-sm flex flex-col justify-center">
+                <p className="text-sm font-bold">Elevation 1</p>
+                <p className="text-[10px] text-muted-foreground uppercase tracking-wider">Level: Card / Surface</p>
               </div>
-              <div className="h-16 bg-card border border-border p-4 shadow-hard">
-                <p className="text-xs font-bold text-foreground">Elevation 2 — Dropdown</p>
+              <div className="h-20 bg-white p-5 shadow-hard flex flex-col justify-center">
+                <p className="text-sm font-bold">Elevation 2</p>
+                <p className="text-[10px] text-muted-foreground uppercase tracking-wider">Level: Dropdown / Hover</p>
               </div>
-              <div className="h-16 bg-card border border-border p-4 shadow-hard-lg">
-                <p className="text-xs font-bold text-foreground">Elevation 3 — Modal</p>
+              <div className="h-20 bg-white p-5 shadow-hard-lg flex flex-col justify-center">
+                <p className="text-sm font-bold">Elevation 3</p>
+                <p className="text-[10px] text-muted-foreground uppercase tracking-wider">Level: Modal / Popover</p>
               </div>
             </div>
           </div>

@@ -1,19 +1,30 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { hexToHSL, hslToHex, randomHex } from '@/lib/colorUtils';
-import { Shuffle, Pipette, Settings } from 'lucide-react';
+import { Sparkles, Pipette, Settings } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { HexColorPicker } from 'react-colorful';
+import { Slider } from '@/components/ui/slider';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 interface ColorPickerSectionProps {
   baseColor: string;
   onColorChange: (hex: string) => void;
-  onGenerate: () => void;
 }
 
-const ColorPickerSection = ({ baseColor, onColorChange, onGenerate }: ColorPickerSectionProps) => {
+const ColorPickerSection = ({ baseColor, onColorChange }: ColorPickerSectionProps) => {
   const hsl = hexToHSL(baseColor);
-  const [localHex, setLocalHex] = useState(baseColor);
+  const [localHex, setLocalHex] = useState(baseColor.toUpperCase());
+
+  useEffect(() => {
+    setLocalHex(baseColor.toUpperCase());
+  }, [baseColor]);
 
   const handleHexInput = (val: string) => {
-    setLocalHex(val);
+    setLocalHex(val.toUpperCase());
     if (/^#[0-9a-fA-F]{6}$/.test(val)) onColorChange(val);
   };
 
@@ -24,84 +35,105 @@ const ColorPickerSection = ({ baseColor, onColorChange, onGenerate }: ColorPicke
     onColorChange(hex);
   };
 
-  const handleRandomize = () => {
-    const hex = randomHex();
-    setLocalHex(hex);
-    onColorChange(hex);
+  const getSliderTrackStyle = (prop: string) => {
+    if (prop === 'h') return 'linear-gradient(to right, #000000 0%, #FFFFFF 100%)';
+    if (prop === 's') return 'linear-gradient(to right, #EEEEEE 0%, #000000 100%)';
+    if (prop === 'l') return 'linear-gradient(to right, #000000 0%, #FFFFFF 100%)';
+    return '';
   };
 
   return (
-    <section className="w-full bg-card border-b border-border">
-      <div className="max-w-[1920px] mx-auto px-12 py-10">
-        <div className="mb-6">
-          <h1 className="text-4xl font-extrabold text-foreground tracking-tight mb-2">Brand Guide Generator</h1>
-          <p className="text-lg text-muted-foreground">Enter a base color to generate a complete brand system with tokens, typography, and components.</p>
-        </div>
-
-        <div className="grid grid-cols-12 gap-8 items-end">
+    <motion.section
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+      className="w-full bg-card z-10"
+    >
+      <div className="w-full">
+        <div className="grid grid-cols-12 items-end">
           {/* Color preview + HEX input */}
-          <div className="col-span-3">
-            <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-2 block">Base Color</label>
-            <div className="flex items-stretch">
-              <div className="w-16 h-14 border border-border flex-shrink-0" style={{ backgroundColor: baseColor }} />
+          <div className="col-span-12 lg:col-span-3">
+            <div className="flex items-stretch group">
+              <Popover>
+                <PopoverTrigger asChild>
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="w-16 h-14 flex-shrink-0 cursor-pointer active:opacity-80 transition-shadow duration-300 shadow-hard-sm group-hover:shadow-hard z-20"
+                    style={{ backgroundColor: baseColor }}
+                    title="Select Base Color"
+                  />
+                </PopoverTrigger>
+                <PopoverContent
+                  side="bottom"
+                  align="start"
+                  sideOffset={0}
+                  className="w-64 p-0 rounded-none shadow-hard-lg bg-background/95 backdrop-blur-md animate-in fade-in zoom-in-95 duration-200"
+                >
+                  <HexColorPicker
+                    color={baseColor}
+                    onChange={(newHex) => {
+                      setLocalHex(newHex.toUpperCase());
+                      onColorChange(newHex);
+                    }}
+                  />
+                </PopoverContent>
+              </Popover>
               <input
                 type="text"
                 value={localHex}
                 onChange={e => handleHexInput(e.target.value)}
-                className="flex-1 h-14 px-4 bg-background border border-l-0 border-border text-foreground text-lg font-mono font-bold focus:outline-none focus:ring-2 focus:ring-ring"
+                className="flex-1 h-14 px-4 bg-background border-none text-foreground text-lg font-mono font-bold focus:outline-none placeholder:opacity-20 translate-z-0"
                 placeholder="#3B82F6"
               />
             </div>
           </div>
 
           {/* HSL sliders */}
-          <div className="col-span-5 space-y-3">
-            <div className="flex items-center gap-4">
-              <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground w-8">H</label>
-              <input type="range" min={0} max={360} value={hsl.h} onChange={e => handleSlider('h', +e.target.value)}
-                className="flex-1 h-2 appearance-none bg-secondary cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-foreground" />
-              <span className="text-sm font-mono text-muted-foreground w-10 text-right">{hsl.h}°</span>
-            </div>
-            <div className="flex items-center gap-4">
-              <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground w-8">S</label>
-              <input type="range" min={0} max={100} value={hsl.s} onChange={e => handleSlider('s', +e.target.value)}
-                className="flex-1 h-2 appearance-none bg-secondary cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-foreground" />
-              <span className="text-sm font-mono text-muted-foreground w-10 text-right">{hsl.s}%</span>
-            </div>
-            <div className="flex items-center gap-4">
-              <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground w-8">L</label>
-              <input type="range" min={0} max={100} value={hsl.l} onChange={e => handleSlider('l', +e.target.value)}
-                className="flex-1 h-2 appearance-none bg-secondary cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-foreground" />
-              <span className="text-sm font-mono text-muted-foreground w-10 text-right">{hsl.l}%</span>
+          <div className="col-span-12 lg:col-span-9 flex flex-col justify-center h-14 px-6 bg-neutral-50/50 backdrop-blur-sm">
+            <div className="flex items-center gap-8 h-full">
+              {[
+                { label: 'H', prop: 'h', max: 360, unit: '°' },
+                { label: 'S', prop: 's', max: 100, unit: '%' },
+                { label: 'L', prop: 'l', max: 100, unit: '%' }
+              ].map((s, i) => (
+                <div key={s.prop} className="flex-1 flex items-center gap-3 group/slider">
+                  <span className="text-[10px] font-bold text-neutral-900 w-4">{s.label}</span>
+                  <div className="relative flex-1 group">
+                    {/* Visual Track Background */}
+                    <div
+                      className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[2px] opacity-40 group-hover:opacity-100 transition-opacity"
+                      style={{ background: getSliderTrackStyle(s.prop) }}
+                    />
+                    <Slider
+                      value={[Number(hsl[s.prop as keyof typeof hsl])]}
+                      max={s.max}
+                      step={1}
+                      onValueChange={([val]) => handleSlider(s.prop as any, val)}
+                      className="relative z-10"
+                    />
+                  </div>
+                  <span className="text-[10px] font-mono font-bold text-neutral-900 w-12 text-right shrink-0">
+                    {Math.round(hsl[s.prop as keyof typeof hsl])}{s.unit}
+                  </span>
+                </div>
+              ))}
+
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={() => onColorChange(randomHex())}
+                className="p-2 transition-colors ml-2"
+                style={{ color: '#000000' }}
+                title="Randomize Color"
+              >
+                <Sparkles size={18} />
+              </motion.button>
             </div>
           </div>
-
-          {/* Actions */}
-          <div className="col-span-4 flex items-end gap-3 justify-end">
-            <button onClick={handleRandomize} className="h-14 px-5 bg-secondary text-secondary-foreground font-bold text-sm hover:bg-muted transition-colors flex items-center gap-2">
-              <Shuffle className="w-4 h-4" /> Randomize
-            </button>
-            <button className="h-14 px-5 bg-secondary text-secondary-foreground font-bold text-sm hover:bg-muted transition-colors flex items-center gap-2">
-              <Settings className="w-4 h-4" /> Advanced
-            </button>
-            <button onClick={onGenerate} className="h-14 px-8 bg-primary text-primary-foreground font-extrabold text-sm hover:opacity-90 transition-opacity flex items-center gap-2">
-              <Pipette className="w-4 h-4" /> Generate Palette
-            </button>
-          </div>
-        </div>
-
-        {/* Palette preview strip */}
-        <div className="mt-6 flex h-12">
-          {[50, 100, 200, 300, 400, 500, 600, 700, 800, 900].map((step) => {
-            const l = step === 50 ? 97 : step === 900 ? 15 : 100 - (step / 10);
-            const hex = hslToHex(hsl.h, hsl.s, l);
-            return <div key={step} className="flex-1 relative group" style={{ backgroundColor: hex }}>
-              <span className="absolute bottom-1 left-1 text-[9px] font-mono opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: l > 55 ? '#111' : '#fafafa' }}>{step}</span>
-            </div>;
-          })}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

@@ -13,112 +13,109 @@ const ComponentsSection = ({ palette }: ComponentsSectionProps) => {
   const n900 = palette.neutrals[900];
 
   return (
-    <section className="w-full bg-card section-rhythm border-b border-border">
+    <section className="w-full bg-card section-padding border-b border-border">
       <div className="max-w-[1920px] mx-auto px-12">
-        <h2 className="text-3xl font-extrabold text-foreground mb-2">Components</h2>
-        <p className="text-muted-foreground mb-8">UI components styled with the generated palette. All edges are sharp — zero border-radius.</p>
+        <h2 className="text-4xl font-extrabold text-foreground mb-4">UI Components</h2>
+        <p className="text-muted-foreground mb-12 max-w-2xl">Precision components styled with the generated palette. All edges are sharp — strict zero border-radius requirement.</p>
 
-        <div className="grid grid-cols-12 gap-8">
+        <div className="grid grid-cols-12 gap-12">
           {/* Buttons */}
-          <div className="col-span-4">
-            <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">Buttons</p>
-            <div className="space-y-3">
-              <button className="w-full h-12 font-bold text-sm flex items-center justify-center gap-2" style={{ backgroundColor: p500, color: getContrastTextColor(p500) }}>
+          <div className="col-span-12 lg:col-span-4">
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground mb-6">Interactive — Buttons</p>
+            <div className="space-y-4">
+              <button className="w-full h-12 font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-hard hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[4px_4px_0_rgba(0,0,0,0.2)] transition-all" style={{ backgroundColor: palette.primary[500], color: '#FAFAFA' }}>
                 Primary Button <ArrowRight className="w-4 h-4" />
               </button>
-              <button className="w-full h-12 font-bold text-sm border-2 flex items-center justify-center gap-2" style={{ borderColor: p500, color: p500, backgroundColor: 'transparent' }}>
+              <button className="w-full h-12 font-bold text-xs uppercase tracking-widest border border-primary flex items-center justify-center gap-2 bg-transparent text-primary hover:bg-primary/5 transition-all shadow-hard-sm">
                 Secondary Button
               </button>
-              <button className="w-full h-12 font-bold text-sm flex items-center justify-center gap-2 text-foreground hover:bg-muted transition-colors bg-transparent">
+              <button className="w-full h-12 font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 text-foreground hover:bg-neutral-100 transition-colors bg-transparent border border-transparent">
                 Ghost Button
               </button>
-              <button className="w-full h-12 font-bold text-sm flex items-center justify-center gap-2" style={{ backgroundColor: a600, color: getContrastTextColor(a600) }}>
+              <button className="w-full h-12 font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-hard hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[4px_4px_0_rgba(0,0,0,0.2)] transition-all" style={{ backgroundColor: palette.accentA[600], color: '#FAFAFA' }}>
                 Accent CTA <ArrowRight className="w-4 h-4" />
               </button>
-              {/* Disabled */}
-              <button className="w-full h-12 font-bold text-sm flex items-center justify-center gap-2 opacity-40 cursor-not-allowed" style={{ backgroundColor: p500, color: getContrastTextColor(p500) }}>
-                Disabled
+              <button className="w-full h-12 font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 opacity-30 cursor-not-allowed bg-neutral-400 text-white">
+                Disabled State
               </button>
             </div>
           </div>
 
           {/* Form elements */}
-          <div className="col-span-4">
-            <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">Form Elements</p>
-            <div className="space-y-4">
+          <div className="col-span-12 lg:col-span-4">
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground mb-6">Input Systems — Forms</p>
+            <div className="space-y-6">
               <div>
-                <label className="text-xs font-bold text-foreground mb-1 block">Text Input</label>
-                <div className="flex items-center border-2 border-border h-12 px-3 bg-background">
-                  <Search className="w-4 h-4 text-muted-foreground mr-2" />
-                  <input type="text" placeholder="Search..." className="flex-1 bg-transparent text-foreground text-sm focus:outline-none" />
+                <label className="text-[11px] font-bold uppercase tracking-wider text-foreground mb-2 block">Text Entry</label>
+                <div className="flex items-center border border-border h-12 px-4 bg-background shadow-hard-sm focus-within:border-primary transition-colors">
+                  <Search className="w-4 h-4 text-muted-foreground mr-3" />
+                  <input type="text" placeholder="Search..." className="flex-1 bg-transparent text-foreground text-sm font-medium focus:outline-none placeholder:text-neutral-400" />
                 </div>
               </div>
               <div>
-                <label className="text-xs font-bold text-foreground mb-1 block">Dropdown</label>
-                <div className="flex items-center justify-between border-2 border-border h-12 px-3 bg-background cursor-pointer">
-                  <span className="text-sm text-muted-foreground">Select option</span>
+                <label className="text-[11px] font-bold uppercase tracking-wider text-foreground mb-2 block">Selection</label>
+                <div className="flex items-center justify-between border border-border h-12 px-4 bg-background cursor-pointer shadow-hard-sm hover:border-neutral-400 transition-colors">
+                  <span className="text-sm text-neutral-500">Select option</span>
                   <ChevronDown className="w-4 h-4 text-muted-foreground" />
                 </div>
               </div>
-              <div className="flex items-center gap-3">
-                <div className="w-5 h-5 border-2 border-border flex items-center justify-center" style={{ backgroundColor: p500, borderColor: p500 }}>
-                  <Check className="w-3 h-3" style={{ color: getContrastTextColor(p500) }} />
+              <div className="flex items-center gap-4 group cursor-pointer">
+                <div className="w-5 h-5 border border-primary flex items-center justify-center transition-all" style={{ backgroundColor: palette.primary[500] }}>
+                  <Check className="w-3.5 h-3.5 text-white" />
                 </div>
-                <span className="text-sm text-foreground">Checkbox checked</span>
+                <span className="text-sm font-bold text-foreground">Checkbox checked</span>
               </div>
-              <div className="flex items-center gap-3">
-                <div className="w-5 h-5 border-2 border-border bg-background" />
-                <span className="text-sm text-foreground">Checkbox unchecked</span>
+              <div className="flex items-center gap-4 group cursor-pointer">
+                <div className="w-5 h-5 border border-border bg-background group-hover:border-neutral-400 transition-all" />
+                <span className="text-sm font-medium text-neutral-600">Checkbox unchecked</span>
               </div>
               {/* Toggle */}
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-6 relative" style={{ backgroundColor: p500 }}>
-                  <div className="absolute right-0.5 top-0.5 w-5 h-5" style={{ backgroundColor: getContrastTextColor(p500) }} />
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-6 flex items-center px-0.5 border border-primary bg-primary" style={{ backgroundColor: palette.primary[500], borderColor: palette.primary[600] }}>
+                  <div className="ml-auto w-5 h-5 bg-white shadow-sm" />
                 </div>
-                <span className="text-sm text-foreground">Toggle on</span>
+                <span className="text-sm font-bold text-foreground">Toggle on</span>
               </div>
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-6 relative bg-muted">
-                  <div className="absolute left-0.5 top-0.5 w-5 h-5 bg-muted-foreground" />
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-6 flex items-center px-0.5 border border-neutral-300 bg-neutral-200">
+                  <div className="w-5 h-5 bg-white shadow-sm" />
                 </div>
-                <span className="text-sm text-foreground">Toggle off</span>
+                <span className="text-sm font-medium text-neutral-600">Toggle off</span>
               </div>
             </div>
           </div>
 
-          {/* Chips, Tabs, Tags */}
-          <div className="col-span-4">
-            <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">Chips & Tabs</p>
-            <div className="flex flex-wrap gap-2 mb-6">
+          {/* Chips, Tabs, Feedback */}
+          <div className="col-span-12 lg:col-span-4">
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground mb-6">Navigation & Feedback</p>
+            <div className="flex flex-wrap gap-3 mb-8">
               {['Design', 'Development', 'Brand', 'Marketing'].map((tag, i) => (
-                <span key={tag} className="h-8 px-4 text-xs font-bold flex items-center" style={{
-                  backgroundColor: i === 0 ? a400 : 'transparent',
-                  color: i === 0 ? getContrastTextColor(a400) : a600,
-                  border: i === 0 ? 'none' : `2px solid ${a400}`,
-                }}>{tag}</span>
+                <span key={tag} className={`h-8 px-4 text-[10px] font-bold uppercase tracking-widest flex items-center border transition-all cursor-pointer ${i === 0 ? 'bg-primary text-white border-primary shadow-hard-sm' : 'bg-transparent text-neutral-600 border-neutral-300 hover:border-neutral-400'
+                  }`} style={{
+                    backgroundColor: i === 0 ? palette.accentA[400] : 'transparent',
+                    borderColor: i === 0 ? palette.accentA[400] : undefined,
+                    color: i === 0 ? '#FAFAFA' : undefined
+                  }}>{tag}</span>
               ))}
             </div>
 
-            <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">Tabs</p>
-            <div className="flex border-b-2 border-border mb-6">
+            <div className="flex border-b border-border mb-8">
               {['Overview', 'Tokens', 'Export'].map((tab, i) => (
-                <div key={tab} className="px-6 py-3 text-sm font-bold cursor-pointer" style={{
-                  color: i === 0 ? p500 : 'hsl(var(--muted-foreground))',
-                  borderBottom: i === 0 ? `3px solid ${p500}` : '3px solid transparent',
-                  marginBottom: '-2px',
+                <div key={tab} className="px-6 py-3 text-[11px] font-bold uppercase tracking-widest cursor-pointer transition-all" style={{
+                  color: i === 0 ? palette.primary[500] : 'hsl(var(--neutral-400))',
+                  borderBottom: i === 0 ? `3px solid ${palette.primary[500]}` : '3px solid transparent',
                 }}>{tab}</div>
               ))}
             </div>
 
-            <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">Feedback States</p>
-            <div className="space-y-2">
+            <div className="space-y-3">
               {([['success', 'Operation completed', palette.feedback.success],
-                ['warning', 'Check your input', palette.feedback.warning],
-                ['danger', 'Action failed', palette.feedback.danger],
-                ['info', 'New update available', palette.feedback.info],
+              ['warning', 'Check your input', palette.feedback.warning],
+              ['danger', 'Action failed', palette.feedback.danger],
+              ['info', 'New update available', palette.feedback.info],
               ] as const).map(([type, msg, color]) => (
-                <div key={type} className="h-10 px-4 flex items-center text-sm font-medium" style={{
-                  backgroundColor: color + '1a',
+                <div key={type} className="h-11 px-4 flex items-center text-xs font-bold border border-black/5 shadow-hard-sm" style={{
+                  backgroundColor: color + '0a',
                   color: color,
                   borderLeft: `4px solid ${color}`,
                 }}>{msg}</div>

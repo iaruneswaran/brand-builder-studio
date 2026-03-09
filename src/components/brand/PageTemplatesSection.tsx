@@ -12,76 +12,44 @@ const PageTemplatesSection = ({ palette }: PageTemplatesSectionProps) => {
   const n900 = palette.neutrals[900];
 
   return (
-    <section className="w-full bg-card section-rhythm border-b border-border">
+    <section className="w-full bg-card section-padding mt-12 pt-12">
       <div className="max-w-[1920px] mx-auto px-12">
-        <h2 className="text-3xl font-extrabold text-foreground mb-2">Page Templates — Website</h2>
-        <p className="text-muted-foreground mb-8">Sample screens applying the palette with strict 0px border-radius.</p>
+        <h2 className="text-4xl font-extrabold text-foreground mb-4">Website Infrastructure</h2>
+        <p className="text-muted-foreground mb-12 max-w-2xl">Sample screens applying the palette with strict 0px border-radius. High-precision layouts for enterprise-grade digital products.</p>
 
-        <div className="space-y-8">
+        <div className="space-y-12">
           {/* Landing Hero */}
           <div>
-            <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">Landing Hero</p>
-            <div className="h-[280px] flex items-center px-16 relative overflow-hidden" style={{ backgroundColor: p700 }}>
-              <div className="relative z-10 max-w-xl">
-                <h3 className="text-4xl font-extrabold mb-4" style={{ color: getContrastTextColor(p700) }}>Build something extraordinary</h3>
-                <p className="text-lg mb-6 opacity-80" style={{ color: getContrastTextColor(p700) }}>Create professional brand guides in minutes with automated color systems and design tokens.</p>
-                <div className="flex gap-3">
-                  <button className="h-12 px-8 font-bold text-sm flex items-center gap-2" style={{ backgroundColor: a600, color: getContrastTextColor(a600) }}>
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-500 mb-6">Template A — Hero Communication</p>
+            <div className="h-[400px] flex items-center px-20 relative overflow-hidden shadow-hard" style={{ backgroundColor: palette.primary[700] }}>
+              <div className="relative z-10 max-w-2xl">
+                <h3 className="text-5xl font-extrabold mb-6 leading-tight" style={{ color: '#FAFAFA' }}>Build something<br />extraordinary.</h3>
+                <p className="text-xl mb-10 opacity-80 leading-relaxed max-w-lg" style={{ color: '#FAFAFA' }}>Create professional brand guides in minutes with automated color systems and design tokens optimized for performance.</p>
+                <div className="flex gap-4">
+                  <button className="h-14 px-10 font-bold text-[11px] uppercase tracking-widest flex items-center gap-3 shadow-hard-sm transition-all hover:bg-white hover:text-black" style={{ backgroundColor: palette.accentA[600], color: '#FAFAFA' }}>
                     Get Started <ArrowRight className="w-4 h-4" />
                   </button>
-                  <button className="h-12 px-8 font-bold text-sm border-2 flex items-center gap-2" style={{ borderColor: getContrastTextColor(p700), color: getContrastTextColor(p700), backgroundColor: 'transparent' }}>
+                  <button className="h-14 px-10 font-bold text-[11px] uppercase tracking-widest flex items-center gap-2 transition-all hover:bg-white/10" style={{ color: '#FAFAFA', backgroundColor: 'rgba(255,255,255,0.1)' }}>
                     Learn More
                   </button>
                 </div>
               </div>
-              <div className="absolute right-16 top-6 w-64 h-64 opacity-10" style={{ backgroundColor: getContrastTextColor(p700) }} />
+              {/* Abstract geometry */}
+              <div className="absolute right-0 top-0 w-1/3 h-full opacity-10 bg-white" style={{ clipPath: 'polygon(20% 0%, 100% 0%, 100% 100%, 0% 100%)' }} />
             </div>
           </div>
 
           {/* Features Grid */}
           <div>
-            <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">Features Grid</p>
-            <div className="grid grid-cols-3 gap-4 p-8" style={{ backgroundColor: n50 }}>
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-500 mb-6">Template B — Feature Matrix</p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 p-12 bg-neutral-50 shadow-hard">
               {['Color Systems', 'Typography Scale', 'Component Library', 'Design Tokens', 'Export Options', 'Accessibility'].map((feat, i) => (
-                <div key={feat} className="p-6 bg-card border border-border shadow-hard-sm">
-                  <div className="w-10 h-10 mb-4 flex items-center justify-center" style={{ backgroundColor: i % 2 === 0 ? p500 : a600 }}>
-                    <Star className="w-5 h-5" style={{ color: getContrastTextColor(i % 2 === 0 ? p500 : a600) }} />
+                <div key={feat} className="p-10 bg-white shadow-hard-sm hover:translate-y-[-4px] transition-all">
+                  <div className="w-12 h-12 mb-6 flex items-center justify-center shadow-hard-sm" style={{ backgroundColor: i % 2 === 0 ? palette.primary[500] : palette.accentA[600] }}>
+                    <Star className="w-6 h-6 text-white" />
                   </div>
-                  <h4 className="text-lg font-bold text-foreground mb-2">{feat}</h4>
-                  <p className="text-sm text-muted-foreground">Automated generation with AA+ contrast compliance and export-ready tokens.</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Pricing */}
-          <div>
-            <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">Pricing</p>
-            <div className="grid grid-cols-3 gap-4">
-              {[
-                { name: 'Starter', price: 'Free', features: ['1 palette', 'CSS export', 'Basic tokens'] },
-                { name: 'Pro', price: '$19/mo', features: ['Unlimited palettes', 'All exports', 'Components', 'Templates'], featured: true },
-                { name: 'Team', price: '$49/mo', features: ['Everything in Pro', 'Collaboration', 'Figma sync', 'API access'] },
-              ].map(plan => (
-                <div key={plan.name} className="p-8 border-2 flex flex-col" style={{
-                  borderColor: plan.featured ? p500 : 'hsl(var(--border))',
-                  backgroundColor: plan.featured ? p50 : 'hsl(var(--card))',
-                }}>
-                  {plan.featured && <span className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: p500 }}>Most Popular</span>}
-                  <h4 className="text-xl font-bold text-foreground">{plan.name}</h4>
-                  <p className="text-3xl font-extrabold text-foreground mt-2 mb-6">{plan.price}</p>
-                  <ul className="space-y-2 mb-8 flex-1">
-                    {plan.features.map(f => (
-                      <li key={f} className="flex items-center gap-2 text-sm text-foreground">
-                        <Check className="w-4 h-4 flex-shrink-0" style={{ color: p500 }} /> {f}
-                      </li>
-                    ))}
-                  </ul>
-                  <button className="w-full h-12 font-bold text-sm" style={{
-                    backgroundColor: plan.featured ? p500 : 'transparent',
-                    color: plan.featured ? getContrastTextColor(p500) : p500,
-                    border: plan.featured ? 'none' : `2px solid ${p500}`,
-                  }}>Choose Plan</button>
+                  <h4 className="text-xl font-bold text-foreground mb-3">{feat}</h4>
+                  <p className="text-sm text-neutral-500 leading-relaxed">Automated generation with AA+ contrast compliance and export-ready tokens. Performance-first architecture.</p>
                 </div>
               ))}
             </div>

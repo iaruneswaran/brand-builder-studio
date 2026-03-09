@@ -16,7 +16,7 @@ export interface FeedbackColors {
 export interface BrandPalette {
   name: string;
   primary: PaletteScale;
-  secondary: { 300: string; 500: string; 700: string };
+  secondary: { 100: string; 300: string; 500: string; 700: string };
   accentA: { 400: string; 600: string };
   accentB: { 400: string; 600: string };
   neutrals: PaletteScale;
@@ -41,7 +41,7 @@ export function hexToHSL(hex: string): HSL {
     else if (max === g) h = ((b - r) / d + 2) / 6;
     else h = ((r - g) / d + 4) / 6;
   }
-  return { h: Math.round(h * 360), s: Math.round(s * 100), l: Math.round(l * 100) };
+  return { h: h * 360, s: s * 100, l: l * 100 };
 }
 
 export function hslToHex(h: number, s: number, l: number): string {
@@ -59,61 +59,94 @@ export function hslString(h: number, s: number, l: number): string {
   return `hsl(${h}, ${s}%, ${l}%)`;
 }
 
-function generateScale(h: number, s: number): PaletteScale {
-  return {
-    50: hslToHex(h, Math.min(s, 30), 97),
-    100: hslToHex(h, Math.min(s, 40), 93),
-    200: hslToHex(h, s * 0.8, 85),
-    300: hslToHex(h, s * 0.85, 72),
-    400: hslToHex(h, s * 0.9, 60),
-    500: hslToHex(h, s, 50),
-    600: hslToHex(h, s, 42),
-    700: hslToHex(h, s, 34),
-    800: hslToHex(h, s * 0.95, 24),
-    900: hslToHex(h, s * 0.9, 15),
-  };
+export function getLuminance(hex: string): number {
+  const r = parseInt(hex.slice(1, 3), 16) / 255;
+  const g = parseInt(hex.slice(3, 5), 16) / 255;
+  const b = parseInt(hex.slice(5, 7), 16) / 255;
+  const fix = (c: number) => c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+  return 0.2126 * fix(r) + 0.7152 * fix(g) + 0.0722 * fix(b);
 }
 
-function generateNeutrals(h: number): PaletteScale {
-  const ns = 8;
+function adjustLuminance(h: number, s: number, targetLuminance: number): string {
+  let low = 0, high = 100, bestL = 50;
+  for (let i = 0; i < 10; i++) {
+    const mid = (low + high) / 2;
+    const hex = hslToHex(h, s, mid);
+    const lum = getLuminance(hex);
+    if (Math.abs(lum - targetLuminance) < 0.01) {
+      bestL = mid;
+      break;
+    }
+    if (lum < targetLuminance) low = mid;
+    else high = mid;
+    bestL = mid;
+  }
+  return hslToHex(h, s, bestL);
+}
+
+function generateCurvedScale(h: number, s: number, baseL: number, originalHex?: string): PaletteScale {
+  const getL = (step: number) => {
+    // Custom Bezier-like curve for scales
+    if (step === 500) return baseL;
+    if (step < 500) {
+      const t = step / 500;
+      return baseL + (97 - baseL) * (1 - Math.pow(t, 1.5));
+    } else {
+      const t = (step - 500) / 400;
+      return baseL - (baseL - 10) * Math.pow(t, 1.2);
+    }
+  };
+
+  const getS = (step: number) => {
+    if (step === 500) return s;
+    if (step < 500) return s * (0.3 + 0.7 * (step / 500));
+    return s + (100 - s) * ((step - 500) / 400) * 0.2;
+  };
+
+  const steps = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900] as const;
+  const scale: any = {};
+  steps.forEach(step => {
+    if (step === 500 && originalHex) {
+      scale[step] = originalHex;
+    } else {
+      scale[step] = hslToHex(h, getS(step), getL(step));
+    }
+  });
+  return scale as PaletteScale;
+}
+
+function generateTintedNeutrals(h: number, s: number): PaletteScale {
+  // Infuse 4-12% of base saturation into neutrals based on base saturation
+  const tintS = Math.max(2, Math.min(12, s * 0.15));
   return {
-    50: hslToHex(h, ns, 98),
-    100: hslToHex(h, ns, 95),
-    200: hslToHex(h, ns, 88),
-    300: hslToHex(h, ns, 75),
-    400: hslToHex(h, ns, 58),
-    500: hslToHex(h, ns, 45),
-    600: hslToHex(h, ns, 33),
-    700: hslToHex(h, ns, 24),
-    800: hslToHex(h, ns, 14),
-    900: hslToHex(h, ns, 8),
+    50: hslToHex(h, tintS * 0.5, 98),
+    100: hslToHex(h, tintS * 0.8, 96),
+    200: hslToHex(h, tintS, 90),
+    300: hslToHex(h, tintS, 80),
+    400: hslToHex(h, tintS, 65),
+    500: hslToHex(h, tintS, 50),
+    600: hslToHex(h, tintS, 35),
+    700: hslToHex(h, tintS, 22),
+    800: hslToHex(h, tintS, 12),
+    900: hslToHex(h, tintS, 6),
   };
 }
 
 function generateFeedback(baseH: number): FeedbackColors {
   return {
-    success: hslToHex(120, 60, 42),
-    warning: hslToHex(38, 90, 50),
-    danger: hslToHex(355, 80, 50),
-    info: hslToHex((baseH + 200) % 360, 65, 50),
+    success: hslToHex(142, 70, 45), // More vibrant "best matched" emerald
+    warning: hslToHex(45, 95, 50),   // Sharp golden yellow
+    danger: hslToHex(0, 85, 55),     // Professional red
+    info: hslToHex((baseH + 190) % 360, 80, 50),
   };
 }
 
 export function getContrastTextColor(hex: string): string {
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
-  const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-  return luminance > 0.55 ? '#111827' : '#FAFAFA';
+  return getLuminance(hex) > 0.45 ? '#0F172A' : '#F8FAFC';
 }
 
 export function getContrastRatio(hex1: string, hex2: string): number {
-  const lum = (hex: string) => {
-    const rgb = [parseInt(hex.slice(1, 3), 16), parseInt(hex.slice(3, 5), 16), parseInt(hex.slice(5, 7), 16)]
-      .map(c => { c /= 255; return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); });
-    return 0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2];
-  };
-  const l1 = lum(hex1), l2 = lum(hex2);
+  const l1 = getLuminance(hex1), l2 = getLuminance(hex2);
   const lighter = Math.max(l1, l2), darker = Math.min(l1, l2);
   return Number(((lighter + 0.05) / (darker + 0.05)).toFixed(2));
 }
@@ -125,18 +158,37 @@ export function getWCAGLevel(ratio: number): string {
   return 'Fail';
 }
 
+function calibrateHarmony(baseHex: string, h: number, satFactor: number = 1): { s: number, l: number } {
+  const baseHSL = hexToHSL(baseHex);
+  const baseLum = getLuminance(baseHex);
+  const targetS = Math.min(95, baseHSL.s * satFactor);
+
+  // Find L that matches perceived weight but stays within functional range
+  let low = 20, high = 80, bestL = 50;
+  for (let i = 0; i < 8; i++) {
+    const mid = (low + high) / 2;
+    const lum = getLuminance(hslToHex(h, targetS, mid));
+    if (Math.abs(lum - baseLum) < 0.05) { bestL = mid; break; }
+    if (lum < baseLum) low = mid; else high = mid;
+    bestL = mid;
+  }
+  return { s: targetS, l: bestL };
+}
+
 export function generateAnalogousPalette(hex: string): BrandPalette {
   const hsl = hexToHSL(hex);
-  const secH = (hsl.h + 30) % 360;
-  const accAH = (hsl.h + 180) % 360;
-  const accBH = (hsl.h + 210) % 360;
+  const h1 = (hsl.h + 30) % 360;
+  const h2 = (hsl.h - 30 + 360) % 360;
+  const c1 = calibrateHarmony(hex, h1, 0.9);
+  const c2 = calibrateHarmony(hex, h2, 0.85);
+
   return {
     name: 'Analogous',
-    primary: generateScale(hsl.h, hsl.s),
-    secondary: { 300: hslToHex(secH, hsl.s * 0.85, 72), 500: hslToHex(secH, hsl.s, 50), 700: hslToHex(secH, hsl.s, 34) },
-    accentA: { 400: hslToHex(accAH, 75, 55), 600: hslToHex(accAH, 75, 40) },
-    accentB: { 400: hslToHex(accBH, 70, 55), 600: hslToHex(accBH, 70, 40) },
-    neutrals: generateNeutrals(hsl.h),
+    primary: generateCurvedScale(hsl.h, hsl.s, hsl.l, hex),
+    secondary: { 100: hslToHex(h1, c1.s * 0.3, 94), 300: hslToHex(h1, c1.s, 72), 500: hslToHex(h1, c1.s, c1.l), 700: hslToHex(h1, c1.s, 34) },
+    accentA: { 400: hslToHex(h1, c1.s, c1.l), 600: hslToHex(h1, c1.s, Math.max(20, c1.l - 15)) },
+    accentB: { 400: hslToHex(h2, c2.s, c2.l), 600: hslToHex(h2, c2.s, Math.max(20, c2.l - 15)) },
+    neutrals: generateTintedNeutrals(hsl.h, hsl.s),
     feedback: generateFeedback(hsl.h),
     baseHex: hex, baseHSL: hsl,
   };
@@ -145,14 +197,15 @@ export function generateAnalogousPalette(hex: string): BrandPalette {
 export function generateComplementaryPalette(hex: string): BrandPalette {
   const hsl = hexToHSL(hex);
   const compH = (hsl.h + 180) % 360;
-  const secH = (hsl.h + 30) % 360;
+  const c = calibrateHarmony(hex, compH, 1.1); // Complementary can be slightly more vibrant
+
   return {
     name: 'Complementary',
-    primary: generateScale(hsl.h, hsl.s),
-    secondary: { 300: hslToHex(secH, hsl.s * 0.8, 72), 500: hslToHex(secH, hsl.s * 0.8, 50), 700: hslToHex(secH, hsl.s * 0.8, 34) },
-    accentA: { 400: hslToHex(compH, 80, 55), 600: hslToHex(compH, 80, 40) },
-    accentB: { 400: hslToHex((compH + 30) % 360, 65, 55), 600: hslToHex((compH + 30) % 360, 65, 40) },
-    neutrals: generateNeutrals(hsl.h),
+    primary: generateCurvedScale(hsl.h, hsl.s, hsl.l, hex),
+    secondary: { 100: hslToHex(compH, c.s * 0.25, 94), 300: hslToHex(compH, c.s * 0.8, 72), 500: hslToHex(compH, c.s * 0.8, 50), 700: hslToHex(compH, c.s * 0.8, 34) },
+    accentA: { 400: hslToHex(compH, c.s, c.l), 600: hslToHex(compH, c.s, Math.max(20, c.l - 15)) },
+    accentB: { 400: hslToHex((compH + 30) % 360, c.s * 0.9, c.l), 600: hslToHex((compH + 30) % 360, c.s * 0.9, Math.max(20, c.l - 15)) },
+    neutrals: generateTintedNeutrals(hsl.h, hsl.s),
     feedback: generateFeedback(hsl.h),
     baseHex: hex, baseHSL: hsl,
   };
@@ -160,15 +213,18 @@ export function generateComplementaryPalette(hex: string): BrandPalette {
 
 export function generateSplitComplementPalette(hex: string): BrandPalette {
   const hsl = hexToHSL(hex);
-  const scA = (hsl.h + 150) % 360;
-  const scB = (hsl.h + 210) % 360;
+  const h1 = (hsl.h + 150) % 360;
+  const h2 = (hsl.h + 210) % 360;
+  const c1 = calibrateHarmony(hex, h1, 1);
+  const c2 = calibrateHarmony(hex, h2, 1);
+
   return {
     name: 'Split-Complement',
-    primary: generateScale(hsl.h, hsl.s),
-    secondary: { 300: hslToHex(scA, hsl.s * 0.8, 72), 500: hslToHex(scA, hsl.s * 0.8, 50), 700: hslToHex(scA, hsl.s * 0.8, 34) },
-    accentA: { 400: hslToHex(scA, 75, 55), 600: hslToHex(scA, 75, 40) },
-    accentB: { 400: hslToHex(scB, 75, 55), 600: hslToHex(scB, 75, 40) },
-    neutrals: generateNeutrals(hsl.h),
+    primary: generateCurvedScale(hsl.h, hsl.s, hsl.l, hex),
+    secondary: { 100: hslToHex(h1, c1.s * 0.3, 94), 300: hslToHex(h1, c1.s, 72), 500: hslToHex(h1, c1.s, c1.l), 700: hslToHex(h1, c1.s, 34) },
+    accentA: { 400: hslToHex(h1, c1.s, c1.l), 600: hslToHex(h1, c1.s, Math.max(20, c1.l - 15)) },
+    accentB: { 400: hslToHex(h2, c2.s, c2.l), 600: hslToHex(h2, c2.s, Math.max(20, c2.l - 15)) },
+    neutrals: generateTintedNeutrals(hsl.h, hsl.s),
     feedback: generateFeedback(hsl.h),
     baseHex: hex, baseHSL: hsl,
   };
@@ -176,15 +232,18 @@ export function generateSplitComplementPalette(hex: string): BrandPalette {
 
 export function generateTriadicPalette(hex: string): BrandPalette {
   const hsl = hexToHSL(hex);
-  const triA = (hsl.h + 120) % 360;
-  const triB = (hsl.h + 240) % 360;
+  const h1 = (hsl.h + 120) % 360;
+  const h2 = (hsl.h + 240) % 360;
+  const c1 = calibrateHarmony(hex, h1, 0.95);
+  const c2 = calibrateHarmony(hex, h2, 0.95);
+
   return {
     name: 'Triadic',
-    primary: generateScale(hsl.h, hsl.s),
-    secondary: { 300: hslToHex(triA, hsl.s * 0.85, 72), 500: hslToHex(triA, hsl.s * 0.85, 50), 700: hslToHex(triA, hsl.s * 0.85, 34) },
-    accentA: { 400: hslToHex(triA, 70, 55), 600: hslToHex(triA, 70, 40) },
-    accentB: { 400: hslToHex(triB, 70, 55), 600: hslToHex(triB, 70, 40) },
-    neutrals: generateNeutrals(hsl.h),
+    primary: generateCurvedScale(hsl.h, hsl.s, hsl.l, hex),
+    secondary: { 100: hslToHex(h1, c1.s * 0.3, 94), 300: hslToHex(h1, c1.s, 72), 500: hslToHex(h1, c1.s, c1.l), 700: hslToHex(h1, c1.s, 34) },
+    accentA: { 400: hslToHex(h1, c1.s, c1.l), 600: hslToHex(h1, c1.s, Math.max(20, c1.l - 15)) },
+    accentB: { 400: hslToHex(h2, c2.s, c2.l), 600: hslToHex(h2, c2.s, Math.max(20, c2.l - 15)) },
+    neutrals: generateTintedNeutrals(hsl.h, hsl.s),
     feedback: generateFeedback(hsl.h),
     baseHex: hex, baseHSL: hsl,
   };
@@ -194,11 +253,11 @@ export function generateMonochromePalette(hex: string): BrandPalette {
   const hsl = hexToHSL(hex);
   return {
     name: 'Monochrome',
-    primary: generateScale(hsl.h, hsl.s),
-    secondary: { 300: hslToHex(hsl.h, hsl.s * 0.5, 72), 500: hslToHex(hsl.h, hsl.s * 0.5, 50), 700: hslToHex(hsl.h, hsl.s * 0.5, 34) },
-    accentA: { 400: hslToHex(hsl.h, hsl.s * 0.7, 60), 600: hslToHex(hsl.h, hsl.s * 0.7, 38) },
-    accentB: { 400: hslToHex(hsl.h, hsl.s * 0.3, 55), 600: hslToHex(hsl.h, hsl.s * 0.3, 40) },
-    neutrals: generateNeutrals(hsl.h),
+    primary: generateCurvedScale(hsl.h, hsl.s, hsl.l, hex),
+    secondary: { 100: hslToHex(hsl.h, hsl.s * 0.15, 94), 300: hslToHex(hsl.h, hsl.s * 0.4, 72), 500: hslToHex(hsl.h, hsl.s * 0.6, Math.max(20, hsl.l - 20)), 700: hslToHex(hsl.h, hsl.s * 0.8, 15) },
+    accentA: { 400: hslToHex(hsl.h, Math.min(100, hsl.s * 1.2), Math.min(90, hsl.l + 10)), 600: hslToHex(hsl.h, hsl.s, Math.max(10, hsl.l - 10)) },
+    accentB: { 400: hslToHex(hsl.h, hsl.s * 0.2, 90), 600: hslToHex(hsl.h, hsl.s * 0.2, 20) },
+    neutrals: generateTintedNeutrals(hsl.h, hsl.s),
     feedback: generateFeedback(hsl.h),
     baseHex: hex, baseHSL: hsl,
   };
@@ -206,13 +265,93 @@ export function generateMonochromePalette(hex: string): BrandPalette {
 
 export function generateCorporatePalette(hex: string): BrandPalette {
   const hsl = hexToHSL(hex);
+  const coldH = (hsl.h > 180 && hsl.h < 300) ? hsl.h : 220; // Default to professional blue if not already cold
   return {
-    name: 'Corporate Neutral',
-    primary: generateScale(hsl.h, Math.min(hsl.s, 50)),
-    secondary: { 300: hslToHex(hsl.h, 15, 72), 500: hslToHex(hsl.h, 15, 50), 700: hslToHex(hsl.h, 15, 34) },
-    accentA: { 400: hslToHex((hsl.h + 180) % 360, 60, 50), 600: hslToHex((hsl.h + 180) % 360, 60, 38) },
-    accentB: { 400: hslToHex(hsl.h, 30, 55), 600: hslToHex(hsl.h, 30, 40) },
-    neutrals: generateNeutrals(hsl.h),
+    name: 'Corporate Modern',
+    primary: generateCurvedScale(hsl.h, Math.min(hsl.s, 60), Math.max(30, hsl.l), hex),
+    secondary: { 100: hslToHex(coldH, 8, 94), 300: hslToHex(coldH, 20, 80), 500: hslToHex(coldH, 40, 40), 700: hslToHex(coldH, 60, 20) },
+    accentA: { 400: hslToHex((hsl.h + 180) % 360, 70, 50), 600: hslToHex((hsl.h + 180) % 360, 70, 35) },
+    accentB: { 400: hslToHex(hsl.h, 15, 90), 600: hslToHex(hsl.h, 15, 15) },
+    neutrals: generateTintedNeutrals(hsl.h, hsl.s),
+    feedback: generateFeedback(hsl.h),
+    baseHex: hex, baseHSL: hsl,
+  };
+}
+
+export function generateTetradicPalette(hex: string): BrandPalette {
+  // 4 hues at 90° intervals: base, +90, +180, +270
+  const hsl = hexToHSL(hex);
+  const h1 = (hsl.h + 90) % 360;  // Orange family
+  const h2 = (hsl.h + 180) % 360; // Complementary (Red family)
+  const h3 = (hsl.h + 270) % 360; // Green family
+  const c1 = calibrateHarmony(hex, h1, 1.0);
+  const c2 = calibrateHarmony(hex, h2, 0.95);
+  const c3 = calibrateHarmony(hex, h3, 0.9);
+
+  return {
+    name: 'Tetradic',
+    primary: generateCurvedScale(hsl.h, hsl.s, hsl.l, hex),
+    secondary: { 100: hslToHex(h1, c1.s * 0.25, 94), 300: hslToHex(h1, c1.s, 72), 500: hslToHex(h1, c1.s, c1.l), 700: hslToHex(h1, c1.s, 34) },
+    accentA: { 400: hslToHex(h2, c2.s, c2.l), 600: hslToHex(h2, c2.s, Math.max(20, c2.l - 15)) },
+    accentB: { 400: hslToHex(h3, c3.s, c3.l), 600: hslToHex(h3, c3.s, Math.max(20, c3.l - 15)) },
+    neutrals: generateTintedNeutrals(hsl.h, hsl.s),
+    feedback: generateFeedback(hsl.h),
+    baseHex: hex, baseHSL: hsl,
+  };
+}
+
+export function generateSquarePalette(hex: string): BrandPalette {
+  // 4 hues at 60°, 180°, 240° from base — rectangle variation
+  const hsl = hexToHSL(hex);
+  const h1 = (hsl.h + 60) % 360;  // Yellow family
+  const h2 = (hsl.h + 180) % 360; // Complementary (Blue family)
+  const h3 = (hsl.h + 240) % 360; // Green family
+  const c1 = calibrateHarmony(hex, h1, 1.0);
+  const c2 = calibrateHarmony(hex, h2, 0.95);
+  const c3 = calibrateHarmony(hex, h3, 0.9);
+
+  return {
+    name: 'Square',
+    primary: generateCurvedScale(hsl.h, hsl.s, hsl.l, hex),
+    secondary: { 100: hslToHex(h1, c1.s * 0.25, 94), 300: hslToHex(h1, c1.s, 72), 500: hslToHex(h1, c1.s, c1.l), 700: hslToHex(h1, c1.s, 34) },
+    accentA: { 400: hslToHex(h2, c2.s, c2.l), 600: hslToHex(h2, c2.s, Math.max(20, c2.l - 15)) },
+    accentB: { 400: hslToHex(h3, c3.s, c3.l), 600: hslToHex(h3, c3.s, Math.max(20, c3.l - 15)) },
+    neutrals: generateTintedNeutrals(hsl.h, hsl.s),
+    feedback: generateFeedback(hsl.h),
+    baseHex: hex, baseHSL: hsl,
+  };
+}
+
+export function generateAchromaticPalette(hex: string): BrandPalette {
+  // Desaturated: Black → Dark Gray → Light Gray → White
+  const hsl = hexToHSL(hex);
+  // Strip saturation — keep a tiny tint from base hue for warmth
+  const tintH = hsl.h;
+  const tintS = Math.min(6, hsl.s * 0.08);
+
+  return {
+    name: 'Achromatic',
+    primary: {
+      50: hslToHex(tintH, tintS, 98),
+      100: hslToHex(tintH, tintS, 93),
+      200: hslToHex(tintH, tintS, 82),
+      300: hslToHex(tintH, tintS, 68),
+      400: hslToHex(tintH, tintS, 52),
+      500: hslToHex(tintH, tintS, 38),
+      600: hslToHex(tintH, tintS, 26),
+      700: hslToHex(tintH, tintS, 16),
+      800: hslToHex(tintH, tintS, 8),
+      900: hslToHex(tintH, tintS, 3),
+    },
+    secondary: {
+      100: hslToHex(tintH, tintS, 96),
+      300: hslToHex(tintH, tintS, 75),
+      500: hslToHex(tintH, tintS, 45),
+      700: hslToHex(tintH, tintS, 14),
+    },
+    accentA: { 400: hslToHex(tintH, tintS, 60), 600: hslToHex(tintH, tintS, 30) },
+    accentB: { 400: hslToHex(tintH, tintS, 88), 600: hslToHex(tintH, tintS, 10) },
+    neutrals: generateTintedNeutrals(tintH, tintS),
     feedback: generateFeedback(hsl.h),
     baseHex: hex, baseHSL: hsl,
   };
@@ -224,8 +363,11 @@ export function generateAllPalettes(hex: string): BrandPalette[] {
     generateComplementaryPalette(hex),
     generateSplitComplementPalette(hex),
     generateTriadicPalette(hex),
+    generateTetradicPalette(hex),
+    generateSquarePalette(hex),
     generateMonochromePalette(hex),
     generateCorporatePalette(hex),
+    generateAchromaticPalette(hex),
   ];
 }
 
@@ -236,7 +378,7 @@ export function paletteToCSS(palette: BrandPalette): string {
     const hsl = hexToHSL(palette.primary[k]);
     lines.push(`  --color-primary-${k}: ${hsl.h} ${hsl.s}% ${hsl.l}%;`);
   });
-  (['300', '500', '700'] as const).forEach(k => {
+  (['100', '300', '500', '700'] as const).forEach(k => {
     const hsl = hexToHSL(palette.secondary[k]);
     lines.push(`  --color-secondary-${k}: ${hsl.h} ${hsl.s}% ${hsl.l}%;`);
   });
