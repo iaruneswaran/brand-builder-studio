@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { hexToHSL, hslToHex, randomHex } from '@/lib/colorUtils';
 
 const HISTORY_SIZE = 50;
-import { Sparkles } from 'lucide-react';
+import { Sparkles, Instagram } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { HexColorPicker } from 'react-colorful';
 import { Slider } from '@/components/ui/slider';
@@ -143,6 +143,18 @@ const ColorPickerSection = ({ baseColor, onColorChange }: ColorPickerSectionProp
             >
               <Sparkles size={18} />
             </motion.button>
+            <motion.a
+              href="https://www.instagram.com/iaruneswaran/"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className="pl-0 pr-2 py-2 transition-colors"
+              style={{ color: '#000000' }}
+              title="Instagram"
+            >
+              <Instagram size={18} />
+            </motion.a>
           </div>
         </div>
       </div>
@@ -189,12 +201,24 @@ const ColorPickerSection = ({ baseColor, onColorChange }: ColorPickerSectionProp
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={handleRandomize}
-            className="px-4 h-full flex items-center justify-center bg-neutral-50"
+            className="px-3 h-full flex items-center justify-center bg-neutral-50"
             style={{ color: '#000000' }}
             title="Randomize Color"
           >
             <Sparkles size={18} />
           </motion.button>
+          <motion.a
+            href="https://www.instagram.com/iaruneswaran/"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            className="px-3 h-full flex items-center justify-center bg-neutral-50 border-l border-neutral-200"
+            style={{ color: '#000000' }}
+            title="Instagram"
+          >
+            <Instagram size={18} />
+          </motion.a>
         </div>
 
         {/* Row 2: HSL sliders in 3-column grid */}
