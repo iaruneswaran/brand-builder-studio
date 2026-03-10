@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { BrandPalette, getContrastTextColor, getContrastRatio, getWCAGLevel } from '@/lib/colorUtils';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X } from 'lucide-react';
 
 interface PaletteOverviewProps {
   palettes: BrandPalette[];
@@ -125,20 +126,31 @@ const PaletteOverview = ({ palettes, activePalette, onSelectPalette }: PaletteOv
   const palette = palettes[activePalette];
   const hasAnimated = useRef(false);
   const [isInitial, setIsInitial] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!hasAnimated.current) {
       hasAnimated.current = true;
-      // After the longest card finishes animating, mark initial done
       const timer = setTimeout(() => setIsInitial(false), 1800);
       return () => clearTimeout(timer);
     }
   }, []);
 
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleOutsideClick = (e: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        setMenuOpen(false);
+      }
+    };
+    if (menuOpen) document.addEventListener('mousedown', handleOutsideClick);
+    return () => document.removeEventListener('mousedown', handleOutsideClick);
+  }, [menuOpen]);
+
   if (!palette) return null;
 
   const primaryCount = Object.keys(palette.primary).length;
-  // Secondary row starts after primary animation finishes
   const secondaryBaseDelay = primaryCount * 0.055 + 0.1;
   const secondaryEntries = Object.entries(palette.secondary);
   const accentBaseDelay = secondaryBaseDelay + secondaryEntries.length * 0.055 + 0.05;
@@ -146,8 +158,9 @@ const PaletteOverview = ({ palettes, activePalette, onSelectPalette }: PaletteOv
   return (
     <section className="w-full h-full bg-background flex flex-col min-h-0">
       <div className="w-full flex-1 flex flex-col min-h-0">
-        {/* Palette tabs */}
-        <div className="flex w-full shrink-0">
+
+        {/* ── Desktop: horizontal tab row ── */}
+        <div className="hidden lg:flex w-full shrink-0">
           {palettes.map((p, i) => (
             <motion.button
               key={i}
@@ -174,7 +187,69 @@ const PaletteOverview = ({ palettes, activePalette, onSelectPalette }: PaletteOv
           ))}
         </div>
 
-        {/* Content Area */}
+        {/* ── Mobile / Tablet: top bar with active name + hamburger menu ── */}
+        <div className="lg:hidden flex items-stretch w-full shrink-0 relative z-20" ref={menuRef}>
+          {/* Active palette pill */}
+          <div className="flex-1 flex items-center px-4 h-11 bg-black">
+            <span className="text-[11px] font-bold uppercase tracking-widest text-white">
+              {palettes[activePalette]?.name}
+            </span>
+          </div>
+
+          {/* Hamburger button */}
+          <button
+            onClick={() => setMenuOpen(prev => !prev)}
+            className="w-12 h-11 flex items-center justify-center bg-black border-l border-white/10 text-white shrink-0"
+            aria-label="Open palette menu"
+          >
+            <AnimatePresence mode="wait" initial={false}>
+              {menuOpen ? (
+                <motion.span key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.15 }}>
+                  <X size={18} />
+                </motion.span>
+              ) : (
+                <motion.span key="open" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.15 }}>
+                  <Menu size={18} />
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </button>
+
+          {/* Dropdown menu */}
+          <AnimatePresence>
+            {menuOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: -8, scaleY: 0.9 }}
+                animate={{ opacity: 1, y: 0, scaleY: 1 }}
+                exit={{ opacity: 0, y: -8, scaleY: 0.9 }}
+                transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
+                style={{ transformOrigin: 'top right' }}
+                className="absolute top-full right-0 bg-black shadow-2xl min-w-[200px] overflow-hidden"
+              >
+                {palettes.map((p, i) => (
+                  <button
+                    key={i}
+                    onClick={() => {
+                      onSelectPalette(i);
+                      setMenuOpen(false);
+                    }}
+                    className={`w-full flex items-center justify-between px-5 py-3 text-left text-[11px] font-bold uppercase tracking-widest transition-colors ${i === activePalette
+                        ? 'bg-white text-black'
+                        : 'text-white/70 hover:bg-white/10 hover:text-white'
+                      }`}
+                  >
+                    <span>{p.name}</span>
+                    {i === activePalette && (
+                      <span className="w-1.5 h-1.5 rounded-full bg-black shrink-0" />
+                    )}
+                  </button>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+
+        {/* ── Content Area (shared) ── */}
         <AnimatePresence mode="wait">
           <motion.div
             key={activePalette}
