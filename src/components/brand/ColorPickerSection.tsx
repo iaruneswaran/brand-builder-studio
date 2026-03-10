@@ -1,5 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { hexToHSL, hslToHex, randomHex } from '@/lib/colorUtils';
+
+const HISTORY_SIZE = 50;
 import { Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { HexColorPicker } from 'react-colorful';
@@ -18,6 +20,18 @@ interface ColorPickerSectionProps {
 const ColorPickerSection = ({ baseColor, onColorChange }: ColorPickerSectionProps) => {
   const hsl = hexToHSL(baseColor);
   const [localHex, setLocalHex] = useState(baseColor.toUpperCase());
+  const colorHistory = useRef<string[]>([]);
+
+  const handleRandomize = useCallback(() => {
+    let candidate: string;
+    let attempts = 0;
+    do {
+      candidate = randomHex();
+      attempts++;
+    } while (colorHistory.current.includes(candidate) && attempts < 200);
+    colorHistory.current = [...colorHistory.current, candidate].slice(-HISTORY_SIZE);
+    onColorChange(candidate);
+  }, [onColorChange]);
 
   useEffect(() => {
     setLocalHex(baseColor.toUpperCase());
@@ -122,7 +136,7 @@ const ColorPickerSection = ({ baseColor, onColorChange }: ColorPickerSectionProp
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              onClick={() => onColorChange(randomHex())}
+              onClick={handleRandomize}
               className="p-2 transition-colors ml-2"
               style={{ color: '#000000' }}
               title="Randomize Color"
@@ -174,7 +188,7 @@ const ColorPickerSection = ({ baseColor, onColorChange }: ColorPickerSectionProp
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            onClick={() => onColorChange(randomHex())}
+            onClick={handleRandomize}
             className="px-4 h-full flex items-center justify-center bg-neutral-50"
             style={{ color: '#000000' }}
             title="Randomize Color"
