@@ -1,12 +1,12 @@
 import { useState, useCallback } from 'react';
-import { generateAllPalettes, BrandPalette } from '@/lib/colorUtils';
+import { generateAllPalettes, BrandPalette, randomHex } from '@/lib/colorUtils';
 import ColorPickerSection from '@/components/brand/ColorPickerSection';
 import PaletteOverview from '@/components/brand/PaletteOverview';
 import { AnimatePresence, motion } from 'framer-motion';
 
 const Index = () => {
-  const [baseColor, setBaseColor] = useState('#3B82F6');
-  const [palettes, setPalettes] = useState<BrandPalette[]>(() => generateAllPalettes('#3B82F6'));
+  const [baseColor, setBaseColor] = useState(() => randomHex());
+  const [palettes, setPalettes] = useState<BrandPalette[]>(() => generateAllPalettes(baseColor));
   const [activePalette, setActivePalette] = useState(0);
 
   const handleColorChange = useCallback((hex: string) => {
