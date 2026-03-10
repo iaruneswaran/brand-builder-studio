@@ -63,10 +63,12 @@ const SwatchItem = ({ step, hex, i, isInitial }: { step: string, hex: string, i:
 const ScaleStrip = ({ scale, label, isInitial }: { scale: Record<string, string>; label: string; isInitial?: boolean }) => (
   <div className="h-full flex flex-col">
     {label && <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground shrink-0">{label}</p>}
-    <div className="flex-1 flex min-h-0">
-      {Object.entries(scale).map(([step, hex], i) => (
-        <SwatchItem key={step} step={step} hex={hex} i={i} isInitial={isInitial} />
-      ))}
+    <div className="flex-1 overflow-x-auto scrollbar-hide min-h-0">
+      <div className="flex h-full min-w-max lg:min-w-0">
+        {Object.entries(scale).map(([step, hex], i) => (
+          <SwatchItem key={step} step={step} hex={hex} i={i} isInitial={isInitial} />
+        ))}
+      </div>
     </div>
   </div>
 );
@@ -234,8 +236,8 @@ const PaletteOverview = ({ palettes, activePalette, onSelectPalette }: PaletteOv
                       setMenuOpen(false);
                     }}
                     className={`w-full flex items-center justify-between px-5 py-3 text-left text-[11px] font-bold uppercase tracking-widest transition-colors ${i === activePalette
-                        ? 'bg-white text-black'
-                        : 'text-white/70 hover:bg-white/10 hover:text-white'
+                      ? 'bg-white text-black'
+                      : 'text-white/70 hover:bg-white/10 hover:text-white'
                       }`}
                   >
                     <span>{p.name}</span>
