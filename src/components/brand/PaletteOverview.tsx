@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { BrandPalette, getContrastTextColor, getContrastRatio, getWCAGLevel } from '@/lib/colorUtils';
-import { Check } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface PaletteOverviewProps {
@@ -9,7 +8,7 @@ interface PaletteOverviewProps {
   onSelectPalette: (index: number) => void;
 }
 
-const SwatchItem = ({ step, hex, i }: { step: string, hex: string, i: number }) => {
+const SwatchItem = ({ step, hex, i, isInitial }: { step: string, hex: string, i: number, isInitial?: boolean }) => {
   const [copied, setCopied] = useState(false);
   const textColor = getContrastTextColor(hex);
   const ratio = getContrastRatio(hex, textColor);
@@ -21,12 +20,17 @@ const SwatchItem = ({ step, hex, i }: { step: string, hex: string, i: number }) 
     setTimeout(() => setCopied(false), 1500);
   };
 
+  const shuffleDelay = isInitial ? i * 0.055 : 0;
+
   return (
     <motion.div
       key={step}
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ delay: i * 0.02 }}
+      initial={isInitial ? { opacity: 0, y: 40, scaleY: 0.6, scaleX: 0.92, rotateZ: (i % 2 === 0 ? -3 : 3) } : { opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, y: 0, scaleY: 1, scaleX: 1, scale: 1, rotateZ: 0 }}
+      transition={isInitial
+        ? { delay: shuffleDelay, type: 'spring', stiffness: 260, damping: 22 }
+        : { delay: i * 0.02 }
+      }
       onClick={handleCopy}
       className="flex-1 p-2 flex flex-col justify-between cursor-pointer group relative"
       style={{ backgroundColor: hex }}
@@ -55,18 +59,18 @@ const SwatchItem = ({ step, hex, i }: { step: string, hex: string, i: number }) 
   );
 };
 
-const ScaleStrip = ({ scale, label }: { scale: Record<string, string>; label: string }) => (
+const ScaleStrip = ({ scale, label, isInitial }: { scale: Record<string, string>; label: string; isInitial?: boolean }) => (
   <div className="h-full flex flex-col">
     {label && <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground shrink-0">{label}</p>}
     <div className="flex-1 flex min-h-0">
       {Object.entries(scale).map(([step, hex], i) => (
-        <SwatchItem key={step} step={step} hex={hex} i={i} />
+        <SwatchItem key={step} step={step} hex={hex} i={i} isInitial={isInitial} />
       ))}
     </div>
   </div>
 );
 
-const SmallSwatch = ({ hex, label }: { hex: string; label: string }) => {
+const SmallSwatch = ({ hex, label, i, isInitial, baseDelay }: { hex: string; label: string; i: number; isInitial?: boolean; baseDelay?: number }) => {
   const [copied, setCopied] = useState(false);
   const textColor = getContrastTextColor(hex);
   const ratio = getContrastRatio(hex, textColor);
@@ -78,10 +82,17 @@ const SmallSwatch = ({ hex, label }: { hex: string; label: string }) => {
     setTimeout(() => setCopied(false), 1500);
   };
 
+  const shuffleDelay = isInitial ? (baseDelay ?? 0) + i * 0.055 : 0;
+
   return (
     <motion.div
       layout
-      transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+      initial={isInitial ? { opacity: 0, y: 50, scaleY: 0.5, scaleX: 0.88, rotateZ: (i % 2 === 0 ? 4 : -4) } : {}}
+      animate={{ opacity: 1, y: 0, scaleY: 1, scaleX: 1, rotateZ: 0 }}
+      transition={isInitial
+        ? { delay: shuffleDelay, type: 'spring', stiffness: 240, damping: 20 }
+        : { duration: 0.5, ease: [0.4, 0, 0.2, 1] }
+      }
       onClick={handleCopy}
       className="flex-1 h-full p-2 flex flex-col justify-between cursor-pointer group relative"
       style={{ backgroundColor: hex }}
@@ -112,7 +123,25 @@ const SmallSwatch = ({ hex, label }: { hex: string; label: string }) => {
 
 const PaletteOverview = ({ palettes, activePalette, onSelectPalette }: PaletteOverviewProps) => {
   const palette = palettes[activePalette];
+  const hasAnimated = useRef(false);
+  const [isInitial, setIsInitial] = useState(true);
+
+  useEffect(() => {
+    if (!hasAnimated.current) {
+      hasAnimated.current = true;
+      // After the longest card finishes animating, mark initial done
+      const timer = setTimeout(() => setIsInitial(false), 1800);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
   if (!palette) return null;
+
+  const primaryCount = Object.keys(palette.primary).length;
+  // Secondary row starts after primary animation finishes
+  const secondaryBaseDelay = primaryCount * 0.055 + 0.1;
+  const secondaryEntries = Object.entries(palette.secondary);
+  const accentBaseDelay = secondaryBaseDelay + secondaryEntries.length * 0.055 + 0.05;
 
   return (
     <section className="w-full h-full bg-background flex flex-col min-h-0">
@@ -157,22 +186,24 @@ const PaletteOverview = ({ palettes, activePalette, onSelectPalette }: PaletteOv
           >
             {/* Primary scale */}
             <div className="flex-[1.5] min-h-0">
-              <ScaleStrip scale={palette.primary} label="" />
+              <ScaleStrip scale={palette.primary} label="" isInitial={isInitial} />
             </div>
 
             {/* Secondary and Accent Scales */}
             <div className="grid grid-cols-12 w-full flex-1 min-h-0 overflow-hidden">
               <div className="col-span-12 lg:col-span-6 h-full">
                 <div className="flex h-full">
-                  {Object.entries(palette.secondary).map(([k, hex]) => <SmallSwatch key={k} hex={hex} label={`S${k}`} />)}
+                  {secondaryEntries.map(([k, hex], i) => (
+                    <SmallSwatch key={k} hex={hex} label={`S${k}`} i={i} isInitial={isInitial} baseDelay={secondaryBaseDelay} />
+                  ))}
                 </div>
               </div>
               <div className="col-span-12 lg:col-span-6 h-full">
                 <div className="flex h-full">
-                  <SmallSwatch hex={palette.accentA['400']} label="A400" />
-                  <SmallSwatch hex={palette.accentA['600']} label="A600" />
-                  <SmallSwatch hex={palette.accentB['400']} label="B400" />
-                  <SmallSwatch hex={palette.accentB['600']} label="B600" />
+                  <SmallSwatch hex={palette.accentA['400']} label="A400" i={0} isInitial={isInitial} baseDelay={accentBaseDelay} />
+                  <SmallSwatch hex={palette.accentA['600']} label="A600" i={1} isInitial={isInitial} baseDelay={accentBaseDelay} />
+                  <SmallSwatch hex={palette.accentB['400']} label="B400" i={2} isInitial={isInitial} baseDelay={accentBaseDelay} />
+                  <SmallSwatch hex={palette.accentB['600']} label="B600" i={3} isInitial={isInitial} baseDelay={accentBaseDelay} />
                 </div>
               </div>
             </div>
