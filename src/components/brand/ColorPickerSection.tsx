@@ -103,7 +103,7 @@ const ColorPickerSection = ({ baseColor, onColorChange }: ColorPickerSectionProp
               type="text"
               value={localHex}
               onChange={e => handleHexInput(e.target.value)}
-              className="flex-1 h-14 px-4 bg-background border-none text-foreground text-lg font-mono font-bold focus:outline-none placeholder:opacity-20 translate-z-0"
+              className="flex-1 h-14 px-4 bg-background border-none text-foreground text-lg font-sans font-bold focus:outline-none placeholder:opacity-20 translate-z-0"
               placeholder="#3B82F6"
             />
           </div>
@@ -111,7 +111,7 @@ const ColorPickerSection = ({ baseColor, onColorChange }: ColorPickerSectionProp
 
         {/* HSL sliders */}
         <div className="col-span-9 flex flex-col justify-center h-14 px-6 bg-neutral-50/50 backdrop-blur-sm">
-          <div className="flex items-center gap-8 h-full">
+          <div className="flex items-center gap-4 h-full">
             {sliders.map((s) => (
               <div key={s.prop} className="flex-1 flex items-center gap-3 group/slider">
                 <span className="text-[10px] font-bold text-neutral-900 w-4">{s.label}</span>
@@ -133,28 +133,30 @@ const ColorPickerSection = ({ baseColor, onColorChange }: ColorPickerSectionProp
                 </span>
               </div>
             ))}
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={handleRandomize}
-              className="p-2 transition-colors ml-2"
-              style={{ color: '#000000' }}
-              title="Randomize Color"
-            >
-              <Sparkles size={18} />
-            </motion.button>
-            <motion.a
-              href="https://www.instagram.com/iaruneswaran/"
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              className="pl-0 pr-2 py-2 transition-colors"
-              style={{ color: '#000000' }}
-              title="Instagram"
-            >
-              <Instagram size={18} />
-            </motion.a>
+            <div className="flex items-center gap-3 ml-auto">
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={handleRandomize}
+                className="p-2 transition-colors"
+                style={{ color: '#000000' }}
+                title="Randomize Color"
+              >
+                <Sparkles size={18} strokeWidth={2} />
+              </motion.button>
+              <motion.a
+                href="https://www.instagram.com/iaruneswaran/"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                className="pl-0 pr-2 py-2 transition-colors"
+                style={{ color: '#000000' }}
+                title="Instagram"
+              >
+                <Instagram size={18} strokeWidth={2} />
+              </motion.a>
+            </div>
           </div>
         </div>
       </div>
@@ -193,7 +195,7 @@ const ColorPickerSection = ({ baseColor, onColorChange }: ColorPickerSectionProp
             type="text"
             value={localHex}
             onChange={e => handleHexInput(e.target.value)}
-            className="flex-1 h-full px-3 bg-background border-none text-foreground text-base font-mono font-bold focus:outline-none"
+            className="flex-1 h-full px-3 bg-background border-none text-foreground text-base font-sans font-bold focus:outline-none"
             placeholder="#3B82F6"
           />
 
@@ -205,7 +207,7 @@ const ColorPickerSection = ({ baseColor, onColorChange }: ColorPickerSectionProp
             style={{ color: '#000000' }}
             title="Randomize Color"
           >
-            <Sparkles size={18} />
+            <Sparkles size={18} strokeWidth={2} />
           </motion.button>
           <motion.a
             href="https://www.instagram.com/iaruneswaran/"
@@ -217,7 +219,7 @@ const ColorPickerSection = ({ baseColor, onColorChange }: ColorPickerSectionProp
             style={{ color: '#000000' }}
             title="Instagram"
           >
-            <Instagram size={18} />
+            <Instagram size={18} strokeWidth={2} />
           </motion.a>
         </div>
 
