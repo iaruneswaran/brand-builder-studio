@@ -1,9 +1,8 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { hexToHSL, hslToHex, randomHex } from '@/lib/colorUtils';
-
-const HISTORY_SIZE = 50;
-import { Sparkles, Instagram } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { Sparkles, Instagram, Menu, Layers, FileDown, Maximize2 } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { HexColorPicker } from 'react-colorful';
 import { Slider } from '@/components/ui/slider';
 import {
@@ -12,12 +11,35 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
+const HISTORY_SIZE = 50;
+
+
 interface ColorPickerSectionProps {
   baseColor: string;
   onColorChange: (hex: string) => void;
 }
 
 const ColorPickerSection = ({ baseColor, onColorChange }: ColorPickerSectionProps) => {
+  const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const desktopMenuRef = React.useRef<HTMLDivElement>(null);
+  const mobileMenuRef = React.useRef<HTMLDivElement>(null);
+
+  // Close menu on outside click
+  React.useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      const target = e.target as Node;
+      if (
+        (!desktopMenuRef.current || !desktopMenuRef.current.contains(target)) &&
+        (!mobileMenuRef.current || !mobileMenuRef.current.contains(target))
+      ) {
+        setMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, []);
+
   const hsl = hexToHSL(baseColor);
   const [localHex, setLocalHex] = useState(baseColor.toUpperCase());
   const colorHistory = useRef<string[]>([]);
@@ -156,6 +178,53 @@ const ColorPickerSection = ({ baseColor, onColorChange }: ColorPickerSectionProp
               >
                 <Instagram size={18} strokeWidth={2} />
               </motion.a>
+
+              {/* Menu */}
+              <div className="relative" ref={desktopMenuRef}>
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  onClick={() => setMenuOpen(o => !o)}
+                  className="pl-2 pr-0 py-2 transition-colors"
+                  style={{ color: '#000000' }}
+                  title="Tools Menu"
+                >
+                  <Menu size={18} strokeWidth={2} />
+                </motion.button>
+                <AnimatePresence>
+                  {menuOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -6, scale: 0.97 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: -6, scale: 0.97 }}
+                      transition={{ duration: 0.15 }}
+                      className="absolute right-0 top-full mt-1 w-52 bg-white border border-neutral-200 shadow-xl rounded-xl overflow-hidden z-50"
+                    >
+                      <button
+                        onClick={() => { setMenuOpen(false); navigate('/tools/background-remover'); }}
+                        className="w-full flex items-center gap-3 px-4 py-3 text-sm font-semibold text-neutral-800 hover:bg-neutral-50 transition-colors text-left"
+                      >
+                        <Layers size={15} className="text-neutral-500" />
+                        Background Remover
+                      </button>
+                      <button
+                        onClick={() => { setMenuOpen(false); navigate('/tools/image-to-pdf'); }}
+                        className="w-full flex items-center gap-3 px-4 py-3 text-sm font-semibold text-neutral-800 hover:bg-neutral-50 transition-colors text-left border-t border-neutral-100"
+                      >
+                        <FileDown size={15} className="text-neutral-500" />
+                        Image to PDF
+                      </button>
+                      <button
+                        onClick={() => { setMenuOpen(false); navigate('/tools/image-upscaler'); }}
+                        className="w-full flex items-center gap-3 px-4 py-3 text-sm font-semibold text-neutral-800 hover:bg-neutral-50 transition-colors text-left border-t border-neutral-100"
+                      >
+                        <Maximize2 size={15} className="text-neutral-500" />
+                        Image Upscaler
+                      </button>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             </div>
           </div>
         </div>
@@ -215,12 +284,60 @@ const ColorPickerSection = ({ baseColor, onColorChange }: ColorPickerSectionProp
             rel="noopener noreferrer"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className="px-3 h-full flex items-center justify-center bg-neutral-50 border-l border-neutral-200"
+            className="px-3 h-full flex items-center justify-center bg-neutral-50 border-x border-neutral-200"
             style={{ color: '#000000' }}
             title="Instagram"
           >
             <Instagram size={18} strokeWidth={2} />
           </motion.a>
+
+          {/* Mobile Menu */}
+          <div className="relative" ref={mobileMenuRef}>
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={() => setMenuOpen(o => !o)}
+              className="px-3 h-full flex items-center justify-center bg-neutral-50"
+              style={{ color: '#000000' }}
+              title="Tools Menu"
+            >
+              <Menu size={18} strokeWidth={2} />
+            </motion.button>
+            <AnimatePresence>
+              {menuOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -6, scale: 0.97 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -6, scale: 0.97 }}
+                  transition={{ duration: 0.15 }}
+                  className="absolute right-0 top-full mt-1 w-52 bg-white border border-neutral-200 shadow-xl rounded-xl overflow-hidden z-50"
+                >
+                  <button
+                    onClick={() => { setMenuOpen(false); navigate('/tools/background-remover'); }}
+                    className="w-full flex items-center gap-3 px-4 py-3 text-sm font-semibold text-neutral-800 hover:bg-neutral-50 transition-colors text-left"
+                  >
+                    <Layers size={15} className="text-neutral-500" />
+                    Background Remover
+                  </button>
+                  <button
+                    onClick={() => { setMenuOpen(false); navigate('/tools/image-to-pdf'); }}
+                    className="w-full flex items-center gap-3 px-4 py-3 text-sm font-semibold text-neutral-800 hover:bg-neutral-50 transition-colors text-left border-t border-neutral-100"
+                  >
+                    <FileDown size={15} className="text-neutral-500" />
+                    Image to PDF
+                  </button>
+                  <button
+                    onClick={() => { setMenuOpen(false); navigate('/tools/image-upscaler'); }}
+                    className="w-full flex items-center gap-3 px-4 py-3 text-sm font-semibold text-neutral-800 hover:bg-neutral-50 transition-colors text-left border-t border-neutral-100"
+                  >
+                    <Maximize2 size={15} className="text-neutral-500" />
+                    Image Upscaler
+                  </button>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
         </div>
 
         {/* Row 2: HSL sliders in 3-column grid */}
