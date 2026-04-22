@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { hexToHSL, hslToHex, randomHex } from '@/lib/colorUtils';
-import { Sparkles, Instagram, Menu, Layers, FileDown, Maximize2 } from 'lucide-react';
+import { Sparkles, Instagram, Menu, Layers, FileDown, Maximize2, FileImage } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { HexColorPicker } from 'react-colorful';
@@ -221,6 +221,13 @@ const ColorPickerSection = ({ baseColor, onColorChange }: ColorPickerSectionProp
                         <Maximize2 size={15} className="text-neutral-500" />
                         Image Upscaler
                       </button>
+                      <button
+                        onClick={() => { setMenuOpen(false); navigate('/tools/heic-to-jpg'); }}
+                        className="w-full flex items-center gap-3 px-4 py-3 text-sm font-semibold text-neutral-800 hover:bg-neutral-50 transition-colors text-left border-t border-neutral-100"
+                      >
+                        <FileImage size={15} className="text-orange-400" />
+                        HEIC to JPG
+                      </button>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -332,6 +339,13 @@ const ColorPickerSection = ({ baseColor, onColorChange }: ColorPickerSectionProp
                   >
                     <Maximize2 size={15} className="text-neutral-500" />
                     Image Upscaler
+                  </button>
+                  <button
+                    onClick={() => { setMenuOpen(false); navigate('/tools/heic-to-jpg'); }}
+                    className="w-full flex items-center gap-3 px-4 py-3 text-sm font-semibold text-neutral-800 hover:bg-neutral-50 transition-colors text-left border-t border-neutral-100"
+                  >
+                    <FileImage size={15} className="text-orange-400" />
+                    HEIC to JPG
                   </button>
                 </motion.div>
               )}

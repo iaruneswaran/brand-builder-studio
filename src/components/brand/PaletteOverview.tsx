@@ -158,7 +158,7 @@ const PaletteOverview = ({ palettes, activePalette, onSelectPalette }: PaletteOv
   const accentBaseDelay = secondaryBaseDelay + secondaryEntries.length * 0.055 + 0.05;
 
   return (
-    <section className="w-full h-full bg-background flex flex-col min-h-0">
+    <section className="w-full h-full bg-background flex flex-col min-h-0 isolate">
       <div className="w-full flex-1 flex flex-col min-h-0">
 
         {/* ── Desktop: horizontal tab row ── */}
@@ -190,7 +190,7 @@ const PaletteOverview = ({ palettes, activePalette, onSelectPalette }: PaletteOv
         </div>
 
         {/* ── Mobile / Tablet: top bar with active name + hamburger menu ── */}
-        <div className="lg:hidden flex items-stretch w-full shrink-0 relative z-20" ref={menuRef}>
+        <div className="lg:hidden flex items-stretch w-full shrink-0 relative z-10" ref={menuRef}>
           {/* Active palette pill */}
           <div className="flex-1 flex items-center px-4 h-11 bg-black">
             <span className="text-[11px] font-bold uppercase tracking-widest text-white">
@@ -218,6 +218,7 @@ const PaletteOverview = ({ palettes, activePalette, onSelectPalette }: PaletteOv
           </button>
 
           {/* Dropdown menu */}
+          <div className="absolute top-full right-0 z-50">
           <AnimatePresence>
             {menuOpen && (
               <motion.div
@@ -226,7 +227,7 @@ const PaletteOverview = ({ palettes, activePalette, onSelectPalette }: PaletteOv
                 exit={{ opacity: 0, y: -8, scaleY: 0.9 }}
                 transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
                 style={{ transformOrigin: 'top right' }}
-                className="absolute top-full right-0 bg-black shadow-2xl min-w-[200px] overflow-hidden"
+                className="bg-black shadow-2xl min-w-[200px] overflow-hidden"
               >
                 {palettes.map((p, i) => (
                   <button
@@ -249,6 +250,7 @@ const PaletteOverview = ({ palettes, activePalette, onSelectPalette }: PaletteOv
               </motion.div>
             )}
           </AnimatePresence>
+          </div>
         </div>
 
         {/* ── Content Area (shared) ── */}
@@ -259,7 +261,7 @@ const PaletteOverview = ({ palettes, activePalette, onSelectPalette }: PaletteOv
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
-            className="flex-1 flex flex-col min-h-0"
+            className="flex-1 flex flex-col min-h-0 relative z-0"
           >
             {/* Primary scale */}
             <div className="flex-[1.5] min-h-0">

@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import BackgroundRemover from "./pages/tools/BackgroundRemover";
 import ImageToPdf from "./pages/tools/ImageToPdf";
 import ImageUpscaler from "./pages/tools/ImageUpscaler";
+import HeicToJpg from "./pages/tools/HeicToJpg";
 
 
 import NotFound from "./pages/NotFound";
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/tools/background-remover" element={<BackgroundRemover />} />
           <Route path="/tools/image-to-pdf" element={<ImageToPdf />} />
           <Route path="/tools/image-upscaler" element={<ImageUpscaler />} />
+          <Route path="/tools/heic-to-jpg" element={<HeicToJpg />} />
 
 
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
