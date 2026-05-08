@@ -856,6 +856,15 @@ const COMMUNICATION_ICONS: string[] = [
   'message-code','message-dots','message-forward','message-language',
   'message-off','message-plus','message-report','message-share','messages',
   'messages-off','send','send-off',
+  // New Communication/Messaging Icons (Simple .svg format)
+  'device-message','direct-inbox','direct-normal','direct-notification',
+  'direct-send','direct','directbox-default','directbox-notif',
+  'directbox-receive','directbox-send','message-add-1','message-add',
+  'message-edit','message-favorite','message-minus','message-notif',
+  'message-remove','message-search','message-square','message-text-1',
+  'message-text','message-tick','message-time','messages-1','messages-2',
+  'messages-3','sms-edit','sms-notification','sms-search','sms-star',
+  'sms-tracking','sms'
 ];
 
 interface Category {
@@ -984,9 +993,22 @@ const nonCategorizedPathFn = (name: string, _variant?: string) =>
 const moodPathFn = (name: string, _variant?: string) =>
   `/Assets/Mood Icons/Type=${name}, Theme=White.svg`;
 
-// Communication icons use: "Type=<name>, Theme=White.svg"
-const communicationPathFn = (name: string, _variant?: string) =>
-  `/Assets/Communication Icons/Type=${name}, Theme=White.svg`;
+const communicationLegacySet = new Set([
+  'mail','mail-ai','mail-fast','mail-forward','mail-off','mail-opened',
+  'message','message-2','message-2-code','message-2-off','message-2-share',
+  'message-chatbot','message-circle','message-circle-2','message-circle-off',
+  'message-code','message-dots','message-forward','message-language',
+  'message-off','message-plus','message-report','message-share','messages',
+  'messages-off','send','send-off'
+]);
+
+// Communication icons use: "Type=<name>, Theme=White.svg" for legacy ones, or simple "<name>.svg" for new ones
+const communicationPathFn = (name: string, _variant?: string) => {
+  if (communicationLegacySet.has(name)) {
+    return `/Assets/Communication Icons/Type=${name}, Theme=White.svg`;
+  }
+  return `/Assets/Communication Icons/${name}.svg`;
+};
 
 const CATEGORIES: Category[] = [
   { id: 'all',       label: 'All Icons',       folder: '',                icons: [...SOCIAL_ICONS] },
