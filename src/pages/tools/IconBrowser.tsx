@@ -1255,7 +1255,7 @@ const CATEGORIES: Category[] = [
   { id: 'weather',   label: 'Weather Icons',   folder: 'Weather Icons',   icons: WEATHER_ICONS,   pathFn: weatherPathFn },
 ];
 
-const TOTAL_COUNT = 65000; // badge number – will grow as more categories are added
+const TOTAL_COUNT = 5000; // badge number – will grow as more categories are added
 
 /* ─────────────────────────────────────────────── */
 
