@@ -20,6 +20,7 @@ interface HeicFile {
   name: string;         // original name
   sizeKB: number;
   status: FileStatus;
+  previewUrl?: string;  // quick thumbnail generated on add
   originalUrl?: string; // tiny preview of original
   outputBlob?: Blob;    // converted JPEG blob
   outputUrl?: string;   // object-URL for preview
@@ -91,6 +92,18 @@ const HeicToJpg: React.FC = () => {
       status: 'pending',
     }));
     setFiles(prev => [...prev, ...newEntries]);
+
+    // Generate quick low-quality thumbnails asynchronously
+    newEntries.forEach(async (entry) => {
+      try {
+        const thumb = await heic2any({ blob: entry.file, toType: 'image/jpeg', quality: 0.25 });
+        const blob = Array.isArray(thumb) ? thumb[0] : thumb;
+        const url = URL.createObjectURL(blob);
+        setFiles(prev => prev.map(f => f.id === entry.id ? { ...f, previewUrl: url } : f));
+      } catch {
+        // silently ignore — placeholder will remain
+      }
+    });
   }, []);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -211,7 +224,7 @@ const HeicToJpg: React.FC = () => {
         <div className="h-4 w-px bg-neutral-200" />
 
         <div className="flex items-center gap-2">
-          <FileImage size={14} className="text-orange-500" />
+          <FileImage size={14} className="text-violet-500" />
           <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-800">
             HEIC → JPG
           </span>
@@ -247,7 +260,7 @@ const HeicToJpg: React.FC = () => {
           <button
             onClick={convertAll}
             disabled={isConverting}
-            className="flex items-center gap-2 px-4 py-1.5 bg-orange-500 text-white text-xs font-bold rounded-xl hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-sm"
+            className="flex items-center gap-2 px-4 py-1.5 bg-violet-600 text-white text-xs font-bold rounded-xl hover:bg-violet-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-sm"
           >
             {isConverting
               ? <Loader2 size={13} className="animate-spin" />
@@ -281,8 +294,8 @@ const HeicToJpg: React.FC = () => {
                     onClick={() => setQuality(q.value)}
                     className={`px-2 py-1.5 rounded-lg text-[11px] font-bold border transition-all ${
                       quality === q.value
-                        ? 'bg-orange-500 text-white border-orange-500'
-                        : 'bg-neutral-50 text-neutral-600 border-neutral-200 hover:border-orange-300'
+                        ? 'bg-violet-600 text-white border-violet-600'
+                        : 'bg-neutral-50 text-neutral-600 border-neutral-200 hover:border-violet-300'
                     }`}
                   >
                     {q.label}
@@ -297,10 +310,10 @@ const HeicToJpg: React.FC = () => {
             </div>
 
             {/* Format info */}
-            <div className="bg-orange-50 border border-orange-100 rounded-xl p-3 space-y-1">
-              <p className="text-[10px] font-bold text-orange-700 uppercase tracking-wider">Output</p>
-              <p className="text-[11px] text-orange-600 font-semibold">JPEG (.jpg)</p>
-              <p className="text-[10px] text-orange-500">Quality: {qualityLabel} ({Math.round(quality * 100)}%)</p>
+            <div className="bg-neutral-50 border border-neutral-200 rounded-xl p-3 space-y-1">
+              <p className="text-[10px] font-bold text-neutral-500 uppercase tracking-wider">Output</p>
+              <p className="text-[11px] text-neutral-700 font-semibold">JPEG (.jpg)</p>
+              <p className="text-[10px] text-neutral-500">Quality: {qualityLabel} ({Math.round(quality * 100)}%)</p>
             </div>
           </div>
 
@@ -320,7 +333,7 @@ const HeicToJpg: React.FC = () => {
                 {pendingCount > 0 && (
                   <div className="flex justify-between">
                     <span className="text-neutral-500">Pending</span>
-                    <span className="font-semibold text-orange-500">{pendingCount}</span>
+                    <span className="font-semibold text-violet-600">{pendingCount}</span>
                   </div>
                 )}
                 {files.filter(f => f.status === 'error').length > 0 && (
@@ -371,9 +384,9 @@ const HeicToJpg: React.FC = () => {
             {isDragging && (
               <motion.div
                 initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                className="absolute inset-4 z-20 rounded-2xl border-2 border-dashed border-orange-400 bg-orange-50/80 flex items-center justify-center pointer-events-none"
+                className="absolute inset-4 z-20 rounded-2xl border-2 border-dashed border-violet-400 bg-violet-50/80 flex items-center justify-center pointer-events-none"
               >
-                <p className="text-sm font-bold text-orange-600">Drop HEIC files here</p>
+                <p className="text-sm font-bold text-violet-600">Drop HEIC files here</p>
               </motion.div>
             )}
           </AnimatePresence>
@@ -383,11 +396,10 @@ const HeicToJpg: React.FC = () => {
             <div className="h-full flex flex-col items-center justify-center gap-6 text-center">
               <motion.div
                 onClick={() => fileInputRef.current?.click()}
-                whileHover={{ scale: 1.04 }}
-                className="cursor-pointer w-36 h-36 rounded-2xl bg-white border-2 border-dashed border-neutral-300 flex flex-col items-center justify-center gap-2 text-neutral-400 hover:border-orange-400 hover:text-orange-500 transition-colors shadow-sm"
+                whileHover={{ scale: 1.05 }}
+                className="cursor-pointer w-48 h-48 rounded-2xl bg-white border-2 border-dashed border-neutral-300 flex items-center justify-center text-neutral-400 hover:border-violet-400 hover:text-violet-500 transition-colors shadow-sm"
               >
-                <FileImage size={40} />
-                <span className="text-[10px] font-bold uppercase tracking-wider">HEIC / HEIF</span>
+                <Upload size={56} strokeWidth={1.5} />
               </motion.div>
               <div className="space-y-1.5">
                 <p className="text-sm font-bold text-neutral-800">Drop HEIC files or click to upload</p>
@@ -395,7 +407,7 @@ const HeicToJpg: React.FC = () => {
               </div>
               <button
                 onClick={() => fileInputRef.current?.click()}
-                className="flex items-center gap-2 px-5 py-2.5 bg-orange-500 text-white text-xs font-bold rounded-xl hover:bg-orange-600 transition-colors shadow-md shadow-orange-100"
+                className="flex items-center gap-2 px-5 py-2.5 bg-violet-600 text-white text-xs font-bold rounded-xl hover:bg-violet-700 transition-colors shadow-md shadow-violet-100"
               >
                 <Upload size={13} /> Choose HEIC Files
               </button>
@@ -409,7 +421,7 @@ const HeicToJpg: React.FC = () => {
                 </p>
                 <button
                   onClick={() => fileInputRef.current?.click()}
-                  className="flex items-center gap-1.5 px-3 py-1.5 text-[10px] font-bold text-orange-600 border border-orange-200 rounded-lg hover:bg-orange-50 transition-colors"
+                  className="flex items-center gap-1.5 px-3 py-1.5 text-[10px] font-bold text-violet-600 border border-violet-200 rounded-lg hover:bg-violet-50 transition-colors"
                 >
                   <Upload size={10} /> Add More
                 </button>
@@ -429,24 +441,24 @@ const HeicToJpg: React.FC = () => {
                     >
                       {/* Preview area */}
                       <div className="flex-1 relative overflow-hidden bg-neutral-100 flex items-center justify-center">
-                        {entry.outputUrl ? (
+                        {(entry.outputUrl || entry.previewUrl) ? (
                           <img
-                            src={entry.outputUrl}
+                            src={entry.outputUrl ?? entry.previewUrl}
                             alt={entry.name}
                             className="w-full h-full object-cover"
                             draggable={false}
                           />
                         ) : (
-                          <div className="flex flex-col items-center gap-1.5 text-neutral-400">
-                            <FileImage size={28} />
-                            <span className="text-[9px] font-bold uppercase">HEIC</span>
+                          <div className="flex flex-col items-center gap-1.5 text-neutral-300">
+                            <Loader2 size={22} className="animate-spin" />
+                            <span className="text-[9px] font-bold uppercase">Loading preview...</span>
                           </div>
                         )}
 
                         {/* Status overlay */}
                         {entry.status === 'converting' && (
                           <div className="absolute inset-0 bg-white/80 flex items-center justify-center">
-                            <Loader2 size={22} className="animate-spin text-orange-500" />
+                            <Loader2 size={22} className="animate-spin text-violet-500" />
                           </div>
                         )}
                         {entry.status === 'error' && (
@@ -463,7 +475,7 @@ const HeicToJpg: React.FC = () => {
                           entry.status === 'done'
                             ? 'bg-emerald-500 text-white'
                             : entry.status === 'converting'
-                              ? 'bg-orange-500 text-white'
+                              ? 'bg-violet-600 text-white'
                               : entry.status === 'error'
                                 ? 'bg-red-500 text-white'
                                 : 'bg-neutral-300 text-neutral-700'
@@ -519,7 +531,7 @@ const HeicToJpg: React.FC = () => {
                                   updateFile(entry.id, { status: 'error', error: err?.message ?? 'Failed' });
                                 }
                               }}
-                              className="text-[8px] font-bold text-orange-500 hover:text-orange-600 transition-colors"
+                              className="text-[8px] font-bold text-violet-600 hover:text-violet-700 transition-colors"
                             >
                               Convert
                             </button>

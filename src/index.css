@@ -134,4 +134,25 @@
     display: none;
     /* Chrome / Safari / Opera */
   }
+
+  /* Remove grey padding from native color pickers */
+  input[type="color"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background: white;
+    padding: 0;
+    border: none;
+    outline: 0.2px solid #d4d4d4;
+    cursor: pointer;
+  }
+  input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+    background: white;
+  }
+  input[type="color"]::-webkit-color-swatch {
+    border: none;
+  }
+  input[type="color"]::-moz-color-swatch {
+    border: none;
+  }
 }

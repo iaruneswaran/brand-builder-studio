@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { hexToHSL, hslToHex, randomHex } from '@/lib/colorUtils';
-import { Sparkles, Instagram, Menu, Layers, FileDown, Maximize2, FileImage } from 'lucide-react';
+import { Sparkles, Instagram, Menu, FileDown, FileImage, QrCode, Grid3X3 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { HexColorPicker } from 'react-colorful';
@@ -156,6 +156,17 @@ const ColorPickerSection = ({ baseColor, onColorChange }: ColorPickerSectionProp
               </div>
             ))}
             <div className="flex items-center gap-3 ml-auto">
+              {/* Icon Browser badge */}
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => navigate('/tools/icon-browser')}
+                className="flex items-center gap-1.5 px-2 py-1 bg-neutral-900 text-white text-[9px] font-bold uppercase tracking-wider transition-colors hover:bg-neutral-700"
+                title="Icon Browser"
+              >
+                <Grid3X3 size={11} strokeWidth={2} />
+                65K+ Icons
+              </motion.button>
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
@@ -200,33 +211,35 @@ const ColorPickerSection = ({ baseColor, onColorChange }: ColorPickerSectionProp
                       transition={{ duration: 0.15 }}
                       className="absolute right-0 top-full mt-1 w-52 bg-white border border-neutral-200 shadow-xl rounded-xl overflow-hidden z-50"
                     >
+
                       <button
-                        onClick={() => { setMenuOpen(false); navigate('/tools/background-remover'); }}
+                        onClick={() => { setMenuOpen(false); navigate('/tools/icon-browser'); }}
                         className="w-full flex items-center gap-3 px-4 py-3 text-sm font-semibold text-neutral-800 hover:bg-neutral-50 transition-colors text-left"
                       >
-                        <Layers size={15} className="text-neutral-500" />
-                        Background Remover
+                        <Grid3X3 size={15} className="text-violet-500" />
+                        Icon Browser
                       </button>
                       <button
                         onClick={() => { setMenuOpen(false); navigate('/tools/image-to-pdf'); }}
                         className="w-full flex items-center gap-3 px-4 py-3 text-sm font-semibold text-neutral-800 hover:bg-neutral-50 transition-colors text-left border-t border-neutral-100"
                       >
-                        <FileDown size={15} className="text-neutral-500" />
+                        <FileDown size={15} className="text-violet-500" />
                         Image to PDF
                       </button>
-                      <button
-                        onClick={() => { setMenuOpen(false); navigate('/tools/image-upscaler'); }}
-                        className="w-full flex items-center gap-3 px-4 py-3 text-sm font-semibold text-neutral-800 hover:bg-neutral-50 transition-colors text-left border-t border-neutral-100"
-                      >
-                        <Maximize2 size={15} className="text-neutral-500" />
-                        Image Upscaler
-                      </button>
+
                       <button
                         onClick={() => { setMenuOpen(false); navigate('/tools/heic-to-jpg'); }}
                         className="w-full flex items-center gap-3 px-4 py-3 text-sm font-semibold text-neutral-800 hover:bg-neutral-50 transition-colors text-left border-t border-neutral-100"
                       >
-                        <FileImage size={15} className="text-orange-400" />
+                        <FileImage size={15} className="text-violet-500" />
                         HEIC to JPG
+                      </button>
+                      <button
+                        onClick={() => { setMenuOpen(false); navigate('/tools/qr-generator'); }}
+                        className="w-full flex items-center gap-3 px-4 py-3 text-sm font-semibold text-neutral-800 hover:bg-neutral-50 transition-colors text-left border-t border-neutral-100"
+                      >
+                        <QrCode size={15} className="text-violet-500" />
+                        QR Generator
                       </button>
                     </motion.div>
                   )}
@@ -275,6 +288,17 @@ const ColorPickerSection = ({ baseColor, onColorChange }: ColorPickerSectionProp
             placeholder="#3B82F6"
           />
 
+          {/* Icon Browser badge – mobile */}
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => navigate('/tools/icon-browser')}
+            className="px-2 h-full flex items-center justify-center bg-neutral-900 gap-1"
+            title="Icon Browser"
+          >
+            <Grid3X3 size={12} strokeWidth={2} className="text-white" />
+            <span className="text-[8px] font-bold text-white leading-none">65K+</span>
+          </motion.button>
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
@@ -319,33 +343,35 @@ const ColorPickerSection = ({ baseColor, onColorChange }: ColorPickerSectionProp
                   transition={{ duration: 0.15 }}
                   className="absolute right-0 top-full mt-1 w-52 bg-white border border-neutral-200 shadow-xl rounded-xl overflow-hidden z-50"
                 >
+
                   <button
-                    onClick={() => { setMenuOpen(false); navigate('/tools/background-remover'); }}
+                    onClick={() => { setMenuOpen(false); navigate('/tools/icon-browser'); }}
                     className="w-full flex items-center gap-3 px-4 py-3 text-sm font-semibold text-neutral-800 hover:bg-neutral-50 transition-colors text-left"
                   >
-                    <Layers size={15} className="text-neutral-500" />
-                    Background Remover
+                    <Grid3X3 size={15} className="text-violet-500" />
+                    Icon Browser
                   </button>
                   <button
                     onClick={() => { setMenuOpen(false); navigate('/tools/image-to-pdf'); }}
                     className="w-full flex items-center gap-3 px-4 py-3 text-sm font-semibold text-neutral-800 hover:bg-neutral-50 transition-colors text-left border-t border-neutral-100"
                   >
-                    <FileDown size={15} className="text-neutral-500" />
+                    <FileDown size={15} className="text-violet-500" />
                     Image to PDF
                   </button>
-                  <button
-                    onClick={() => { setMenuOpen(false); navigate('/tools/image-upscaler'); }}
-                    className="w-full flex items-center gap-3 px-4 py-3 text-sm font-semibold text-neutral-800 hover:bg-neutral-50 transition-colors text-left border-t border-neutral-100"
-                  >
-                    <Maximize2 size={15} className="text-neutral-500" />
-                    Image Upscaler
-                  </button>
+
                   <button
                     onClick={() => { setMenuOpen(false); navigate('/tools/heic-to-jpg'); }}
                     className="w-full flex items-center gap-3 px-4 py-3 text-sm font-semibold text-neutral-800 hover:bg-neutral-50 transition-colors text-left border-t border-neutral-100"
                   >
-                    <FileImage size={15} className="text-orange-400" />
+                    <FileImage size={15} className="text-violet-500" />
                     HEIC to JPG
+                  </button>
+                  <button
+                    onClick={() => { setMenuOpen(false); navigate('/tools/qr-generator'); }}
+                    className="w-full flex items-center gap-3 px-4 py-3 text-sm font-semibold text-neutral-800 hover:bg-neutral-50 transition-colors text-left border-t border-neutral-100"
+                  >
+                    <QrCode size={15} className="text-violet-500" />
+                    QR Generator
                   </button>
                 </motion.div>
               )}

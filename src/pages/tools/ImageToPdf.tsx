@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowLeft, FileDown, Upload, Trash2, ChevronUp, ChevronDown,
   GripVertical, ImageIcon, CheckCircle2, Loader2, X, FileText,
-  ZoomIn, ZoomOut, RotateCw,
+  ZoomIn, ZoomOut, RotateCw, ArrowUpDown,
 } from 'lucide-react';
 
 /* ───────────────────────────────────────────────── */
@@ -146,6 +146,8 @@ const ImageToPdf: React.FC = () => {
   const dropRef = useRef<HTMLDivElement>(null);
 
   const [images, setImages] = useState<PdfImage[]>([]);
+  const [draggedId, setDraggedId] = useState<string | null>(null);
+  const [dragOverId, setDragOverId] = useState<string | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [building, setBuilding] = useState(false);
   const [done, setDone] = useState(false);
@@ -252,6 +254,13 @@ const ImageToPdf: React.FC = () => {
   };
 
   /* ─── Render ─── */
+  let estimatedSizeMB = '0.00';
+  if (images.length > 0) {
+    const totalMB = images.reduce((acc, img) => acc + img.sizeKB, 0) / 1024;
+    const multiplier = quality === 'high' ? 1.1 : quality === 'medium' ? 0.6 : 0.3;
+    estimatedSizeMB = Math.max(0.01, totalMB * multiplier).toFixed(2);
+  }
+
   return (
     <div className="h-screen w-screen overflow-hidden flex flex-col bg-neutral-50 text-foreground select-none">
       <input ref={fileInputRef} type="file" accept="image/*" multiple className="hidden" onChange={handleFileChange} />
@@ -423,6 +432,12 @@ const ImageToPdf: React.FC = () => {
               <p className="text-neutral-500">{pageSize === 'fit' ? 'Fit to image' : `${pageSize} · ${orientation}`}</p>
               <p className="text-neutral-500">Quality: {quality}</p>
               <p className="text-neutral-500">Margin: {margin === 0 ? 'Auto' : margin === 20 ? 'Medium' : 'Large'} ({margin} pt)</p>
+              <div className="pt-2 mt-2 border-t border-neutral-200">
+                <p className="flex justify-between items-center font-bold text-neutral-700">
+                  <span>Est. PDF Size:</span>
+                  <span className="text-violet-600 bg-violet-100 px-1.5 py-0.5 rounded text-[10px]">~{estimatedSizeMB} MB</span>
+                </p>
+              </div>
             </div>
           )}
 
@@ -437,7 +452,10 @@ const ImageToPdf: React.FC = () => {
         <main
           ref={dropRef}
           className="flex-1 overflow-y-auto p-4 relative"
-          onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
+          onDragOver={(e) => { 
+            e.preventDefault(); 
+            if (e.dataTransfer.types.includes('Files')) setIsDragging(true); 
+          }}
           onDragLeave={() => setIsDragging(false)}
           onDrop={handleDrop}
         >
@@ -457,10 +475,10 @@ const ImageToPdf: React.FC = () => {
             <div className="h-full flex flex-col items-center justify-center gap-5 text-center">
               <motion.div
                 onClick={() => fileInputRef.current?.click()}
-                whileHover={{ scale: 1.04 }}
-                className="cursor-pointer w-32 h-32 rounded-2xl bg-white border-2 border-dashed border-neutral-300 flex items-center justify-center text-neutral-400 hover:border-violet-400 hover:text-violet-500 transition-colors shadow-sm"
+                whileHover={{ scale: 1.05 }}
+                className="cursor-pointer w-48 h-48 rounded-2xl bg-white border-2 border-dashed border-neutral-300 flex items-center justify-center text-neutral-400 hover:border-violet-400 hover:text-violet-500 transition-colors shadow-sm"
               >
-                <Upload size={40} />
+                <Upload size={56} strokeWidth={1.5} />
               </motion.div>
               <div className="space-y-1">
                 <p className="text-sm font-bold text-neutral-800">Drop images or click to upload</p>
@@ -479,12 +497,20 @@ const ImageToPdf: React.FC = () => {
               {/* Header row */}
               <div className="flex items-center justify-between mb-4">
                 <p className="text-[11px] font-bold text-neutral-500 uppercase tracking-widest">Pages ({images.length})</p>
-                <button
-                  onClick={() => fileInputRef.current?.click()}
-                  className="flex items-center gap-1.5 px-3 py-1.5 text-[10px] font-bold text-violet-600 border border-violet-200 rounded-lg hover:bg-violet-50 transition-colors"
-                >
-                  <Upload size={10} /> Add More
-                </button>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => setImages(prev => [...prev].reverse())}
+                    className="flex items-center gap-1.5 px-3 py-1.5 text-[10px] font-bold text-neutral-600 border border-neutral-200 rounded-lg hover:bg-neutral-100 transition-colors"
+                  >
+                    <ArrowUpDown size={10} /> Reverse Order
+                  </button>
+                  <button
+                    onClick={() => fileInputRef.current?.click()}
+                    className="flex items-center gap-1.5 px-3 py-1.5 text-[10px] font-bold text-violet-600 border border-violet-200 rounded-lg hover:bg-violet-50 transition-colors"
+                  >
+                    <Upload size={10} /> Add More
+                  </button>
+                </div>
               </div>
 
               <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3">
@@ -497,7 +523,43 @@ const ImageToPdf: React.FC = () => {
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.85 }}
                       transition={{ duration: 0.18 }}
-                      className="relative group overflow-hidden bg-neutral-100 border border-neutral-200 shadow-sm cursor-default rounded-xl"
+                      draggable
+                      onDragStart={(e) => {
+                        setDraggedId(img.id);
+                        e.dataTransfer.effectAllowed = 'move';
+                        e.dataTransfer.setData('text/plain', img.id);
+                      }}
+                      onDragOver={(e) => {
+                        e.preventDefault();
+                        if (draggedId && draggedId !== img.id) {
+                          setDragOverId(img.id);
+                        }
+                      }}
+                      onDragLeave={() => {
+                        if (dragOverId === img.id) setDragOverId(null);
+                      }}
+                      onDrop={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        if (draggedId && draggedId !== img.id) {
+                          setImages(prev => {
+                            const draggedIdx = prev.findIndex(x => x.id === draggedId);
+                            const targetIdx = prev.findIndex(x => x.id === img.id);
+                            if (draggedIdx === -1 || targetIdx === -1) return prev;
+                            const arr = [...prev];
+                            const [removed] = arr.splice(draggedIdx, 1);
+                            arr.splice(targetIdx, 0, removed);
+                            return arr;
+                          });
+                        }
+                        setDraggedId(null);
+                        setDragOverId(null);
+                      }}
+                      onDragEnd={() => {
+                        setDraggedId(null);
+                        setDragOverId(null);
+                      }}
+                      className={`relative group overflow-hidden bg-neutral-100 border shadow-sm rounded-xl cursor-grab active:cursor-grabbing transition-all duration-200 ${draggedId === img.id ? 'opacity-50 ring-2 ring-violet-500 scale-95' : dragOverId === img.id ? 'border-violet-500 ring-4 ring-violet-500/30 scale-105 z-10' : 'border-neutral-200'}`}
                       style={{ 
                         aspectRatio: pageSize === 'fit' ? 'auto' : getCardAspect(pageSize, orientation)
                       }}

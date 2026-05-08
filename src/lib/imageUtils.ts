@@ -31,14 +31,19 @@ export async function ensureSafeSize(file: File, maxDim: number = 1500): Promise
       }
 
       ctx.drawImage(img, 0, 0, newW, newH);
+      
+      const mimeType = file.type === 'image/png' ? 'image/png' : 'image/jpeg';
+      
       canvas.toBlob((blob) => {
         if (!blob) {
           resolve({ file, resized: false });
           return;
         }
-        const resizedFile = new File([blob], file.name, { type: file.type });
+        const ext = mimeType === 'image/png' ? '.png' : '.jpg';
+        const newName = file.name.replace(/\.[^/.]+$/, "") + ext;
+        const resizedFile = new File([blob], newName, { type: mimeType });
         resolve({ file: resizedFile, resized: true });
-      }, file.type, 0.9);
+      }, mimeType, 0.9);
     };
     img.onerror = () => resolve({ file, resized: false });
     img.src = URL.createObjectURL(file);
