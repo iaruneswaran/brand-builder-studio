@@ -13,27 +13,131 @@ import {
 // Social icons base names (unique brand names, no -1/-2 suffix)
 const SOCIAL_ICONS: string[] = [
   'AdobeIllustrator','AdobePhotoshop','AdobeXD','Aim','Airbnb','Airtable',
-  'Amazon','Android','AppStore','Apple','Asana','Atlassian','Badoo','Basecamp',
-  'Behance','Binance','Bing','Bitbucket','Bitcoin','Bittorrent','Blogger',
-  'Buffer','BuzzFeed','Codeopen','Coinbase','Confluence','Coub','Creativemarket',
-  'Dailymotion','Digg','Discord','Dribbble','Dropbox','Drupal','DuckDuckGo',
-  'Edge','Epic Games','Ethereum','Evernote','ExpressVPN','Facebook','Fancy',
-  'Figma','Firefox','Flickr','Foursquare','Framer','Github','Gmail',
-  'Google Chrome','Google Docs','Google Drive','Google Meet','Google','GooglePlay',
-  'Gumroad','HTML5','Hola','Iconfinder','Instagram','Intercom','Invision',
-  'Jira','KakaoTalk','Kickstarter','Line','LinkedIn','MailChimp','Mail_ru',
-  'Marvel','Mastercard','Medium','Mega','Messenger','MetaMask','Mi',
-  'Microsoft Excel','Microsoft Word','Microsoft','Netflix','Nintendo','NordVPN ',
-  'Notion','OK','Opera','Outlook','Patreon','PayPal','Payoneer','Periscope',
-  'Pinterest','Playstation','Pocket','ProductHunt','QQ','Quora','RSS','Reddit',
-  'Safari','Shopify','Shutterstock','Signal','Sketch','Skrill','Skype','Slack',
-  'Snapchat','Spotify','Steam','Strava','StumbleUpon','Taobao','TeamViewer',
-  'Telegram','Tether','Tidal','Tik Tok','Tilda','Tinder','Tor','Treehouse',
-  'Trello','Tripadvisor','Tumblr','Twitch','Twitter','Ubuntu','Uplabs',
-  'Utorrent','VK','Viadeo','Viber','Vimeo','Vine','Visa','Wechat','Weibo',
-  'WhatsApp Business','WhatsApp','Wickr','Wikipedia','Windows','Wire',
-  'Wordpress','Xbox','YandexBrowser','Yelp','Youtube','Zendesk','Zerpply','Zoom',
-  'ui8',
+  'Amazon','Android','Apple','AppStore','Asana','Atlassian',
+  'Badoo','Basecamp','Behance','Binance','Bing','Bitbucket',
+  'Bitcoin','Bittorrent','Blogger','Buffer','BuzzFeed','Codeopen',
+  'Coinbase','Confluence','Coub','Creativemarket','Dailymotion','Digg',
+  'Discord','Dribbble','Dropbox','Drupal','DuckDuckGo','Edge',
+  'Epic Games','Ethereum','Evernote','ExpressVPN','Facebook','Fancy',
+  'Figma','Firefox','Flickr','Foursquare','Framer','Geo',
+  'Github','Gmail','Google','Google calendar','Google Chrome','Google Docs',
+  'Google Drive','Google Meet','GooglePlay','Gumroad','Hola','HTML5',
+  'Iconfinder','Iconjar','Instagram','Intercom','Invision','Jira',
+  'Kaixin001','KakaoTalk','Kickstarter','Line','LinkedIn','Mail_ru',
+  'MailChimp','Marvel','Mastercard','Medium','Mega','Messenger',
+  'MetaMask','Mi','Microsoft','Microsoft Excel','Microsoft Word','Miliao',
+  'Netflix','Nintendo','NordVPN ','Notion','OK','Opera',
+  'Outlook','Patreon','Payoneer','PayPal','Periscope','Pinterest',
+  'Playstation','Pocket','ProductHunt','QQ','Quora','Reddit',
+  'Renren','RSS','Safari','Shopify','Shutterstock','Signal',
+  'Sketch','Skrill','Skype','Slack','Snapchat','Spotify',
+  'Steam','Strava','StumbleUpon','Style=bold','Style=bold-10','Style=bold-100',
+  'Style=bold-11','Style=bold-12','Style=bold-13','Style=bold-14','Style=bold-15','Style=bold-16',
+  'Style=bold-17','Style=bold-18','Style=bold-19','Style=bold-20','Style=bold-21','Style=bold-22',
+  'Style=bold-23','Style=bold-24','Style=bold-25','Style=bold-26','Style=bold-27','Style=bold-28',
+  'Style=bold-29','Style=bold-3','Style=bold-30','Style=bold-31','Style=bold-32','Style=bold-33',
+  'Style=bold-34','Style=bold-35','Style=bold-36','Style=bold-37','Style=bold-38','Style=bold-39',
+  'Style=bold-4','Style=bold-40','Style=bold-41','Style=bold-42','Style=bold-43','Style=bold-44',
+  'Style=bold-45','Style=bold-46','Style=bold-47','Style=bold-48','Style=bold-49','Style=bold-5',
+  'Style=bold-50','Style=bold-51','Style=bold-52','Style=bold-53','Style=bold-54','Style=bold-55',
+  'Style=bold-56','Style=bold-57','Style=bold-58','Style=bold-59','Style=bold-6','Style=bold-60',
+  'Style=bold-61','Style=bold-62','Style=bold-63','Style=bold-64','Style=bold-65','Style=bold-66',
+  'Style=bold-67','Style=bold-68','Style=bold-69','Style=bold-7','Style=bold-70','Style=bold-71',
+  'Style=bold-72','Style=bold-73','Style=bold-74','Style=bold-75','Style=bold-76','Style=bold-77',
+  'Style=bold-78','Style=bold-79','Style=bold-8','Style=bold-80','Style=bold-81','Style=bold-82',
+  'Style=bold-83','Style=bold-84','Style=bold-85','Style=bold-86','Style=bold-87','Style=bold-88',
+  'Style=bold-89','Style=bold-9','Style=bold-90','Style=bold-91','Style=bold-92','Style=bold-93',
+  'Style=bold-94','Style=bold-95','Style=bold-96','Style=bold-97','Style=bold-98','Style=bold-99',
+  'Style=broken','Style=broken-10','Style=broken-100','Style=broken-11','Style=broken-12','Style=broken-13',
+  'Style=broken-14','Style=broken-15','Style=broken-16','Style=broken-17','Style=broken-18','Style=broken-19',
+  'Style=broken-20','Style=broken-21','Style=broken-22','Style=broken-23','Style=broken-24','Style=broken-25',
+  'Style=broken-26','Style=broken-27','Style=broken-28','Style=broken-29','Style=broken-3','Style=broken-30',
+  'Style=broken-31','Style=broken-32','Style=broken-33','Style=broken-34','Style=broken-35','Style=broken-36',
+  'Style=broken-37','Style=broken-38','Style=broken-39','Style=broken-4','Style=broken-40','Style=broken-41',
+  'Style=broken-42','Style=broken-43','Style=broken-44','Style=broken-45','Style=broken-46','Style=broken-47',
+  'Style=broken-48','Style=broken-49','Style=broken-5','Style=broken-50','Style=broken-51','Style=broken-52',
+  'Style=broken-53','Style=broken-54','Style=broken-55','Style=broken-56','Style=broken-57','Style=broken-58',
+  'Style=broken-59','Style=broken-6','Style=broken-60','Style=broken-61','Style=broken-62','Style=broken-63',
+  'Style=broken-64','Style=broken-65','Style=broken-66','Style=broken-67','Style=broken-68','Style=broken-69',
+  'Style=broken-7','Style=broken-70','Style=broken-71','Style=broken-72','Style=broken-73','Style=broken-74',
+  'Style=broken-75','Style=broken-76','Style=broken-77','Style=broken-78','Style=broken-79','Style=broken-8',
+  'Style=broken-80','Style=broken-81','Style=broken-82','Style=broken-83','Style=broken-84','Style=broken-85',
+  'Style=broken-86','Style=broken-87','Style=broken-88','Style=broken-89','Style=broken-9','Style=broken-90',
+  'Style=broken-91','Style=broken-92','Style=broken-93','Style=broken-94','Style=broken-95','Style=broken-96',
+  'Style=broken-97','Style=broken-98','Style=broken-99','Style=bulk','Style=bulk-10','Style=bulk-100',
+  'Style=bulk-11','Style=bulk-12','Style=bulk-13','Style=bulk-14','Style=bulk-15','Style=bulk-16',
+  'Style=bulk-17','Style=bulk-18','Style=bulk-19','Style=bulk-20','Style=bulk-21','Style=bulk-22',
+  'Style=bulk-23','Style=bulk-24','Style=bulk-25','Style=bulk-26','Style=bulk-27','Style=bulk-28',
+  'Style=bulk-29','Style=bulk-3','Style=bulk-30','Style=bulk-31','Style=bulk-32','Style=bulk-33',
+  'Style=bulk-34','Style=bulk-35','Style=bulk-36','Style=bulk-37','Style=bulk-38','Style=bulk-39',
+  'Style=bulk-4','Style=bulk-40','Style=bulk-41','Style=bulk-42','Style=bulk-43','Style=bulk-44',
+  'Style=bulk-45','Style=bulk-46','Style=bulk-47','Style=bulk-48','Style=bulk-49','Style=bulk-5',
+  'Style=bulk-50','Style=bulk-51','Style=bulk-52','Style=bulk-53','Style=bulk-54','Style=bulk-55',
+  'Style=bulk-56','Style=bulk-57','Style=bulk-58','Style=bulk-59','Style=bulk-6','Style=bulk-60',
+  'Style=bulk-61','Style=bulk-62','Style=bulk-63','Style=bulk-64','Style=bulk-65','Style=bulk-66',
+  'Style=bulk-67','Style=bulk-68','Style=bulk-69','Style=bulk-7','Style=bulk-70','Style=bulk-71',
+  'Style=bulk-72','Style=bulk-73','Style=bulk-74','Style=bulk-75','Style=bulk-76','Style=bulk-77',
+  'Style=bulk-78','Style=bulk-79','Style=bulk-8','Style=bulk-80','Style=bulk-81','Style=bulk-82',
+  'Style=bulk-83','Style=bulk-84','Style=bulk-85','Style=bulk-86','Style=bulk-87','Style=bulk-88',
+  'Style=bulk-89','Style=bulk-9','Style=bulk-90','Style=bulk-91','Style=bulk-92','Style=bulk-93',
+  'Style=bulk-94','Style=bulk-95','Style=bulk-96','Style=bulk-97','Style=bulk-98','Style=bulk-99',
+  'Style=linear','Style=linear-10','Style=linear-100','Style=linear-11','Style=linear-12','Style=linear-13',
+  'Style=linear-14','Style=linear-15','Style=linear-16','Style=linear-17','Style=linear-18','Style=linear-19',
+  'Style=linear-20','Style=linear-21','Style=linear-22','Style=linear-23','Style=linear-24','Style=linear-25',
+  'Style=linear-26','Style=linear-27','Style=linear-28','Style=linear-29','Style=linear-3','Style=linear-30',
+  'Style=linear-31','Style=linear-32','Style=linear-33','Style=linear-34','Style=linear-35','Style=linear-36',
+  'Style=linear-37','Style=linear-38','Style=linear-39','Style=linear-4','Style=linear-40','Style=linear-41',
+  'Style=linear-42','Style=linear-43','Style=linear-44','Style=linear-45','Style=linear-46','Style=linear-47',
+  'Style=linear-48','Style=linear-49','Style=linear-5','Style=linear-50','Style=linear-51','Style=linear-52',
+  'Style=linear-53','Style=linear-54','Style=linear-55','Style=linear-56','Style=linear-57','Style=linear-58',
+  'Style=linear-59','Style=linear-6','Style=linear-60','Style=linear-61','Style=linear-62','Style=linear-63',
+  'Style=linear-64','Style=linear-65','Style=linear-66','Style=linear-67','Style=linear-68','Style=linear-69',
+  'Style=linear-7','Style=linear-70','Style=linear-71','Style=linear-72','Style=linear-73','Style=linear-74',
+  'Style=linear-75','Style=linear-76','Style=linear-77','Style=linear-78','Style=linear-79','Style=linear-8',
+  'Style=linear-80','Style=linear-81','Style=linear-82','Style=linear-83','Style=linear-84','Style=linear-85',
+  'Style=linear-86','Style=linear-87','Style=linear-88','Style=linear-89','Style=linear-9','Style=linear-90',
+  'Style=linear-91','Style=linear-92','Style=linear-93','Style=linear-94','Style=linear-95','Style=linear-96',
+  'Style=linear-97','Style=linear-98','Style=linear-99','Style=outline','Style=outline-10','Style=outline-100',
+  'Style=outline-11','Style=outline-12','Style=outline-13','Style=outline-14','Style=outline-15','Style=outline-16',
+  'Style=outline-17','Style=outline-18','Style=outline-19','Style=outline-20','Style=outline-21','Style=outline-22',
+  'Style=outline-23','Style=outline-24','Style=outline-25','Style=outline-26','Style=outline-27','Style=outline-28',
+  'Style=outline-29','Style=outline-3','Style=outline-30','Style=outline-31','Style=outline-32','Style=outline-33',
+  'Style=outline-34','Style=outline-35','Style=outline-36','Style=outline-37','Style=outline-38','Style=outline-39',
+  'Style=outline-4','Style=outline-40','Style=outline-41','Style=outline-42','Style=outline-43','Style=outline-44',
+  'Style=outline-45','Style=outline-46','Style=outline-47','Style=outline-48','Style=outline-49','Style=outline-5',
+  'Style=outline-50','Style=outline-51','Style=outline-52','Style=outline-53','Style=outline-54','Style=outline-55',
+  'Style=outline-56','Style=outline-57','Style=outline-58','Style=outline-59','Style=outline-6','Style=outline-60',
+  'Style=outline-61','Style=outline-62','Style=outline-63','Style=outline-64','Style=outline-65','Style=outline-66',
+  'Style=outline-67','Style=outline-68','Style=outline-69','Style=outline-7','Style=outline-70','Style=outline-71',
+  'Style=outline-72','Style=outline-73','Style=outline-74','Style=outline-75','Style=outline-76','Style=outline-77',
+  'Style=outline-78','Style=outline-79','Style=outline-8','Style=outline-80','Style=outline-81','Style=outline-82',
+  'Style=outline-83','Style=outline-84','Style=outline-85','Style=outline-86','Style=outline-87','Style=outline-88',
+  'Style=outline-89','Style=outline-9','Style=outline-90','Style=outline-91','Style=outline-92','Style=outline-93',
+  'Style=outline-94','Style=outline-95','Style=outline-96','Style=outline-97','Style=outline-98','Style=outline-99',
+  'Style=twotone','Style=twotone-10','Style=twotone-100','Style=twotone-11','Style=twotone-12','Style=twotone-13',
+  'Style=twotone-14','Style=twotone-15','Style=twotone-16','Style=twotone-17','Style=twotone-18','Style=twotone-19',
+  'Style=twotone-20','Style=twotone-21','Style=twotone-22','Style=twotone-23','Style=twotone-24','Style=twotone-25',
+  'Style=twotone-26','Style=twotone-27','Style=twotone-28','Style=twotone-29','Style=twotone-3','Style=twotone-30',
+  'Style=twotone-31','Style=twotone-32','Style=twotone-33','Style=twotone-34','Style=twotone-35','Style=twotone-36',
+  'Style=twotone-37','Style=twotone-38','Style=twotone-39','Style=twotone-4','Style=twotone-40','Style=twotone-41',
+  'Style=twotone-42','Style=twotone-43','Style=twotone-44','Style=twotone-45','Style=twotone-46','Style=twotone-47',
+  'Style=twotone-48','Style=twotone-49','Style=twotone-5','Style=twotone-50','Style=twotone-51','Style=twotone-52',
+  'Style=twotone-53','Style=twotone-54','Style=twotone-55','Style=twotone-56','Style=twotone-57','Style=twotone-58',
+  'Style=twotone-59','Style=twotone-6','Style=twotone-60','Style=twotone-61','Style=twotone-62','Style=twotone-63',
+  'Style=twotone-64','Style=twotone-65','Style=twotone-66','Style=twotone-67','Style=twotone-68','Style=twotone-69',
+  'Style=twotone-7','Style=twotone-70','Style=twotone-71','Style=twotone-72','Style=twotone-73','Style=twotone-74',
+  'Style=twotone-75','Style=twotone-76','Style=twotone-77','Style=twotone-78','Style=twotone-79','Style=twotone-8',
+  'Style=twotone-80','Style=twotone-81','Style=twotone-82','Style=twotone-83','Style=twotone-84','Style=twotone-85',
+  'Style=twotone-86','Style=twotone-87','Style=twotone-88','Style=twotone-89','Style=twotone-9','Style=twotone-90',
+  'Style=twotone-91','Style=twotone-92','Style=twotone-93','Style=twotone-94','Style=twotone-95','Style=twotone-96',
+  'Style=twotone-97','Style=twotone-98','Style=twotone-99','Taobao','TeamViewer','Telegram',
+  'Tether','Tidal','Tik Tok','Tilda','Tinder','Tor',
+  'Treehouse','Trello','Tripadvisor','Tumblr','Tux','Twitch',
+  'Twitter','Ubuntu','ui8','Uplabs','Utorrent','Viadeo',
+  'Viber','Vimeo','Vine','Visa','VK','Wechat',
+  'Weibo','WhatsApp','WhatsApp Business','Wickr','Wikipedia','Windows',
+  'Wire','Wordpress','Xbox','YandexBrowser','Yelp','Youtube',
+  'Zendesk','Zerpply','Zoom',
 ];
 
 // Arrow icons – filenames: "Type=<name>, Theme=White.svg"
@@ -95,6 +199,10 @@ const ARROW_ICONS: string[] = [
   'square-rounded-chevron-down','square-rounded-chevron-left','square-rounded-chevron-right','square-rounded-chevron-up',
   'square-rounded-chevrons-down','square-rounded-chevrons-left','square-rounded-chevrons-right','square-rounded-chevrons-up',
   'step-into','step-out','switch','switch-2','switch-3','switch-horizontal','switch-vertical',
+  'transition-bottom','transition-left','transition-right','transition-top',
+  'trending-down','trending-down-2','trending-down-3','trending-up','trending-up-2','trending-up-3',
+  'upload',
+];',
   'transition-bottom','transition-left','transition-right','transition-top',
   'trending-down','trending-down-2','trending-down-3','trending-up','trending-up-2','trending-up-3',
   'upload',
@@ -287,6 +395,19 @@ const DESIGN_ICONS: string[] = [
   'template-off','text-resize','tools','tools-off','ux-circle','vector','vector-bezier',
   'vector-bezier-2','vector-bezier-arc','vector-bezier-circle','vector-off',
   'vector-spline','vector-triangle','vector-triangle-off',
+  // New Design/Creative Icons (Simple .svg format)
+  'additem','backward-item-1','backward-item','bezier-1','bezier','blend-2',
+  'blend','blur-1','brush-1','brush-2','brush-3','bucket-circle-1',
+  'bucket-circle','bucket-square-1','bucket-square','colorfilter',
+  'colors-square-1','colors-square','component-1','component','copy-success',
+  'copy','designtools','eraser-1','eraser','flash-circle-1','flash-circle',
+  'forward-item-1','forward-item','glass','group-1','group-2','group-3',
+  'group','layer','lifebuoy','magicpen','main-component-1','main-component',
+  'mask-1','mask-2','mask-3','omega-circle-1','omega-circle','omega-square-1',
+  'omega-square','paintbucket','path-2','path-square','path','pen-add-1',
+  'pen-add','pen-close-1','pen-close','pen-remove-1','pen-remove','pen-tool-1',
+  'pen-tool-2-1','pen-tool-2','pen-tool','recovery-convert','ruler&pen',
+  'scissor-1','shapes-1','shapes-2','shapes','size'
 ];
 
 // Documents icons – filenames: "Type=<name>, Theme=White.svg"
@@ -864,7 +985,35 @@ const COMMUNICATION_ICONS: string[] = [
   'message-remove','message-search','message-square','message-text-1',
   'message-text','message-tick','message-time','messages-1','messages-2',
   'messages-3','sms-edit','sms-notification','sms-search','sms-star',
-  'sms-tracking','sms'
+  'sms-tracking','sms',
+  // New Communication/Call Icons (Simple .svg format)
+  'call-add','call-calling','call-incoming','call-minus','call-outgoing',
+  'call-received','call-remove','call-slash','call',
+];
+
+// Content icons – filenames: "<name>.svg"
+const CONTENT_ICONS: string[] = [
+  'archive-book','bill','clipboard-close','clipboard-export','clipboard-import',
+  'clipboard-text','clipboard-tick','copyright','creative-commons','document-cloud',
+  'document-copy','document-download','document-favorite','document-filter',
+  'document-forward','document-like','document-normal','document-previous',
+  'document-sketch','document-text-1','document-text','document-upload',
+  'document','edit-2','edit','menu-board','note-1','note-add','note-favorite',
+  'note-remove','note-text','note','stickynote','task-square','task',
+];
+
+// Weather icons – filenames: "Type=<name>, Theme=White.svg"
+const WEATHER_ICONS: string[] = [
+  'cloud','cloud-fog','cloud-off','cloud-rain','cloud-snow','cloud-storm',
+  'comet','flare','haze','mist','mist-off','moon','moon-2','moon-off',
+  'moon-stars','rainbow','rainbow-off','snowflake','snowflake-off','sun',
+  'sun-high','sun-low','sun-moon','sun-off','sun-wind','sunrise','sunset',
+  'sunset-2','temperature','temperature-celsius','temperature-fahrenheit',
+  'temperature-minus','temperature-off','temperature-plus','tornado',
+  'uv-index','wind','wind-off',
+  // New Weather Icons (Simple .svg format)
+  'cloud-cross','cloud-drizzle','cloud-lightning','cloud-minus','cloud-notif',
+  'cloud-plus','cloud-sunny','drop','flash','sun-1','sun-fog','wind-2',
 ];
 
 interface Category {
@@ -894,9 +1043,52 @@ const buildingPathFn = (name: string, _variant?: string) =>
 const devicePathFn = (name: string, _variant?: string) =>
   `/Assets/Device Icons/Type=White, Theme=${name}.svg`;
 
-// Design icons use: "Type=<name>, Theme=White.svg"
-const designPathFn = (name: string, _variant?: string) =>
-  `/Assets/Design Icons/Type=${name}, Theme=White.svg`;
+const designLegacySet = new Set([
+  'ad','ad-2','ad-off','angle','artboard','artboard-off','blur','blur-off',
+  'border-all','border-bottom','border-corners','border-horizontal','border-inner',
+  'border-left','border-none','border-outer','border-radius','border-right',
+  'border-sides','border-style','border-style-2','border-top','border-vertical',
+  'bounce-left','bounce-right','box-align-bottom','box-align-bottom-left',
+  'box-align-bottom-right','box-align-left','box-align-right','box-align-top',
+  'box-align-top-left','box-align-top-right','box-margin','box-model','box-model-2',
+  'box-model-2-off','box-model-off','box-padding','brush','brush-off','bucket',
+  'bucket-droplet','bucket-off','circle-half-2','color-filter','color-picker',
+  'color-picker-off','color-swatch','color-swatch-off','components','components-off',
+  'container','container-off','crop','cut','dimensions','drag-drop','drag-drop-2',
+  'droplet','droplet-filled-2','droplet-half','droplet-half-2','droplet-half-filled',
+  'droplet-off','ease-in','ease-in-control-point','ease-in-out','ease-in-out-control-points',
+  'ease-out','ease-out-control-point','edit','edit-circle','edit-circle-off','edit-off',
+  'flip-horizontal','flip-vertical','frame','frame-off','hierarchy','hierarchy-2',
+  'hierarchy-3','hierarchy-off','inner-shadow-bottom','inner-shadow-bottom-left',
+  'inner-shadow-bottom-right','inner-shadow-left','inner-shadow-right','inner-shadow-top',
+  'inner-shadow-top-left','inner-shadow-top-right','lasso','lasso-off','lasso-polygon',
+  'layers-difference','layers-intersect','layers-intersect-2','layers-linked',
+  'layers-subtract','layers-union','layout','layout-2','layout-align-bottom',
+  'layout-align-center','layout-align-left','layout-align-middle','layout-align-right',
+  'layout-align-top','layout-board','layout-board-split','layout-bottombar',
+  'layout-bottombar-collapse','layout-bottombar-expand','layout-cards','layout-collage',
+  'layout-columns','layout-dashboard','layout-distribute-horizontal','layout-distribute-vertical',
+  'layout-grid','layout-grid-add','layout-grid-remove','layout-kanban','layout-list',
+  'layout-navbar','layout-navbar-collapse','layout-navbar-expand','layout-off','layout-rows',
+  'layout-sidebar','layout-sidebar-left-collapse','layout-sidebar-left-expand',
+  'layout-sidebar-right','layout-sidebar-right-collapse','layout-sidebar-right-expand',
+  'line','mask','mask-off','paint','paint-off','palette','palette-off','pencil',
+  'pencil-minus','pencil-off','pencil-plus','polygon','polygon-off','resize',
+  'scissors','scissors-off','section','shape','shape-2','shape-3','shape-off','slice',
+  'square-half','square-toggle','square-toggle-horizontal','squares-diagonal',
+  'squares-filled','stack','stack-2','stack-3','stack-pop','stack-push','template',
+  'template-off','text-resize','tools','tools-off','ux-circle','vector','vector-bezier',
+  'vector-bezier-2','vector-bezier-arc','vector-bezier-circle','vector-off',
+  'vector-spline','vector-triangle','vector-triangle-off'
+]);
+
+// Design icons use: "Type=<name>, Theme=White.svg" for legacy ones, or simple "<name>.svg" for new ones
+const designPathFn = (name: string, _variant?: string) => {
+  if (designLegacySet.has(name)) {
+    return `/Assets/Design Icons/Type=${name}, Theme=White.svg`;
+  }
+  return `/Assets/Design Icons/${name}.svg`;
+};
 
 // Documents icons use: "Type=<name>, Theme=White.svg"
 const documentsPathFn = (name: string, _variant?: string) =>
@@ -1010,6 +1202,28 @@ const communicationPathFn = (name: string, _variant?: string) => {
   return `/Assets/Communication Icons/${name}.svg`;
 };
 
+// Content icons use: "<name>.svg"
+const contentPathFn = (name: string, _variant?: string) =>
+  `/Assets/Content Icons/${name}.svg`;
+
+const weatherLegacySet = new Set([
+  'cloud','cloud-fog','cloud-off','cloud-rain','cloud-snow','cloud-storm',
+  'comet','flare','haze','mist','mist-off','moon','moon-2','moon-off',
+  'moon-stars','rainbow','rainbow-off','snowflake','snowflake-off','sun',
+  'sun-high','sun-low','sun-moon','sun-off','sun-wind','sunrise','sunset',
+  'sunset-2','temperature','temperature-celsius','temperature-fahrenheit',
+  'temperature-minus','temperature-off','temperature-plus','tornado',
+  'uv-index','wind','wind-off'
+]);
+
+// Weather icons use: "Type=<name>, Theme=White.svg" for legacy ones, or simple "<name>.svg" for new ones
+const weatherPathFn = (name: string, _variant?: string) => {
+  if (weatherLegacySet.has(name)) {
+    return `/Assets/Weather Icons/Type=${name}, Theme=White.svg`;
+  }
+  return `/Assets/Weather Icons/${name}.svg`;
+};
+
 const CATEGORIES: Category[] = [
   { id: 'all',       label: 'All Icons',       folder: '',                icons: [...SOCIAL_ICONS] },
   { id: 'social',    label: 'Social Icons',    folder: 'Social Icons',    icons: SOCIAL_ICONS },
@@ -1037,6 +1251,8 @@ const CATEGORIES: Category[] = [
   { id: 'non-categorized', label: 'Miscellaneous Icons', folder: 'Non-categorized Icons', icons: NON_CATEGORIZED_ICONS, pathFn: nonCategorizedPathFn },
   { id: 'mood',      label: 'Mood Icons',      folder: 'Mood Icons',      icons: MOOD_ICONS,      pathFn: moodPathFn },
   { id: 'communication', label: 'Communication Icons', folder: 'Communication Icons', icons: COMMUNICATION_ICONS, pathFn: communicationPathFn },
+  { id: 'content',   label: 'Content Icons',   folder: 'Content Icons',   icons: CONTENT_ICONS,   pathFn: contentPathFn },
+  { id: 'weather',   label: 'Weather Icons',   folder: 'Weather Icons',   icons: WEATHER_ICONS,   pathFn: weatherPathFn },
 ];
 
 const TOTAL_COUNT = 65000; // badge number – will grow as more categories are added
@@ -1102,7 +1318,9 @@ const IconBrowser: React.FC = () => {
         ...buildIconList(CATEGORIES.find(c => c.id === 'ecommerce')!),
         ...buildIconList(CATEGORIES.find(c => c.id === 'non-categorized')!),
         ...buildIconList(CATEGORIES.find(c => c.id === 'mood')!),
-        ...buildIconList(CATEGORIES.find(c => c.id === 'communication')!)
+        ...buildIconList(CATEGORIES.find(c => c.id === 'communication')!),
+        ...buildIconList(CATEGORIES.find(c => c.id === 'content')!),
+        ...buildIconList(CATEGORIES.find(c => c.id === 'weather')!)
       ]
     : buildIconList(cat);
 
@@ -1239,38 +1457,40 @@ const IconBrowser: React.FC = () => {
       <div className="flex-1 min-h-0 flex overflow-hidden">
 
         {/* ─── LEFT: Categories ─── */}
-        <aside className="w-52 shrink-0 bg-white border-r border-neutral-200 flex flex-col overflow-y-auto scrollbar-hide">
-          <p className="text-[9px] font-bold uppercase tracking-widest text-neutral-400 px-4 pt-4 pb-2">
+        <aside className="w-52 shrink-0 bg-white border-r border-neutral-200 flex flex-col">
+          <p className="text-[9px] font-bold uppercase tracking-widest text-neutral-400 px-4 pt-4 pb-2 shrink-0">
             Categories
           </p>
 
-          {CATEGORIES.map(c => {
-            const count = c.id === 'all' ? SOCIAL_ICONS.length : c.icons.length;
-            const active = activeCat === c.id;
-            return (
-              <button
-                key={c.id}
-                onClick={() => { setActiveCat(c.id); setSelected(null); }}
-                className={`w-full flex items-center justify-between px-4 py-2.5 text-left transition-all group ${
-                  active
-                    ? 'bg-neutral-900 text-white'
-                    : 'text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900'
-                }`}
-              >
-                <span className="text-[11px] font-bold">{c.label}</span>
-                <div className="flex items-center gap-1">
-                  <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded-full ${
-                    active ? 'bg-white/20 text-white' : 'bg-neutral-100 text-neutral-500'
-                  }`}>
-                    {count}
-                  </span>
-                  {active && <ChevronRight size={11} className="text-white/60" />}
-                </div>
-              </button>
-            );
-          })}
+          <div className="flex-1 overflow-y-auto custom-scrollbar">
+            {CATEGORIES.map(c => {
+              const count = c.id === 'all' ? SOCIAL_ICONS.length : c.icons.length;
+              const active = activeCat === c.id;
+              return (
+                <button
+                  key={c.id}
+                  onClick={() => { setActiveCat(c.id); setSelected(null); }}
+                  className={`w-full flex items-center justify-between px-4 py-2.5 text-left transition-all group ${
+                    active
+                      ? 'bg-neutral-900 text-white'
+                      : 'text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900'
+                  }`}
+                >
+                  <span className="text-[11px] font-bold">{c.label}</span>
+                  <div className="flex items-center gap-1">
+                    <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded-full ${
+                      active ? 'bg-white/20 text-white' : 'bg-neutral-100 text-neutral-500'
+                    }`}>
+                      {count}
+                    </span>
+                    {active && <ChevronRight size={11} className="text-white/60" />}
+                  </div>
+                </button>
+              );
+            })}
+          </div>
 
-          <div className="mt-auto p-4 border-t border-neutral-100">
+          <div className="mt-auto p-4 border-t border-neutral-100 shrink-0">
             <p className="text-[9px] text-neutral-400 leading-relaxed text-center">
               More categories coming soon.<br />Icons are processed locally.
             </p>
@@ -1278,65 +1498,67 @@ const IconBrowser: React.FC = () => {
         </aside>
 
         {/* ─── MIDDLE: Icon Grid ─── */}
-        <main className="flex-1 min-w-0 overflow-y-auto scrollbar-hide bg-neutral-50">
+        <main className="flex-1 min-w-0 flex flex-col bg-neutral-50">
           {/* Grid header */}
-          <div className="sticky top-0 bg-neutral-50/95 backdrop-blur-sm border-b border-neutral-100 px-4 py-2.5 flex items-center justify-between z-10">
+          <div className="bg-neutral-50 border-b border-neutral-100 px-4 py-2.5 flex items-center justify-between shrink-0 z-10">
             <p className="text-[10px] font-bold text-neutral-500 uppercase tracking-widest">
               {search ? `${totalShown} results` : `${totalShown} icons`}
             </p>
             <p className="text-[9px] text-neutral-400 font-semibold">Click an icon to inspect</p>
           </div>
 
-          {filtered.length === 0 ? (
-            <div className="flex flex-col items-center justify-center h-48 gap-3 text-neutral-300">
-              <Search size={32} strokeWidth={1.5} />
-              <p className="text-sm font-semibold">No icons found for "{search}"</p>
-            </div>
-          ) : (
-            <div className="p-3 grid grid-cols-[repeat(auto-fill,minmax(72px,1fr))] gap-1.5">
-              <AnimatePresence initial={false}>
-                {filtered.map(entry => {
-                  const isSelected = selected?.name === entry.name && selected?.folder === entry.folder;
-                  return (
-                    <motion.button
-                      key={entry.name}
-                      layout
-                      initial={{ opacity: 0, scale: 0.92 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.88 }}
-                      transition={{ duration: 0.12 }}
-                      onClick={() => { setSelected(entry); setVariantIdx(0); }}
-                      className={`flex flex-col items-center gap-1.5 p-2 border transition-all group ${
-                        isSelected
-                          ? 'bg-violet-50 border-violet-400 shadow-sm'
-                          : 'bg-white border-neutral-200 hover:border-violet-300 hover:bg-violet-50/50'
-                      }`}
-                      title={entry.name}
-                    >
-                      <div className="w-9 h-9 flex items-center justify-center">
-                        <img
-                          src={iconPath(entry)}
-                          alt={entry.name}
-                          className="max-w-full max-h-full object-contain"
-                          loading="lazy"
-                          onError={e => { (e.target as HTMLImageElement).style.opacity = '0.3'; }}
-                        />
-                      </div>
-                      <span className={`text-[8px] font-semibold leading-tight text-center line-clamp-2 w-full ${
-                        isSelected ? 'text-violet-700' : 'text-neutral-500'
-                      }`}>
-                        {entry.name}
-                      </span>
-                    </motion.button>
-                  );
-                })}
-              </AnimatePresence>
-            </div>
-          )}
+          <div className="flex-1 overflow-y-auto custom-scrollbar">
+            {filtered.length === 0 ? (
+              <div className="flex flex-col items-center justify-center h-48 gap-3 text-neutral-300">
+                <Search size={32} strokeWidth={1.5} />
+                <p className="text-sm font-semibold">No icons found for "{search}"</p>
+              </div>
+            ) : (
+              <div className="p-3 grid grid-cols-[repeat(auto-fill,minmax(72px,1fr))] gap-1.5">
+                <AnimatePresence initial={false}>
+                  {filtered.map(entry => {
+                    const isSelected = selected?.name === entry.name && selected?.folder === entry.folder;
+                    return (
+                      <motion.button
+                        key={entry.name}
+                        layout
+                        initial={{ opacity: 0, scale: 0.92 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.88 }}
+                        transition={{ duration: 0.12 }}
+                        onClick={() => { setSelected(entry); setVariantIdx(0); }}
+                        className={`flex flex-col items-center gap-1.5 p-2 border transition-all group ${
+                          isSelected
+                            ? 'bg-violet-50 border-violet-400 shadow-sm'
+                            : 'bg-white border-neutral-200 hover:border-violet-300 hover:bg-violet-50/50'
+                        }`}
+                        title={entry.name}
+                      >
+                        <div className="w-9 h-9 flex items-center justify-center">
+                          <img
+                            src={iconPath(entry)}
+                            alt={entry.name}
+                            className="max-w-full max-h-full object-contain"
+                            loading="lazy"
+                            onError={e => { (e.target as HTMLImageElement).style.opacity = '0.3'; }}
+                          />
+                        </div>
+                        <span className={`text-[8px] font-semibold leading-tight text-center line-clamp-2 w-full ${
+                          isSelected ? 'text-violet-700' : 'text-neutral-500'
+                        }`}>
+                          {entry.name}
+                        </span>
+                      </motion.button>
+                    );
+                  })}
+                </AnimatePresence>
+              </div>
+            )}
+          </div>
         </main>
 
         {/* ─── RIGHT: Actions Panel ─── */}
-        <aside className={`w-72 shrink-0 bg-white border-l border-neutral-200 flex flex-col overflow-y-auto scrollbar-hide transition-all`}>
+        <aside className={`w-72 shrink-0 bg-white border-l border-neutral-200 flex flex-col overflow-y-auto custom-scrollbar transition-all`}>
           {!selected ? (
             <div className="flex-1 flex flex-col items-center justify-center gap-3 text-neutral-300 px-6 text-center">
               <Grid3X3 size={40} strokeWidth={1} />
@@ -1382,7 +1604,7 @@ const IconBrowser: React.FC = () => {
                   </div>
 
                   {/* Variant selector - only show if not using a custom pathFn (OR if it is a brand icon which has variants) */}
-                  {(!selected.pathFn || selected.folder === 'Brand Icons') && (
+                  {(!selected.pathFn || selected.folder === 'Brand Icons') && !selected.name.startsWith('Style=') && (
                     <div className="flex gap-1 mb-3">
                       {variantLabels.map((lbl, i) => (
                         <button
