@@ -1460,7 +1460,6 @@ const IconBrowser: React.FC = () => {
             })()}
           </div>
 
-          <div className="mt-auto p-4 border-t border-neutral-100 shrink-0">
         </aside>
 
         {/* ─── MIDDLE: Icon Grid ─── */}
