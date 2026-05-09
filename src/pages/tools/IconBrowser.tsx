@@ -2397,7 +2397,7 @@ function iconPath(entry: IconEntry, variant: '' | '-1' | '-2' = '') {
 
 const IconBrowser: React.FC = () => {
   const navigate = useNavigate();
-  const [activeCat, setActiveCat] = useState<string>('all');
+  const [activeCat, setActiveCat] = useState<string>('social');
   const [search, setSearch] = useState('');
   const [selected, setSelected] = useState<IconEntry | null>(null);
   const [iconColor, setIconColor] = useState('#000000');
@@ -2475,6 +2475,7 @@ const IconBrowser: React.FC = () => {
   }, [coloredSvg]);
 
   const handleCopySvg = async () => {
+    if (!svgContent) return;
     const c = coloredSvg(svgContent, iconColor);
     await navigator.clipboard.writeText(c);
     setCopiedSvg(true); setTimeout(() => setCopiedSvg(false), 2000);
@@ -2530,7 +2531,7 @@ const IconBrowser: React.FC = () => {
     <div className="h-screen w-screen overflow-hidden flex flex-col bg-neutral-50 text-foreground select-none">
 
       {/* ══ TOP BAR ══ */}
-      <header className="shrink-0 bg-white border-b border-neutral-200 flex items-center h-12 px-3 gap-2 shadow-sm z-20">
+      <header className="shrink-0 bg-white border-b border-neutral-200 flex flex-wrap md:flex-nowrap items-center min-h-[3rem] py-2 px-3 gap-2 shadow-sm z-20">
         <button
           onClick={() => navigate('/')}
           className="flex items-center gap-1 text-xs font-semibold text-neutral-500 hover:text-neutral-900 transition-colors px-1.5 py-1 rounded-md hover:bg-neutral-100"
@@ -2539,12 +2540,12 @@ const IconBrowser: React.FC = () => {
           <span className="hidden sm:inline">Back</span>
         </button>
 
-        <div className="h-4 w-px bg-neutral-200" />
+        <div className="h-4 w-px bg-neutral-200 hidden sm:block" />
 
         <div className="flex items-center gap-2">
-          <Grid3X3 size={14} className="text-violet-500" />
-          <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-800">Icon Browser</span>
-          <span className="px-1.5 py-0.5 text-[9px] font-bold bg-violet-100 text-violet-700 rounded-full">
+          <Grid3X3 size={14} className="text-violet-500 shrink-0" />
+          <span className="hidden sm:inline text-[11px] font-bold uppercase tracking-wider text-neutral-800 shrink-0">Icon Browser</span>
+          <span className="px-1.5 py-0.5 text-[9px] font-bold bg-violet-100 text-violet-700 rounded-full shrink-0">
             {TOTAL_COUNT.toLocaleString()}+
           </span>
         </div>
@@ -2552,7 +2553,7 @@ const IconBrowser: React.FC = () => {
         <div className="flex-1" />
 
         {/* Search */}
-        <div className="relative w-56">
+        <div className="relative w-full sm:w-auto sm:min-w-[14rem] md:w-56 mt-2 sm:mt-0 flex-none sm:flex-initial">
           <Search size={12} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-neutral-400" />
           <input
             ref={searchRef}
@@ -2571,15 +2572,15 @@ const IconBrowser: React.FC = () => {
       </header>
 
       {/* ══ BODY ══ */}
-      <div className="flex-1 min-h-0 flex overflow-hidden">
+      <div className="flex-1 min-h-0 flex flex-col lg:flex-row overflow-hidden relative">
 
         {/* ─── LEFT: Categories ─── */}
-        <aside className="w-52 shrink-0 bg-white border-r border-neutral-200 flex flex-col">
-          <p className="text-[9px] font-bold uppercase tracking-widest text-neutral-400 px-4 pt-4 pb-2 shrink-0">
+        <aside className="w-full lg:w-52 shrink-0 bg-white border-b lg:border-b-0 lg:border-r border-neutral-200 flex flex-col z-10">
+          <p className="hidden lg:block text-[9px] font-bold uppercase tracking-widest text-neutral-400 px-4 pt-4 pb-2 shrink-0">
             Categories
           </p>
 
-          <div className="flex-1 overflow-y-auto custom-scrollbar">
+          <div className="flex lg:flex-col overflow-x-auto lg:overflow-y-auto custom-scrollbar p-2 lg:p-0 gap-2 lg:gap-0">
             {(() => {
               const sorted = [...CATEGORIES].sort((a, b) => {
                 if (a.id === 'all') return -1;
@@ -2596,14 +2597,14 @@ const IconBrowser: React.FC = () => {
                   <button
                     key={c.id}
                     onClick={() => { setActiveCat(c.id); setSelected(null); }}
-                    className={`w-full flex items-center justify-between px-4 py-2.5 text-left transition-all group ${
+                    className={`shrink-0 lg:w-full flex items-center justify-between px-3 lg:px-4 py-1.5 lg:py-2.5 text-left transition-all rounded-full lg:rounded-none border lg:border-0 group ${
                       active
-                        ? 'bg-neutral-900 text-white'
-                        : 'text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900'
+                        ? 'bg-neutral-900 text-white border-neutral-900 lg:border-transparent'
+                        : 'text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 border-neutral-200 lg:border-transparent'
                     }`}
                   >
-                    <span className="text-[11px] font-bold">{c.label}</span>
-                    <div className="flex items-center gap-1">
+                    <span className="text-[11px] font-bold">{c.label || c.name || c.id}</span>
+                    <div className="hidden lg:flex items-center gap-1">
                       <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded-full ${
                         active ? 'bg-white/20 text-white' : 'bg-neutral-100 text-neutral-500'
                       }`}>
@@ -2620,7 +2621,7 @@ const IconBrowser: React.FC = () => {
         </aside>
 
         {/* ─── MIDDLE: Icon Grid ─── */}
-        <main className="flex-1 min-w-0 flex flex-col bg-neutral-50">
+        <main className="flex-1 min-w-0 min-h-0 flex flex-col bg-neutral-50">
           {/* Grid header */}
           <div className="bg-neutral-50 border-b border-neutral-100 px-4 py-2.5 flex items-center justify-between shrink-0 z-10">
             <p className="text-[10px] font-bold text-neutral-500 uppercase tracking-widest">
@@ -2649,12 +2650,11 @@ const IconBrowser: React.FC = () => {
                         exit={{ opacity: 0, scale: 0.88 }}
                         transition={{ duration: 0.12 }}
                         onClick={() => { setSelected(entry); setVariantIdx(0); }}
-                        className={`flex flex-col items-center gap-1.5 p-2 border transition-all group ${
+                        className={`flex flex-col items-center justify-center p-2 aspect-square border transition-all group ${
                           isSelected
                             ? 'bg-violet-50 border-violet-400 shadow-sm'
                             : 'bg-white border-neutral-200 hover:border-violet-300 hover:bg-violet-50/50'
                         }`}
-                        title={entry.name}
                       >
                         <div className="w-9 h-9 flex items-center justify-center">
                           <img
@@ -2665,11 +2665,6 @@ const IconBrowser: React.FC = () => {
                             onError={e => { (e.target as HTMLImageElement).style.opacity = '0.3'; }}
                           />
                         </div>
-                        <span className={`text-[8px] font-semibold leading-tight text-center line-clamp-2 w-full ${
-                          isSelected ? 'text-violet-700' : 'text-neutral-500'
-                        }`}>
-                          {entry.name}
-                        </span>
                       </motion.button>
                     );
                   })}
@@ -2680,155 +2675,114 @@ const IconBrowser: React.FC = () => {
         </main>
 
         {/* ─── RIGHT: Actions Panel ─── */}
-        <aside className={`w-72 shrink-0 bg-white border-l border-neutral-200 flex flex-col overflow-y-auto custom-scrollbar transition-all`}>
-          {!selected ? (
-            <div className="flex-1 flex flex-col items-center justify-center gap-3 text-neutral-300 px-6 text-center">
-              <Grid3X3 size={40} strokeWidth={1} />
-              <p className="text-sm font-semibold text-neutral-400">Select an icon</p>
-              <p className="text-[11px] text-neutral-300">Click any icon to view details, copy SVG, and download.</p>
-            </div>
-          ) : (
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={selected.name + variantIdx}
-                initial={{ opacity: 0, x: 10 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.15 }}
-                className="flex flex-col h-full"
+        <aside className={`
+          absolute inset-x-0 bottom-0 z-30 max-h-[70vh] shadow-[0_-10px_40px_rgba(0,0,0,0.1)]
+          lg:relative lg:w-72 lg:max-h-none lg:shadow-none
+          shrink-0 bg-white border-t lg:border-t-0 lg:border-l border-neutral-200
+          flex flex-col overflow-y-auto custom-scrollbar transition-transform duration-300
+          ${selected ? 'translate-y-0' : 'translate-y-full lg:translate-y-0'}
+        `}>
+          <div className="flex flex-col h-full">
+            {/* Preview */}
+            <div className="p-5 pb-1 border-b border-neutral-100">
+              <div className="flex items-start justify-between mb-3">
+                <div>
+                  <p className="text-[11px] font-bold text-neutral-800 leading-tight">Overview</p>
+                </div>
+                {/* Mobile close button */}
+                <button onClick={() => setSelected(null)} className="lg:hidden p-1 hover:bg-neutral-100 text-neutral-400 hover:text-neutral-700 transition-colors">
+                  <X size={12} />
+                </button>
+              </div>
+
+              {/* Large preview */}
+              <div
+                className="w-full h-36 flex items-center justify-center border border-neutral-100 bg-neutral-50 mb-3"
+                style={{ backgroundImage: 'radial-gradient(#e5e5e5 1px, transparent 1px)', backgroundSize: '12px 12px' }}
               >
-                {/* Preview */}
-                <div className="p-5 border-b border-neutral-100">
-                  <div className="flex items-start justify-between mb-3">
-                    <div>
-                      <p className="text-[11px] font-bold text-neutral-800 leading-tight">{selected.name}</p>
-                      <p className="text-[9px] text-neutral-400 mt-0.5 uppercase tracking-wider">{selected.folder}</p>
-                    </div>
-                    <button onClick={() => setSelected(null)} className="p-1 hover:bg-neutral-100 text-neutral-400 hover:text-neutral-700 transition-colors">
-                      <X size={12} />
-                    </button>
-                  </div>
-
-                  {/* Large preview */}
-                  <div
-                    className="w-full h-36 flex items-center justify-center border border-neutral-100 bg-neutral-50 mb-3"
-                    style={{ backgroundImage: 'radial-gradient(#e5e5e5 1px, transparent 1px)', backgroundSize: '12px 12px' }}
-                  >
-                    {svgContent ? (
-                      <img
-                        src={svgDataUri(svgContent, iconColor)}
-                        alt={selected.name}
-                        className="max-w-[80px] max-h-[80px] object-contain"
-                      />
-                    ) : (
-                      <div className="w-8 h-8 border-2 border-violet-300 border-t-violet-600 rounded-full animate-spin" />
-                    )}
-                  </div>
-
-                  {/* Variant selector - only show if not using a custom pathFn */}
-                  {!selected.pathFn && !selected.name.startsWith('Style=') && (
-                    <div className="flex gap-1 mb-3">
-                      {variantLabels.map((lbl, i) => (
-                        <button
-                          key={lbl}
-                          onClick={() => setVariantIdx(i as 0|1|2)}
-                          className={`flex-1 py-1.5 text-[10px] font-bold border transition-all ${
-                            variantIdx === i
-                              ? 'bg-neutral-900 text-white border-neutral-900'
-                              : 'bg-neutral-50 text-neutral-600 border-neutral-200 hover:border-neutral-400'
-                          }`}
-                        >
-                          {lbl}
-                        </button>
-                      ))}
-                    </div>
-                  )}
-
-                  {/* Color control (only for mono variants OR for icons which are white/mono by default) */}
-                  {(variantIdx !== 0 || selected.pathFn) && (
-                    <div className="flex items-center gap-2">
-                      <Palette size={11} className="text-neutral-400 shrink-0" />
-                      <label className="text-[10px] font-semibold text-neutral-500">Color</label>
-                      <input
-                        type="color"
-                        value={iconColor}
-                        onChange={e => setIconColor(e.target.value)}
-                        className="w-6 h-6 cursor-pointer border-0"
-                        title="Icon color"
-                      />
-                      <span className="text-[10px] font-mono text-neutral-500">{iconColor.toUpperCase()}</span>
-                    </div>
-                  )}
-                </div>
-
-                {/* Copy actions */}
-                <div className="p-4 border-b border-neutral-100 space-y-2">
-                  <p className="text-[9px] font-bold uppercase tracking-widest text-neutral-400 mb-2">Copy</p>
-
-                  <button
-                    onClick={handleCopySvg}
-                    className="w-full flex items-center gap-2 px-3 py-2 text-[11px] font-bold text-neutral-700 border border-neutral-200 hover:border-violet-400 hover:bg-violet-50 hover:text-violet-700 transition-all"
-                  >
-                    {copiedSvg ? <Check size={12} className="text-emerald-500" /> : <Code2 size={12} />}
-                    {copiedSvg ? 'Copied!' : 'Copy SVG Code'}
-                  </button>
-
-                  <button
-                    onClick={handleCopyXml}
-                    className="w-full flex items-center gap-2 px-3 py-2 text-[11px] font-bold text-neutral-700 border border-neutral-200 hover:border-violet-400 hover:bg-violet-50 hover:text-violet-700 transition-all"
-                  >
-                    {copiedXml ? <Check size={12} className="text-emerald-500" /> : <FileCode size={12} />}
-                    {copiedXml ? 'Copied!' : 'Copy Raw XML'}
-                  </button>
-
-                  <button
-                    onClick={handleCopyName}
-                    className="w-full flex items-center gap-2 px-3 py-2 text-[11px] font-bold text-neutral-700 border border-neutral-200 hover:border-violet-400 hover:bg-violet-50 hover:text-violet-700 transition-all"
-                  >
-                    {copiedName ? <Check size={12} className="text-emerald-500" /> : <Copy size={12} />}
-                    {copiedName ? 'Copied!' : 'Copy Icon Name'}
-                  </button>
-                </div>
-
-                {/* Download actions */}
-                <div className="p-4 space-y-2">
-                  <p className="text-[9px] font-bold uppercase tracking-widest text-neutral-400 mb-2">Download</p>
-
-                  <button
-                    onClick={handleDownloadSvg}
-                    className="w-full flex items-center gap-2 px-3 py-2 text-[11px] font-bold bg-violet-600 text-white hover:bg-violet-700 transition-colors"
-                  >
-                    <Download size={12} />
-                    Download SVG
-                  </button>
-
-                  <p className="text-[9px] font-bold uppercase tracking-widest text-neutral-400 mb-1 mt-3">PNG Export</p>
-                  <div className="grid grid-cols-4 gap-1.5">
-                    {[16, 32, 64, 128, 256, 512, 1024, 2048].map(sz => (
-                      <button
-                        key={sz}
-                        onClick={() => handleDownloadPng(sz)}
-                        className="py-2 text-[9px] font-bold border border-neutral-200 text-neutral-600 hover:border-violet-400 hover:bg-violet-50 hover:text-violet-700 transition-all flex flex-col items-center gap-0.5"
-                      >
-                        <Download size={9} />
-                        {sz < 1000 ? `${sz}px` : `${sz/1024}K`}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* SVG Source preview */}
-                {svgContent && (
-                  <div className="p-4 border-t border-neutral-100 mt-auto">
-                    <p className="text-[9px] font-bold uppercase tracking-widest text-neutral-400 mb-2">SVG Source</p>
-                    <pre className="text-[8px] font-mono text-neutral-500 bg-neutral-50 border border-neutral-200 p-2 overflow-x-auto max-h-28 leading-relaxed whitespace-pre-wrap break-all">
-                      {svgContent.slice(0, 400)}{svgContent.length > 400 ? '…' : ''}
-                    </pre>
+                {selected ? (
+                  svgContent ? (
+                    <img
+                      src={svgDataUri(svgContent, iconColor)}
+                      alt={selected.name}
+                      className="w-[48px] h-[48px] object-contain"
+                    />
+                  ) : (
+                    <div className="w-8 h-8 border-2 border-violet-300 border-t-violet-600 rounded-full animate-spin" />
+                  )
+                ) : (
+                  <div className="text-neutral-300 flex flex-col items-center gap-2">
+                    <Grid3X3 size={24} strokeWidth={1} />
+                    <span className="text-[10px]">Select an icon</span>
                   </div>
                 )}
-              </motion.div>
-            </AnimatePresence>
-          )}
+              </div>
+
+              {/* Variant selector - invisible when not applicable to maintain layout height */}
+              <div className={`flex gap-1 ${(!selected || selected?.pathFn || selected?.name.startsWith('Style=')) ? 'invisible pointer-events-none' : ''}`}>
+                {variantLabels.map((lbl, i) => (
+                  <button
+                    key={lbl}
+                    onClick={() => setVariantIdx(i as 0|1|2)}
+                    className={`flex-1 py-1.5 text-[10px] font-bold border transition-all ${
+                      variantIdx === i
+                        ? 'bg-neutral-900 text-white border-neutral-900'
+                        : 'bg-neutral-50 text-neutral-600 border-neutral-200 hover:border-neutral-400'
+                    }`}
+                  >
+                    {lbl}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Download actions */}
+            <div className="p-4 pt-1 border-b border-neutral-100 space-y-2">
+              <p className="text-[9px] font-bold uppercase tracking-widest text-neutral-400 mb-2">Download</p>
+
+              <div className="flex gap-2 mb-2">
+                <button
+                  onClick={handleCopySvg}
+                  disabled={!selected}
+                  className="flex-1 flex items-center justify-center gap-2 px-3 py-2 text-[11px] font-bold text-violet-600 border border-violet-600 hover:bg-violet-50 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent"
+                >
+                  {copiedSvg ? <Check size={12} className="text-emerald-500" /> : <Copy size={12} />}
+                  {copiedSvg ? 'Copied!' : 'Copy SVG'}
+                </button>
+                <button
+                  onClick={handleCopyXml}
+                  disabled={!selected}
+                  className="flex-1 flex items-center justify-center gap-2 px-3 py-2 text-[11px] font-bold text-violet-600 border border-violet-600 hover:bg-violet-50 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent"
+                >
+                  {copiedXml ? <Check size={12} className="text-emerald-500" /> : <Copy size={12} />}
+                  {copiedXml ? 'Copied!' : 'SVG Source'}
+                </button>
+              </div>
+              <button
+                onClick={handleDownloadSvg}
+                disabled={!selected}
+                className="w-full flex items-center justify-center gap-2 px-3 py-2 text-[11px] font-bold bg-violet-600 text-white hover:bg-violet-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-violet-600"
+              >
+                <Download size={12} />
+                Download SVG
+              </button>
+
+              <p className="text-[9px] font-bold uppercase tracking-widest text-neutral-400 mb-1 mt-3">PNG Export</p>
+              <div className="grid grid-cols-4 gap-1.5">
+                {[16, 32, 64, 128, 256, 512, 1024, 2048].map(sz => (
+                  <button
+                    key={sz}
+                    onClick={() => handleDownloadPng(sz)}
+                    disabled={!selected}
+                    className="py-2 text-[9px] font-bold border border-neutral-200 text-neutral-600 hover:border-violet-400 hover:bg-violet-50 hover:text-violet-700 transition-all flex flex-col items-center gap-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:border-neutral-200 disabled:hover:text-neutral-600"
+                  >
+                    <Download size={9} />
+                    {sz < 1000 ? `${sz}px` : `${sz/1024}K`}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
         </aside>
       </div>
     </div>

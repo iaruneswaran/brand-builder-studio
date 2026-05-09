@@ -156,17 +156,7 @@ const ColorPickerSection = ({ baseColor, onColorChange }: ColorPickerSectionProp
               </div>
             ))}
             <div className="flex items-center gap-3 ml-auto">
-              {/* Icon Browser badge */}
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => navigate('/tools/icon-browser')}
-                className="flex items-center gap-1.5 px-2 py-1 bg-neutral-900 text-white text-[9px] font-bold uppercase tracking-wider transition-colors hover:bg-neutral-700"
-                title="Icon Browser"
-              >
-                <Grid3X3 size={11} strokeWidth={2} />
-                65K+ Icons
-              </motion.button>
+
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
@@ -288,17 +278,7 @@ const ColorPickerSection = ({ baseColor, onColorChange }: ColorPickerSectionProp
             placeholder="#3B82F6"
           />
 
-          {/* Icon Browser badge – mobile */}
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => navigate('/tools/icon-browser')}
-            className="px-2 h-full flex items-center justify-center bg-neutral-900 gap-1"
-            title="Icon Browser"
-          >
-            <Grid3X3 size={12} strokeWidth={2} className="text-white" />
-            <span className="text-[8px] font-bold text-white leading-none">65K+</span>
-          </motion.button>
+
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
