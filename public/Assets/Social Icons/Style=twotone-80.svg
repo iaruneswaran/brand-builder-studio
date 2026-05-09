@@ -3,7 +3,7 @@
 <g opacity="0.4">
 <path d="M6.5 16L10 8L13.6 16" stroke="#171717" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M7.2998 13.3H12.6998" stroke="#171717" stroke-width="1.5" stroke-miterlimit="10"/>
-<path d="M16.0996 16V10.7" stroke="#171717" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M16.1406 8.03418V8.03418" stroke="#171717" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M16.1001 16V10.7" stroke="#171717" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M16.1401 8.03418V8.03418" stroke="#171717" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </g>
 </svg>
