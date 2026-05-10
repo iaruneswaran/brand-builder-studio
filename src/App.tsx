@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 
+import BrandPalette from "./pages/tools/BrandPalette";
 import ImageToPdf from "./pages/tools/ImageToPdf";
 import IconBrowser from "./pages/tools/IconBrowser";
 
@@ -24,6 +25,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/tools/brand-palette" element={<BrandPalette />} />
           <Route path="/tools/icon-browser" element={<IconBrowser />} />
 
           <Route path="/tools/image-to-pdf" element={<ImageToPdf />} />

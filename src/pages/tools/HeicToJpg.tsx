@@ -5,7 +5,7 @@ import {
   ArrowLeft, Upload, Trash2, Download,
   Loader2, X, FileImage, AlertCircle, RefreshCw,
 } from 'lucide-react';
-// @ts-ignore — heic2any ships a plain-JS UMD bundle, no types bundled
+// @ts-expect-error — heic2any ships a plain-JS UMD bundle, no types bundled
 import heic2any from 'heic2any';
 import JSZip from 'jszip';
 
@@ -154,10 +154,10 @@ const HeicToJpg: React.FC = () => {
           outputUrl: url,
           outputSizeKB: Math.round(blob.size / 1024),
         });
-      } catch (err: any) {
+      } catch (err: unknown) {
         updateFile(entry.id, {
           status: 'error',
-          error: err?.message ?? 'Conversion failed',
+          error: err instanceof Error ? err.message : 'Conversion failed',
         });
       }
     }
@@ -224,7 +224,7 @@ const HeicToJpg: React.FC = () => {
         <div className="h-4 w-px bg-neutral-200" />
 
         <div className="flex items-center gap-2">
-          <FileImage size={14} className="text-violet-500" />
+          <img src="/icons/HEIC to JPG.svg" alt="HEIC to JPG" className="w-4 h-4" />
           <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-800">
             HEIC → JPG
           </span>
@@ -527,8 +527,8 @@ const HeicToJpg: React.FC = () => {
                                     outputUrl: url,
                                     outputSizeKB: Math.round(blob.size / 1024),
                                   });
-                                } catch (err: any) {
-                                  updateFile(entry.id, { status: 'error', error: err?.message ?? 'Failed' });
+                                } catch (err: unknown) {
+                                  updateFile(entry.id, { status: 'error', error: err instanceof Error ? err.message : 'Failed' });
                                 }
                               }}
                               className="text-[8px] font-bold text-violet-600 hover:text-violet-700 transition-colors"

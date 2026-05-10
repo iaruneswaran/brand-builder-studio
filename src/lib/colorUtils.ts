@@ -104,7 +104,7 @@ function generateCurvedScale(h: number, s: number, baseL: number, originalHex?: 
   };
 
   const steps = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900] as const;
-  const scale: any = {};
+  const scale: Partial<PaletteScale> = {};
   steps.forEach(step => {
     if (step === 500 && originalHex) {
       scale[step] = originalHex;

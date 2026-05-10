@@ -49,7 +49,7 @@ const QrGenerator: React.FC = () => {
     } catch {
       setHasContent(false);
     }
-  }, [text, fgColor, bgColor, size, errorLevel, margin]);
+  }, [text, fgColor, bgColor, errorLevel, margin]);
 
   useEffect(() => { generate(); }, [generate]);
 
@@ -81,7 +81,7 @@ const QrGenerator: React.FC = () => {
         setTimeout(() => URL.revokeObjectURL(url), 1000);
 
       } else if (format === 'eps') {
-        const qrData = (QRCode as any).create(text, { errorCorrectionLevel: errorLevel });
+        const qrData = (QRCode as { create: (...args: unknown[]) => { modules: { size: number, get: (r: number, c: number) => boolean } } }).create(text, { errorCorrectionLevel: errorLevel });
         const modules = qrData.modules;
         const n = modules.size;
         const cellPt = 4;
@@ -165,7 +165,7 @@ const QrGenerator: React.FC = () => {
         <div className="h-4 w-px bg-neutral-200" />
 
         <div className="flex items-center gap-2">
-          <QrCode size={14} className="text-violet-500" />
+          <img src="/icons/QR Generator.svg" alt="QR Generator" className="w-4 h-4" />
           <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-800">QR Generator</span>
         </div>
 

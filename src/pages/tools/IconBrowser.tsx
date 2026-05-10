@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -3539,6 +3539,8 @@ function buildIconList(cat: Category): IconEntry[] {
   return cat.icons.map(name => ({ name, folder: cat.folder || '', pathFn: cat.pathFn }));
 }
 
+const ALL_ICONS = CATEGORIES.filter(c => c.id !== 'all').flatMap(buildIconList);
+
 function iconPath(entry: IconEntry, variant: '' | '-1' | '-2' = '') {
   if (entry.pathFn) return entry.pathFn(entry.name, variant);
   return `/Assets/${entry.folder}/${entry.name}${variant}.svg`;
@@ -3547,6 +3549,9 @@ function iconPath(entry: IconEntry, variant: '' | '-1' | '-2' = '') {
 /* ─────────────────────────────────────────────── */
 /*  Component                                      */
 /* ─────────────────────────────────────────────── */
+
+const VARIANTS: Array<'' | '-1' | '-2'> = ['', '-1', '-2'];
+const VARIANT_LABELS = ['Color', 'Mono 1', 'Mono 2'];
 
 const IconBrowser: React.FC = () => {
   const navigate = useNavigate();
@@ -3561,53 +3566,23 @@ const IconBrowser: React.FC = () => {
   const [variantIdx, setVariantIdx] = useState<0|1|2>(0); // 0=default, 1=-1, 2=-2
   const searchRef = useRef<HTMLInputElement>(null);
 
-  const cat = CATEGORIES.find(c => c.id === activeCat) ?? CATEGORIES[0];
-  const allInCat = activeCat === 'all'
-    ? [
-        ...buildIconList(CATEGORIES.find(c => c.id === 'brand')!),
-        ...buildIconList(CATEGORIES.find(c => c.id === 'social')!),
-        ...buildIconList(CATEGORIES.find(c => c.id === 'essential')!),
-        ...buildIconList(CATEGORIES.find(c => c.id === 'arrows')!),
-        ...buildIconList(CATEGORIES.find(c => c.id === 'building')!),
-        ...buildIconList(CATEGORIES.find(c => c.id === 'device')!),
-        ...buildIconList(CATEGORIES.find(c => c.id === 'design')!),
-        ...buildIconList(CATEGORIES.find(c => c.id === 'documents')!),
-        ...buildIconList(CATEGORIES.find(c => c.id === 'system')!),
-        ...buildIconList(CATEGORIES.find(c => c.id === 'letters')!),
-        ...buildIconList(CATEGORIES.find(c => c.id === 'map')!),
-        ...buildIconList(CATEGORIES.find(c => c.id === 'text')!),
-        ...buildIconList(CATEGORIES.find(c => c.id === 'health')!),
-        ...buildIconList(CATEGORIES.find(c => c.id === 'shapes')!),
-        ...buildIconList(CATEGORIES.find(c => c.id === 'media')!),
-        ...buildIconList(CATEGORIES.find(c => c.id === 'vehicles')!),
-        ...buildIconList(CATEGORIES.find(c => c.id === 'numbers')!),
-        ...buildIconList(CATEGORIES.find(c => c.id === 'database')!),
-        ...buildIconList(CATEGORIES.find(c => c.id === 'sports')!),
-        ...buildIconList(CATEGORIES.find(c => c.id === 'math')!),
-        ...buildIconList(CATEGORIES.find(c => c.id === 'currency')!),
-        ...buildIconList(CATEGORIES.find(c => c.id === 'food')!),
-        ...buildIconList(CATEGORIES.find(c => c.id === 'ecommerce')!),
-        ...buildIconList(CATEGORIES.find(c => c.id === 'non-categorized')!),
-        ...buildIconList(CATEGORIES.find(c => c.id === 'mood')!),
-        ...buildIconList(CATEGORIES.find(c => c.id === 'communication')!),
-        ...buildIconList(CATEGORIES.find(c => c.id === 'content')!),
-        ...buildIconList(CATEGORIES.find(c => c.id === 'tools')!),
-        ...buildIconList(CATEGORIES.find(c => c.id === 'weather')!),
-        ...buildIconList(CATEGORIES.find(c => c.id === 'search')!),
-      ]
-    : buildIconList(cat);
+  const filtered = useMemo(() => {
+    const term = search.toLowerCase().trim();
+    if (term) {
+      // Global search: searches across all categories
+      return ALL_ICONS.filter(icon => icon.name.toLowerCase().includes(term));
+    }
+    // Category-specific view
+    if (activeCat === 'all') return ALL_ICONS;
+    const currentCat = CATEGORIES.find(c => c.id === activeCat) ?? CATEGORIES[1]; // default to first real cat
+    return buildIconList(currentCat);
+  }, [search, activeCat]);
 
-  const filtered = search.trim()
-    ? allInCat.filter(e => e.name.toLowerCase().includes(search.toLowerCase()))
-    : allInCat;
-
-  const variants: Array<'' | '-1' | '-2'> = ['', '-1', '-2'];
-  const variantLabels = ['Color', 'Mono 1', 'Mono 2'];
 
   // Load SVG content when selection/variant changes
   useEffect(() => {
     if (!selected) { setSvgContent(''); return; }
-    const path = iconPath(selected, variants[variantIdx]);
+    const path = iconPath(selected, VARIANTS[variantIdx]);
     fetch(path)
       .then(r => r.text())
       .then(txt => setSvgContent(txt))
@@ -3654,7 +3629,7 @@ const IconBrowser: React.FC = () => {
     const blob = new Blob([c], { type: 'image/svg+xml' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
-    a.href = url; a.download = `${selected.name}${variants[variantIdx]}.svg`; a.click();
+    a.href = url; a.download = `${selected.name}${VARIANTS[variantIdx]}.svg`; a.click();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   };
 
@@ -3699,7 +3674,7 @@ const IconBrowser: React.FC = () => {
         <div className="h-4 w-px bg-neutral-200 hidden sm:block" />
 
         <div className="flex items-center gap-2">
-          <Grid3X3 size={14} className="text-violet-500 shrink-0" />
+          <img src="/icons/Icon Browser.svg" alt="Icon Browser" className="w-4 h-4 shrink-0" />
           <span className="hidden sm:inline text-[11px] font-bold uppercase tracking-wider text-neutral-800 shrink-0">Icon Browser</span>
           <span className="px-1.5 py-0.5 text-[9px] font-bold bg-violet-100 text-violet-700 rounded-full shrink-0">
             {TOTAL_COUNT.toLocaleString()}+
@@ -3798,7 +3773,7 @@ const IconBrowser: React.FC = () => {
                   const isSelected = selected?.name === entry.name && selected?.folder === entry.folder;
                   return (
                     <motion.button
-                      key={entry.name}
+                      key={`${entry.folder}-${entry.name}`}
                       initial={{ opacity: 0, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ duration: 0.05 }}
@@ -3872,7 +3847,7 @@ const IconBrowser: React.FC = () => {
 
               {/* Variant selector - invisible when not applicable to maintain layout height */}
               <div className={`flex gap-1 ${(!selected || selected?.pathFn || selected?.name.startsWith('Style=')) ? 'invisible pointer-events-none' : ''}`}>
-                {variantLabels.map((lbl, i) => (
+                {VARIANT_LABELS.map((lbl, i) => (
                   <button
                     key={lbl}
                     onClick={() => setVariantIdx(i as 0|1|2)}

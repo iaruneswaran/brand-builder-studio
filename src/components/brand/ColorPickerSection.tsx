@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { hexToHSL, hslToHex, randomHex } from '@/lib/colorUtils';
-import { Sparkles, Instagram, Menu, FileDown, FileImage, QrCode, Grid3X3 } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
+import { Sparkles } from 'lucide-react';
+import { motion } from 'framer-motion';
+
 import { HexColorPicker } from 'react-colorful';
 import { Slider } from '@/components/ui/slider';
 import {
@@ -20,25 +20,7 @@ interface ColorPickerSectionProps {
 }
 
 const ColorPickerSection = ({ baseColor, onColorChange }: ColorPickerSectionProps) => {
-  const navigate = useNavigate();
-  const [menuOpen, setMenuOpen] = useState(false);
-  const desktopMenuRef = React.useRef<HTMLDivElement>(null);
-  const mobileMenuRef = React.useRef<HTMLDivElement>(null);
 
-  // Close menu on outside click
-  React.useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      const target = e.target as Node;
-      if (
-        (!desktopMenuRef.current || !desktopMenuRef.current.contains(target)) &&
-        (!mobileMenuRef.current || !mobileMenuRef.current.contains(target))
-      ) {
-        setMenuOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', handler);
-    return () => document.removeEventListener('mousedown', handler);
-  }, []);
 
   const hsl = hexToHSL(baseColor);
   const [localHex, setLocalHex] = useState(baseColor.toUpperCase());
@@ -101,7 +83,7 @@ const ColorPickerSection = ({ baseColor, onColorChange }: ColorPickerSectionProp
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="w-16 h-14 flex-shrink-0 cursor-pointer active:opacity-80 transition-shadow duration-300 shadow-hard-sm group-hover:shadow-hard z-20"
+                  className="w-16 h-14 flex-shrink-0 cursor-pointer active:opacity-80 transition-shadow duration-300 z-20"
                   style={{ backgroundColor: baseColor }}
                   title="Select Base Color"
                 />
@@ -110,7 +92,7 @@ const ColorPickerSection = ({ baseColor, onColorChange }: ColorPickerSectionProp
                 side="bottom"
                 align="start"
                 sideOffset={0}
-                className="w-64 p-0 rounded-none shadow-hard-lg bg-background/95 backdrop-blur-md animate-in fade-in zoom-in-95 duration-200"
+                className="w-64 p-0 rounded-none bg-background/95 backdrop-blur-md animate-in fade-in zoom-in-95 duration-200 border border-foreground/10"
               >
                 <HexColorPicker
                   color={baseColor}
@@ -146,7 +128,7 @@ const ColorPickerSection = ({ baseColor, onColorChange }: ColorPickerSectionProp
                     value={[Number(hsl[s.prop as keyof typeof hsl])]}
                     max={s.max}
                     step={1}
-                    onValueChange={([val]) => handleSlider(s.prop as any, val)}
+                    onValueChange={([val]) => handleSlider(s.prop as 'h' | 's' | 'l', val)}
                     className="relative z-10"
                   />
                 </div>
@@ -167,74 +149,6 @@ const ColorPickerSection = ({ baseColor, onColorChange }: ColorPickerSectionProp
               >
                 <Sparkles size={18} strokeWidth={2} />
               </motion.button>
-              <motion.a
-                href="https://www.instagram.com/iaruneswaran/"
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                className="pl-0 pr-2 py-2 transition-colors"
-                style={{ color: '#000000' }}
-                title="Instagram"
-              >
-                <Instagram size={18} strokeWidth={2} />
-              </motion.a>
-
-              {/* Menu */}
-              <div className="relative" ref={desktopMenuRef}>
-                <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  onClick={() => setMenuOpen(o => !o)}
-                  className="pl-2 pr-0 py-2 transition-colors"
-                  style={{ color: '#000000' }}
-                  title="Tools Menu"
-                >
-                  <Menu size={18} strokeWidth={2} />
-                </motion.button>
-                <AnimatePresence>
-                  {menuOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -6, scale: 0.97 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: -6, scale: 0.97 }}
-                      transition={{ duration: 0.15 }}
-                      className="absolute right-0 top-full mt-1 w-52 bg-white border border-neutral-200 shadow-xl rounded-xl overflow-hidden z-50"
-                    >
-
-                      <button
-                        onClick={() => { setMenuOpen(false); navigate('/tools/icon-browser'); }}
-                        className="w-full flex items-center gap-3 px-4 py-3 text-sm font-semibold text-neutral-800 hover:bg-neutral-50 transition-colors text-left"
-                      >
-                        <Grid3X3 size={15} className="text-violet-500" />
-                        Icon Browser
-                      </button>
-                      <button
-                        onClick={() => { setMenuOpen(false); navigate('/tools/image-to-pdf'); }}
-                        className="w-full flex items-center gap-3 px-4 py-3 text-sm font-semibold text-neutral-800 hover:bg-neutral-50 transition-colors text-left border-t border-neutral-100"
-                      >
-                        <FileDown size={15} className="text-violet-500" />
-                        Image to PDF
-                      </button>
-
-                      <button
-                        onClick={() => { setMenuOpen(false); navigate('/tools/heic-to-jpg'); }}
-                        className="w-full flex items-center gap-3 px-4 py-3 text-sm font-semibold text-neutral-800 hover:bg-neutral-50 transition-colors text-left border-t border-neutral-100"
-                      >
-                        <FileImage size={15} className="text-violet-500" />
-                        HEIC to JPG
-                      </button>
-                      <button
-                        onClick={() => { setMenuOpen(false); navigate('/tools/qr-generator'); }}
-                        className="w-full flex items-center gap-3 px-4 py-3 text-sm font-semibold text-neutral-800 hover:bg-neutral-50 transition-colors text-left border-t border-neutral-100"
-                      >
-                        <QrCode size={15} className="text-violet-500" />
-                        QR Generator
-                      </button>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
             </div>
           </div>
         </div>
@@ -258,7 +172,7 @@ const ColorPickerSection = ({ baseColor, onColorChange }: ColorPickerSectionProp
               side="bottom"
               align="start"
               sideOffset={0}
-              className="w-72 p-0 rounded-none shadow-hard-lg bg-background/95 backdrop-blur-md animate-in fade-in zoom-in-95 duration-200"
+              className="w-72 p-0 rounded-none bg-background/95 backdrop-blur-md animate-in fade-in zoom-in-95 duration-200 border border-foreground/10"
             >
               <HexColorPicker
                 color={baseColor}
@@ -289,74 +203,7 @@ const ColorPickerSection = ({ baseColor, onColorChange }: ColorPickerSectionProp
           >
             <Sparkles size={18} strokeWidth={2} />
           </motion.button>
-          <motion.a
-            href="https://www.instagram.com/iaruneswaran/"
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            className="px-3 h-full flex items-center justify-center bg-neutral-50 border-x border-neutral-200"
-            style={{ color: '#000000' }}
-            title="Instagram"
-          >
-            <Instagram size={18} strokeWidth={2} />
-          </motion.a>
 
-          {/* Mobile Menu */}
-          <div className="relative" ref={mobileMenuRef}>
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={() => setMenuOpen(o => !o)}
-              className="px-3 h-full flex items-center justify-center bg-neutral-50"
-              style={{ color: '#000000' }}
-              title="Tools Menu"
-            >
-              <Menu size={18} strokeWidth={2} />
-            </motion.button>
-            <AnimatePresence>
-              {menuOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: -6, scale: 0.97 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -6, scale: 0.97 }}
-                  transition={{ duration: 0.15 }}
-                  className="absolute right-0 top-full mt-1 w-52 bg-white border border-neutral-200 shadow-xl rounded-xl overflow-hidden z-50"
-                >
-
-                  <button
-                    onClick={() => { setMenuOpen(false); navigate('/tools/icon-browser'); }}
-                    className="w-full flex items-center gap-3 px-4 py-3 text-sm font-semibold text-neutral-800 hover:bg-neutral-50 transition-colors text-left"
-                  >
-                    <Grid3X3 size={15} className="text-violet-500" />
-                    Icon Browser
-                  </button>
-                  <button
-                    onClick={() => { setMenuOpen(false); navigate('/tools/image-to-pdf'); }}
-                    className="w-full flex items-center gap-3 px-4 py-3 text-sm font-semibold text-neutral-800 hover:bg-neutral-50 transition-colors text-left border-t border-neutral-100"
-                  >
-                    <FileDown size={15} className="text-violet-500" />
-                    Image to PDF
-                  </button>
-
-                  <button
-                    onClick={() => { setMenuOpen(false); navigate('/tools/heic-to-jpg'); }}
-                    className="w-full flex items-center gap-3 px-4 py-3 text-sm font-semibold text-neutral-800 hover:bg-neutral-50 transition-colors text-left border-t border-neutral-100"
-                  >
-                    <FileImage size={15} className="text-violet-500" />
-                    HEIC to JPG
-                  </button>
-                  <button
-                    onClick={() => { setMenuOpen(false); navigate('/tools/qr-generator'); }}
-                    className="w-full flex items-center gap-3 px-4 py-3 text-sm font-semibold text-neutral-800 hover:bg-neutral-50 transition-colors text-left border-t border-neutral-100"
-                  >
-                    <QrCode size={15} className="text-violet-500" />
-                    QR Generator
-                  </button>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
 
         </div>
 
@@ -379,7 +226,7 @@ const ColorPickerSection = ({ baseColor, onColorChange }: ColorPickerSectionProp
                   value={[Number(hsl[s.prop as keyof typeof hsl])]}
                   max={s.max}
                   step={1}
-                  onValueChange={([val]) => handleSlider(s.prop as any, val)}
+                  onValueChange={([val]) => handleSlider(s.prop as 'h' | 's' | 'l', val)}
                   className="relative z-10 touch-none"
                 />
               </div>

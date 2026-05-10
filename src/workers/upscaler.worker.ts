@@ -11,8 +11,8 @@ setWasmPaths(
   'https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm@4.11.0/dist/'
 );
 
-let upscaler2x: any = null;
-let upscaler4x: any = null;
+let upscaler2x: Upscaler | null = null;
+let upscaler4x: Upscaler | null = null;
 let backendReady = false;
 
 async function ensureBackend() {
@@ -78,7 +78,7 @@ self.onmessage = async (event: MessageEvent) => {
 
     self.postMessage({ type: 'progress', pct: 92, label: 'Encoding…' });
     self.postMessage({ type: 'done', dataUrl: result });
-  } catch (err: any) {
-    self.postMessage({ type: 'error', message: err?.message ?? String(err) });
+  } catch (err: unknown) {
+    self.postMessage({ type: 'error', message: err instanceof Error ? err.message : String(err) });
   }
 };
