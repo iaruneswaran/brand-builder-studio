@@ -1496,169 +1496,272 @@ const ARROW_ICONS: string[] = [
 
 // Building icons – filenames: "Type=<name>, Theme=White.svg"
 const BUILDING_ICONS: string[] = [
-  'building','building-arch','building-bank','building-bridge','building-bridge-2',
-  'building-broadcast-tower','building-carousel','building-castle','building-church',
-  'building-circus','building-community','building-cottage','building-estate',
-  'building-factory','building-factory-2','building-fortress','building-hospital',
-  'building-lighthouse','building-monument','building-mosque','building-pavilion',
-  'building-skyscraper','building-stadium','building-store','building-tunnel',
-  'building-warehouse','building-wind-turbine','fence','fence-off','home','home-2',
-  'home-bolt','home-cancel','home-check','home-cog','home-dollar','home-dot','home-down',
-  'home-eco','home-edit','home-exclamation','home-heart','home-link','home-minus',
-  'home-move','home-off','home-plus','home-question','home-ribbon','home-search',
-  'home-share','home-shield','home-signal','home-star','home-stats','home-up','home-x',
-  'smart-home','smart-home-off','tower','tower-off',
+  'Style=bold', 'Style=bold, Property 2=building-4', 'Style=bold-1', 'Style=bold-2', 'Style=bold-3', 'Style=bold-4', 'Style=bold-5', 'Style=bold-6',
+  'Style=bold-7', 'Style=bold-8', 'Style=bold-9', 'Style=broken', 'Style=broken, Property 2=building-4', 'Style=broken-1', 'Style=broken-2', 'Style=broken-3',
+  'Style=broken-4', 'Style=broken-5', 'Style=broken-6', 'Style=broken-7', 'Style=broken-8', 'Style=broken-9', 'Style=bulk', 'Style=bulk, Property 2=building-4',
+  'Style=bulk-1', 'Style=bulk-2', 'Style=bulk-3', 'Style=bulk-4', 'Style=bulk-5', 'Style=bulk-6', 'Style=bulk-7', 'Style=bulk-8',
+  'Style=bulk-9', 'Style=linear', 'Style=linear, Property 2=building-4', 'Style=linear-1', 'Style=linear-2', 'Style=linear-3', 'Style=linear-4', 'Style=linear-5',
+  'Style=linear-6', 'Style=linear-7', 'Style=linear-8', 'Style=linear-9', 'Style=outline', 'Style=outline, Property 2=building-4', 'Style=outline-1', 'Style=outline-2',
+  'Style=outline-3', 'Style=outline-4', 'Style=outline-5', 'Style=outline-6', 'Style=outline-7', 'Style=outline-8', 'Style=outline-9', 'Style=twotone',
+  'Style=twotone, Property 2=building-4', 'Style=twotone-1', 'Style=twotone-2', 'Style=twotone-3', 'Style=twotone-4', 'Style=twotone-5', 'Style=twotone-6', 'Style=twotone-7',
+  'Style=twotone-8', 'Style=twotone-9', 'building', 'building-arch', 'building-bank', 'building-bridge', 'building-bridge-2', 'building-broadcast-tower',
+  'building-carousel', 'building-castle', 'building-church', 'building-circus', 'building-community', 'building-cottage', 'building-estate', 'building-factory',
+  'building-factory-2', 'building-fortress', 'building-hospital', 'building-lighthouse', 'building-monument', 'building-mosque', 'building-pavilion', 'building-skyscraper',
+  'building-stadium', 'building-store', 'building-tunnel', 'building-warehouse', 'building-wind-turbine', 'fence', 'fence-off', 'home',
+  'home-2', 'home-bolt', 'home-cancel', 'home-check', 'home-cog', 'home-dollar', 'home-dot', 'home-down',
+  'home-eco', 'home-edit', 'home-exclamation', 'home-heart', 'home-link', 'home-minus', 'home-move', 'home-off',
+  'home-plus', 'home-question', 'home-ribbon', 'home-search', 'home-share', 'home-shield', 'home-signal', 'home-star',
+  'home-stats', 'home-up', 'home-x', 'smart-home', 'smart-home-off', 'tower', 'tower-off'
 ];
 
 // Device icons – filenames: "Type=White, Theme=<name>.svg"
 const DEVICE_ICONS: string[] = [
-  'access-point','access-point-off','antenna-bars-1','antenna-bars-2','antenna-bars-3',
-  'antenna-bars-4','antenna-bars-5','battery','battery-1','battery-2','battery-3',
-  'battery-4','battery-charging','battery-charging-2','battery-eco','battery-off',
-  'bluetooth','bluetooth-connected','bluetooth-off','broadcast','broadcast-off',
-  'browser','browser-check','browser-off','browser-plus','browser-x','cardboards',
-  'cardboards-off','cell-signal-1','cell-signal-2','cell-signal-3','cell-signal-4',
-  'cell-signal-5','cell-signal-off','cpu','cpu-2','cpu-off','device-airpods',
-  'device-airpods-case','device-analytics','device-audio-tape','device-camera-phone',
-  'device-cctv','device-cctv-off','device-computer-camera','device-computer-camera-off',
-  'device-desktop','device-desktop-analytics','device-desktop-bolt','device-desktop-cancel',
-  'device-desktop-check','device-desktop-code','device-desktop-cog','device-desktop-dollar',
-  'device-desktop-down','device-desktop-exclamation','device-desktop-heart',
-  'device-desktop-minus','device-desktop-off','device-desktop-pause','device-desktop-pin',
-  'device-desktop-plus','device-desktop-question','device-desktop-search','device-desktop-share',
-  'device-desktop-star','device-desktop-up','device-desktop-x','device-floppy',
-  'device-gamepad','device-gamepad-2','device-heart-monitor','device-imac','device-imac-bolt',
-  'device-imac-cancel','device-imac-check','device-imac-code','device-imac-cog',
-  'device-imac-dollar','device-imac-down','device-imac-exclamation','device-imac-heart',
-  'device-imac-minus','device-imac-off','device-imac-pause','device-imac-pin','device-imac-plus',
-  'device-imac-question','device-imac-search','device-imac-share','device-imac-star',
-  'device-imac-up','device-imac-x','device-ipad','device-ipad-bolt','device-ipad-cancel',
-  'device-ipad-check','device-ipad-code','device-ipad-cog','device-ipad-dollar','device-ipad-down',
-  'device-ipad-exclamation','device-ipad-heart','device-ipad-horizontal',
-  'device-ipad-horizontal-bolt','device-ipad-horizontal-cancel','device-ipad-horizontal-check',
-  'device-ipad-horizontal-code','device-ipad-horizontal-cog','device-ipad-horizontal-dollar',
-  'device-ipad-horizontal-down','device-ipad-horizontal-exclamation','device-ipad-horizontal-heart',
-  'device-ipad-horizontal-minus','device-ipad-horizontal-off','device-ipad-horizontal-pause',
-  'device-ipad-horizontal-pin','device-ipad-horizontal-plus','device-ipad-horizontal-question',
-  'device-ipad-horizontal-search','device-ipad-horizontal-share','device-ipad-horizontal-star',
-  'device-ipad-horizontal-up','device-ipad-horizontal-x','device-ipad-minus','device-ipad-off',
-  'device-ipad-pause','device-ipad-pin','device-ipad-plus','device-ipad-question',
-  'device-ipad-search','device-ipad-share','device-ipad-star','device-ipad-up','device-ipad-x',
-  'device-landline-phone','device-laptop','device-laptop-off','device-mobile','device-mobile-bolt',
-  'device-mobile-cancel','device-mobile-charging','device-mobile-check','device-mobile-code',
-  'device-mobile-cog','device-mobile-dollar','device-mobile-down','device-mobile-exclamation',
-  'device-mobile-heart','device-mobile-message','device-mobile-minus','device-mobile-off',
-  'device-mobile-pause','device-mobile-pin','device-mobile-plus','device-mobile-question',
-  'device-mobile-rotated','device-mobile-search','device-mobile-share','device-mobile-star',
-  'device-mobile-up','device-mobile-vibration','device-mobile-x','device-nintendo',
-  'device-nintendo-off','device-remote','device-sd-card','device-sim','device-sim-1',
-  'device-sim-2','device-sim-3','device-speaker','device-speaker-off','device-tablet',
-  'device-tablet-bolt','device-tablet-cancel','device-tablet-check','device-tablet-code',
-  'device-tablet-cog','device-tablet-dollar','device-tablet-down','device-tablet-exclamation',
-  'device-tablet-heart','device-tablet-minus','device-tablet-off','device-tablet-pause',
-  'device-tablet-pin','device-tablet-plus','device-tablet-question','device-tablet-search',
-  'device-tablet-share','device-tablet-star','device-tablet-up','device-tablet-x','device-tv',
-  'device-tv-off','device-tv-old','device-watch','device-watch-bolt','device-watch-cancel',
-  'device-watch-check','device-watch-code','device-watch-cog','device-watch-dollar',
-  'device-watch-down','device-watch-exclamation','device-watch-heart','device-watch-minus',
-  'device-watch-off','device-watch-pause','device-watch-pin','device-watch-plus',
-  'device-watch-question','device-watch-search','device-watch-share','device-watch-star',
-  'device-watch-stats','device-watch-stats-2','device-watch-up','device-watch-x','devices',
-  'devices-2','devices-bolt','devices-cancel','devices-check','devices-code','devices-cog',
-  'devices-dollar','devices-down','devices-exclamation','devices-heart','devices-minus',
-  'devices-off','devices-pause','devices-pc','devices-pc-off','devices-pin','devices-plus',
-  'devices-question','devices-search','devices-share','devices-star','devices-up','devices-x',
-  'disc','disc-off','dual-screen','fridge','fridge-off','keyboard','keyboard-hide',
-  'keyboard-off','keyboard-show','mouse','mouse-2','mouse-off','nfc','nfc-off','phone',
-  'phone-call','phone-calling','phone-check','phone-incoming','phone-off','phone-outgoing',
-  'phone-pause','phone-plus','phone-x','playstation-circle','playstation-square',
-  'playstation-triangle','playstation-x','plug','plug-connected','plug-connected-x',
-  'plug-off','plug-x','power','printer','printer-off','qrcode','qrcode-off','router',
-  'router-off','screen-share','screen-share-off','server','server-2','server-bolt',
-  'server-cog','server-off','shredder','signal-3g','signal-4g','signal-4g-plus','signal-5g',
-  'viewport-narrow','viewport-wide','vinyl','wash-machine','wifi','wifi-0','wifi-1','wifi-2',
-  'wifi-off','xbox-a','xbox-b','xbox-x','xbox-y',
+  'Style=bold', 'Style=bold-1', 'Style=bold-10', 'Style=bold-11',
+  'Style=bold-12', 'Style=bold-13', 'Style=bold-14', 'Style=bold-15',
+  'Style=bold-16', 'Style=bold-17', 'Style=bold-18', 'Style=bold-19',
+  'Style=bold-2', 'Style=bold-20', 'Style=bold-21', 'Style=bold-22',
+  'Style=bold-23', 'Style=bold-24', 'Style=bold-25', 'Style=bold-26',
+  'Style=bold-27', 'Style=bold-28', 'Style=bold-29', 'Style=bold-3',
+  'Style=bold-30', 'Style=bold-31', 'Style=bold-32', 'Style=bold-33',
+  'Style=bold-34', 'Style=bold-35', 'Style=bold-36', 'Style=bold-37',
+  'Style=bold-38', 'Style=bold-39', 'Style=bold-4', 'Style=bold-40',
+  'Style=bold-41', 'Style=bold-42', 'Style=bold-43', 'Style=bold-44',
+  'Style=bold-45', 'Style=bold-46', 'Style=bold-47', 'Style=bold-5',
+  'Style=bold-6', 'Style=bold-7', 'Style=bold-8', 'Style=bold-9',
+  'Style=broken', 'Style=broken-1', 'Style=broken-10', 'Style=broken-11',
+  'Style=broken-12', 'Style=broken-13', 'Style=broken-14', 'Style=broken-15',
+  'Style=broken-16', 'Style=broken-17', 'Style=broken-18', 'Style=broken-19',
+  'Style=broken-2', 'Style=broken-20', 'Style=broken-21', 'Style=broken-22',
+  'Style=broken-23', 'Style=broken-24', 'Style=broken-25', 'Style=broken-26',
+  'Style=broken-27', 'Style=broken-28', 'Style=broken-29', 'Style=broken-3',
+  'Style=broken-30', 'Style=broken-31', 'Style=broken-32', 'Style=broken-33',
+  'Style=broken-34', 'Style=broken-35', 'Style=broken-36', 'Style=broken-37',
+  'Style=broken-38', 'Style=broken-39', 'Style=broken-4', 'Style=broken-40',
+  'Style=broken-41', 'Style=broken-42', 'Style=broken-43', 'Style=broken-44',
+  'Style=broken-45', 'Style=broken-46', 'Style=broken-47', 'Style=broken-5',
+  'Style=broken-6', 'Style=broken-7', 'Style=broken-8', 'Style=broken-9',
+  'Style=bulk', 'Style=bulk-1', 'Style=bulk-10', 'Style=bulk-11',
+  'Style=bulk-12', 'Style=bulk-13', 'Style=bulk-14', 'Style=bulk-15',
+  'Style=bulk-16', 'Style=bulk-17', 'Style=bulk-18', 'Style=bulk-19',
+  'Style=bulk-2', 'Style=bulk-20', 'Style=bulk-21', 'Style=bulk-22',
+  'Style=bulk-23', 'Style=bulk-24', 'Style=bulk-25', 'Style=bulk-26',
+  'Style=bulk-27', 'Style=bulk-28', 'Style=bulk-29', 'Style=bulk-3',
+  'Style=bulk-30', 'Style=bulk-31', 'Style=bulk-32', 'Style=bulk-33',
+  'Style=bulk-34', 'Style=bulk-35', 'Style=bulk-36', 'Style=bulk-37',
+  'Style=bulk-38', 'Style=bulk-39', 'Style=bulk-4', 'Style=bulk-40',
+  'Style=bulk-41', 'Style=bulk-42', 'Style=bulk-43', 'Style=bulk-44',
+  'Style=bulk-45', 'Style=bulk-46', 'Style=bulk-47', 'Style=bulk-5',
+  'Style=bulk-6', 'Style=bulk-7', 'Style=bulk-8', 'Style=bulk-9',
+  'Style=linear', 'Style=linear-1', 'Style=linear-10', 'Style=linear-11',
+  'Style=linear-12', 'Style=linear-13', 'Style=linear-14', 'Style=linear-15',
+  'Style=linear-16', 'Style=linear-17', 'Style=linear-18', 'Style=linear-19',
+  'Style=linear-2', 'Style=linear-20', 'Style=linear-21', 'Style=linear-22',
+  'Style=linear-23', 'Style=linear-24', 'Style=linear-25', 'Style=linear-26',
+  'Style=linear-27', 'Style=linear-28', 'Style=linear-29', 'Style=linear-3',
+  'Style=linear-30', 'Style=linear-31', 'Style=linear-32', 'Style=linear-33',
+  'Style=linear-34', 'Style=linear-35', 'Style=linear-36', 'Style=linear-37',
+  'Style=linear-38', 'Style=linear-39', 'Style=linear-4', 'Style=linear-40',
+  'Style=linear-41', 'Style=linear-42', 'Style=linear-43', 'Style=linear-44',
+  'Style=linear-45', 'Style=linear-46', 'Style=linear-47', 'Style=linear-5',
+  'Style=linear-6', 'Style=linear-7', 'Style=linear-8', 'Style=linear-9',
+  'Style=outline', 'Style=outline-1', 'Style=outline-10', 'Style=outline-11',
+  'Style=outline-12', 'Style=outline-13', 'Style=outline-14', 'Style=outline-15',
+  'Style=outline-16', 'Style=outline-17', 'Style=outline-18', 'Style=outline-19',
+  'Style=outline-2', 'Style=outline-20', 'Style=outline-21', 'Style=outline-22',
+  'Style=outline-23', 'Style=outline-24', 'Style=outline-25', 'Style=outline-26',
+  'Style=outline-27', 'Style=outline-28', 'Style=outline-29', 'Style=outline-3',
+  'Style=outline-30', 'Style=outline-31', 'Style=outline-32', 'Style=outline-33',
+  'Style=outline-34', 'Style=outline-35', 'Style=outline-36', 'Style=outline-37',
+  'Style=outline-38', 'Style=outline-39', 'Style=outline-4', 'Style=outline-40',
+  'Style=outline-41', 'Style=outline-42', 'Style=outline-43', 'Style=outline-44',
+  'Style=outline-45', 'Style=outline-46', 'Style=outline-47', 'Style=outline-5',
+  'Style=outline-6', 'Style=outline-7', 'Style=outline-8', 'Style=outline-9',
+  'Style=twotone', 'Style=twotone-1', 'Style=twotone-10', 'Style=twotone-11',
+  'Style=twotone-12', 'Style=twotone-13', 'Style=twotone-14', 'Style=twotone-15',
+  'Style=twotone-16', 'Style=twotone-17', 'Style=twotone-18', 'Style=twotone-19',
+  'Style=twotone-2', 'Style=twotone-20', 'Style=twotone-21', 'Style=twotone-22',
+  'Style=twotone-23', 'Style=twotone-24', 'Style=twotone-25', 'Style=twotone-26',
+  'Style=twotone-27', 'Style=twotone-28', 'Style=twotone-29', 'Style=twotone-3',
+  'Style=twotone-30', 'Style=twotone-31', 'Style=twotone-32', 'Style=twotone-33',
+  'Style=twotone-34', 'Style=twotone-35', 'Style=twotone-36', 'Style=twotone-37',
+  'Style=twotone-38', 'Style=twotone-39', 'Style=twotone-4', 'Style=twotone-40',
+  'Style=twotone-41', 'Style=twotone-42', 'Style=twotone-43', 'Style=twotone-44',
+  'Style=twotone-45', 'Style=twotone-46', 'Style=twotone-5', 'Style=twotone-6',
+  'Style=twotone-7', 'Style=twotone-8', 'Style=twotone-9', 'access-point',
+  'access-point-off', 'antenna-bars-1', 'antenna-bars-2', 'antenna-bars-3',
+  'antenna-bars-4', 'antenna-bars-5', 'battery', 'battery-1',
+  'battery-2', 'battery-3', 'battery-4', 'battery-charging',
+  'battery-charging-2', 'battery-eco', 'battery-off', 'bluetooth',
+  'bluetooth-connected', 'bluetooth-off', 'broadcast', 'broadcast-off',
+  'browser', 'browser-check', 'browser-off', 'browser-plus',
+  'browser-x', 'cardboards', 'cardboards-off', 'cell-signal-1',
+  'cell-signal-2', 'cell-signal-3', 'cell-signal-4', 'cell-signal-5',
+  'cell-signal-off', 'cpu', 'cpu-2', 'cpu-off',
+  'device-airpods', 'device-airpods-case', 'device-analytics', 'device-audio-tape',
+  'device-camera-phone', 'device-cctv', 'device-cctv-off', 'device-computer-camera',
+  'device-computer-camera-off', 'device-desktop', 'device-desktop-analytics', 'device-desktop-bolt',
+  'device-desktop-cancel', 'device-desktop-check', 'device-desktop-code', 'device-desktop-cog',
+  'device-desktop-dollar', 'device-desktop-down', 'device-desktop-exclamation', 'device-desktop-heart',
+  'device-desktop-minus', 'device-desktop-off', 'device-desktop-pause', 'device-desktop-pin',
+  'device-desktop-plus', 'device-desktop-question', 'device-desktop-search', 'device-desktop-share',
+  'device-desktop-star', 'device-desktop-up', 'device-desktop-x', 'device-floppy',
+  'device-gamepad', 'device-gamepad-2', 'device-heart-monitor', 'device-imac',
+  'device-imac-bolt', 'device-imac-cancel', 'device-imac-check', 'device-imac-code',
+  'device-imac-cog', 'device-imac-dollar', 'device-imac-down', 'device-imac-exclamation',
+  'device-imac-heart', 'device-imac-minus', 'device-imac-off', 'device-imac-pause',
+  'device-imac-pin', 'device-imac-plus', 'device-imac-question', 'device-imac-search',
+  'device-imac-share', 'device-imac-star', 'device-imac-up', 'device-imac-x',
+  'device-ipad', 'device-ipad-bolt', 'device-ipad-cancel', 'device-ipad-check',
+  'device-ipad-code', 'device-ipad-cog', 'device-ipad-dollar', 'device-ipad-down',
+  'device-ipad-exclamation', 'device-ipad-heart', 'device-ipad-horizontal', 'device-ipad-horizontal-bolt',
+  'device-ipad-horizontal-cancel', 'device-ipad-horizontal-check', 'device-ipad-horizontal-code', 'device-ipad-horizontal-cog',
+  'device-ipad-horizontal-dollar', 'device-ipad-horizontal-down', 'device-ipad-horizontal-exclamation', 'device-ipad-horizontal-heart',
+  'device-ipad-horizontal-minus', 'device-ipad-horizontal-off', 'device-ipad-horizontal-pause', 'device-ipad-horizontal-pin',
+  'device-ipad-horizontal-plus', 'device-ipad-horizontal-question', 'device-ipad-horizontal-search', 'device-ipad-horizontal-share',
+  'device-ipad-horizontal-star', 'device-ipad-horizontal-up', 'device-ipad-horizontal-x', 'device-ipad-minus',
+  'device-ipad-off', 'device-ipad-pause', 'device-ipad-pin', 'device-ipad-plus',
+  'device-ipad-question', 'device-ipad-search', 'device-ipad-share', 'device-ipad-star',
+  'device-ipad-up', 'device-ipad-x', 'device-landline-phone', 'device-laptop',
+  'device-laptop-off', 'device-mobile', 'device-mobile-bolt', 'device-mobile-cancel',
+  'device-mobile-charging', 'device-mobile-check', 'device-mobile-code', 'device-mobile-cog',
+  'device-mobile-dollar', 'device-mobile-down', 'device-mobile-exclamation', 'device-mobile-heart',
+  'device-mobile-message', 'device-mobile-minus', 'device-mobile-off', 'device-mobile-pause',
+  'device-mobile-pin', 'device-mobile-plus', 'device-mobile-question', 'device-mobile-rotated',
+  'device-mobile-search', 'device-mobile-share', 'device-mobile-star', 'device-mobile-up',
+  'device-mobile-vibration', 'device-mobile-x', 'device-nintendo', 'device-nintendo-off',
+  'device-remote', 'device-sd-card', 'device-sim', 'device-sim-1',
+  'device-sim-2', 'device-sim-3', 'device-speaker', 'device-speaker-off',
+  'device-tablet', 'device-tablet-bolt', 'device-tablet-cancel', 'device-tablet-check',
+  'device-tablet-code', 'device-tablet-cog', 'device-tablet-dollar', 'device-tablet-down',
+  'device-tablet-exclamation', 'device-tablet-heart', 'device-tablet-minus', 'device-tablet-off',
+  'device-tablet-pause', 'device-tablet-pin', 'device-tablet-plus', 'device-tablet-question',
+  'device-tablet-search', 'device-tablet-share', 'device-tablet-star', 'device-tablet-up',
+  'device-tablet-x', 'device-tv', 'device-tv-off', 'device-tv-old',
+  'device-watch', 'device-watch-bolt', 'device-watch-cancel', 'device-watch-check',
+  'device-watch-code', 'device-watch-cog', 'device-watch-dollar', 'device-watch-down',
+  'device-watch-exclamation', 'device-watch-heart', 'device-watch-minus', 'device-watch-off',
+  'device-watch-pause', 'device-watch-pin', 'device-watch-plus', 'device-watch-question',
+  'device-watch-search', 'device-watch-share', 'device-watch-star', 'device-watch-stats',
+  'device-watch-stats-2', 'device-watch-up', 'device-watch-x', 'devices',
+  'devices-2', 'devices-bolt', 'devices-cancel', 'devices-check',
+  'devices-code', 'devices-cog', 'devices-dollar', 'devices-down',
+  'devices-exclamation', 'devices-heart', 'devices-minus', 'devices-off',
+  'devices-pause', 'devices-pc', 'devices-pc-off', 'devices-pin',
+  'devices-plus', 'devices-question', 'devices-search', 'devices-share',
+  'devices-star', 'devices-up', 'devices-x', 'disc',
+  'disc-off', 'dual-screen', 'fridge', 'fridge-off',
+  'keyboard', 'keyboard-hide', 'keyboard-off', 'keyboard-show',
+  'mouse', 'mouse-2', 'mouse-off', 'nfc',
+  'nfc-off', 'phone', 'phone-call', 'phone-calling',
+  'phone-check', 'phone-incoming', 'phone-off', 'phone-outgoing',
+  'phone-pause', 'phone-plus', 'phone-x', 'playstation-circle',
+  'playstation-square', 'playstation-triangle', 'playstation-x', 'plug',
+  'plug-connected', 'plug-connected-x', 'plug-off', 'plug-x',
+  'power', 'printer', 'printer-off', 'qrcode',
+  'qrcode-off', 'router', 'router-off', 'screen-share',
+  'screen-share-off', 'server', 'server-2', 'server-bolt',
+  'server-cog', 'server-off', 'shredder', 'signal-3g',
+  'signal-4g', 'signal-4g-plus', 'signal-5g', 'viewport-narrow',
+  'viewport-wide', 'vinyl', 'wash-machine', 'wifi',
+  'wifi-0', 'wifi-1', 'wifi-2', 'wifi-off',
+  'xbox-a', 'xbox-b', 'xbox-x', 'xbox-y'
 ];
 
 // Design icons – filenames: "Type=<name>, Theme=White.svg"
 const DESIGN_ICONS: string[] = [
-  'ad','ad-2','ad-off','angle','artboard','artboard-off','blur','blur-off',
-  'border-all','border-bottom','border-corners','border-horizontal','border-inner',
-  'border-left','border-none','border-outer','border-radius','border-right',
-  'border-sides','border-style','border-style-2','border-top','border-vertical',
-  'bounce-left','bounce-right','box-align-bottom','box-align-bottom-left',
-  'box-align-bottom-right','box-align-left','box-align-right','box-align-top',
-  'box-align-top-left','box-align-top-right','box-margin','box-model','box-model-2',
-  'box-model-2-off','box-model-off','box-padding','brush','brush-off','bucket',
-  'bucket-droplet','bucket-off','circle-half-2','color-filter','color-picker',
-  'color-picker-off','color-swatch','color-swatch-off','components','components-off',
-  'container','container-off','crop','cut','dimensions','drag-drop','drag-drop-2',
-  'droplet','droplet-filled-2','droplet-half','droplet-half-2','droplet-half-filled',
-  'droplet-off','ease-in','ease-in-control-point','ease-in-out','ease-in-out-control-points',
-  'ease-out','ease-out-control-point','edit','edit-circle','edit-circle-off','edit-off',
-  'flip-horizontal','flip-vertical','frame','frame-off','hierarchy','hierarchy-2',
-  'hierarchy-3','hierarchy-off','inner-shadow-bottom','inner-shadow-bottom-left',
-  'inner-shadow-bottom-right','inner-shadow-left','inner-shadow-right','inner-shadow-top',
-  'inner-shadow-top-left','inner-shadow-top-right','lasso','lasso-off','lasso-polygon',
-  'layers-difference','layers-intersect','layers-intersect-2','layers-linked',
-  'layers-subtract','layers-union','layout','layout-2','layout-align-bottom',
-  'layout-align-center','layout-align-left','layout-align-middle','layout-align-right',
-  'layout-align-top','layout-board','layout-board-split','layout-bottombar',
-  'layout-bottombar-collapse','layout-bottombar-expand','layout-cards','layout-collage',
-  'layout-columns','layout-dashboard','layout-distribute-horizontal','layout-distribute-vertical',
-  'layout-grid','layout-grid-add','layout-grid-remove','layout-kanban','layout-list',
-  'layout-navbar','layout-navbar-collapse','layout-navbar-expand','layout-off','layout-rows',
-  'layout-sidebar','layout-sidebar-left-collapse','layout-sidebar-left-expand',
-  'layout-sidebar-right','layout-sidebar-right-collapse','layout-sidebar-right-expand',
-  'line','mask','mask-off','paint','paint-off','palette','palette-off','pencil',
-  'pencil-minus','pencil-off','pencil-plus','polygon','polygon-off','resize',
-  'scissors','scissors-off','section','shape','shape-2','shape-3','shape-off','slice',
-  'square-half','square-toggle','square-toggle-horizontal','squares-diagonal',
-  'squares-filled','stack','stack-2','stack-3','stack-pop','stack-push','template',
-  'template-off','text-resize','tools','tools-off','ux-circle','vector','vector-bezier',
-  'vector-bezier-2','vector-bezier-arc','vector-bezier-circle','vector-off',
-  'vector-spline','vector-triangle','vector-triangle-off',
-  // New Design/Creative Icons (Simple .svg format)
-  'additem','backward-item-1','backward-item','bezier-1','bezier','blend-2',
-  'blend','blur-1','brush-1','brush-2','brush-3','bucket-circle-1',
-  'bucket-circle','bucket-square-1','bucket-square','colorfilter',
-  'colors-square-1','colors-square','component-1','component','copy-success',
-  'copy','designtools','eraser-1','eraser','flash-circle-1','flash-circle',
-  'forward-item-1','forward-item','glass','group-1','group-2','group-3',
-  'group','layer','lifebuoy','magicpen','main-component-1','main-component',
-  'mask-1','mask-2','mask-3','omega-circle-1','omega-circle','omega-square-1',
-  'omega-square','paintbucket','path-2','path-square','path','pen-add-1',
-  'pen-add','pen-close-1','pen-close','pen-remove-1','pen-remove','pen-tool-1',
-  'pen-tool-2-1','pen-tool-2','pen-tool','recovery-convert','ruler&pen',
-  'scissor-1','shapes-1','shapes-2','shapes','size'
+  'Style=bold', 'Style=bold, Property 2=grid-lock', 'Style=bold-1', 'Style=bold-10', 'Style=bold-11', 'Style=bold-12', 'Style=bold-13', 'Style=bold-14',
+  'Style=bold-15', 'Style=bold-16', 'Style=bold-17', 'Style=bold-18', 'Style=bold-19', 'Style=bold-2', 'Style=bold-20', 'Style=bold-21',
+  'Style=bold-22', 'Style=bold-23', 'Style=bold-24', 'Style=bold-25', 'Style=bold-26', 'Style=bold-27', 'Style=bold-28', 'Style=bold-29',
+  'Style=bold-3', 'Style=bold-30', 'Style=bold-31', 'Style=bold-32', 'Style=bold-33', 'Style=bold-34', 'Style=bold-35', 'Style=bold-36',
+  'Style=bold-37', 'Style=bold-38', 'Style=bold-39', 'Style=bold-4', 'Style=bold-40', 'Style=bold-41', 'Style=bold-42', 'Style=bold-43',
+  'Style=bold-5', 'Style=bold-6', 'Style=bold-7', 'Style=bold-8', 'Style=bold-9', 'Style=broken', 'Style=broken, Property 2=grid-lock', 'Style=broken-1',
+  'Style=broken-10', 'Style=broken-11', 'Style=broken-12', 'Style=broken-13', 'Style=broken-14', 'Style=broken-15', 'Style=broken-16', 'Style=broken-17',
+  'Style=broken-18', 'Style=broken-19', 'Style=broken-2', 'Style=broken-20', 'Style=broken-21', 'Style=broken-22', 'Style=broken-23', 'Style=broken-24',
+  'Style=broken-25', 'Style=broken-26', 'Style=broken-27', 'Style=broken-28', 'Style=broken-29', 'Style=broken-3', 'Style=broken-30', 'Style=broken-31',
+  'Style=broken-32', 'Style=broken-33', 'Style=broken-34', 'Style=broken-35', 'Style=broken-36', 'Style=broken-37', 'Style=broken-38', 'Style=broken-39',
+  'Style=broken-4', 'Style=broken-40', 'Style=broken-41', 'Style=broken-42', 'Style=broken-43', 'Style=broken-5', 'Style=broken-6', 'Style=broken-7',
+  'Style=broken-8', 'Style=broken-9', 'Style=bulk', 'Style=bulk, Property 2=grid-lock', 'Style=bulk-1', 'Style=bulk-10', 'Style=bulk-11', 'Style=bulk-12',
+  'Style=bulk-13', 'Style=bulk-14', 'Style=bulk-15', 'Style=bulk-16', 'Style=bulk-17', 'Style=bulk-18', 'Style=bulk-19', 'Style=bulk-2',
+  'Style=bulk-20', 'Style=bulk-21', 'Style=bulk-22', 'Style=bulk-23', 'Style=bulk-24', 'Style=bulk-25', 'Style=bulk-26', 'Style=bulk-27',
+  'Style=bulk-28', 'Style=bulk-29', 'Style=bulk-3', 'Style=bulk-30', 'Style=bulk-31', 'Style=bulk-32', 'Style=bulk-33', 'Style=bulk-34',
+  'Style=bulk-35', 'Style=bulk-36', 'Style=bulk-37', 'Style=bulk-38', 'Style=bulk-39', 'Style=bulk-4', 'Style=bulk-40', 'Style=bulk-41',
+  'Style=bulk-42', 'Style=bulk-43', 'Style=bulk-5', 'Style=bulk-6', 'Style=bulk-7', 'Style=bulk-8', 'Style=bulk-9', 'Style=linear',
+  'Style=linear, Property 2=grid-lock', 'Style=linear-1', 'Style=linear-10', 'Style=linear-11', 'Style=linear-12', 'Style=linear-13', 'Style=linear-14', 'Style=linear-15',
+  'Style=linear-16', 'Style=linear-17', 'Style=linear-18', 'Style=linear-19', 'Style=linear-2', 'Style=linear-20', 'Style=linear-21', 'Style=linear-22',
+  'Style=linear-23', 'Style=linear-24', 'Style=linear-25', 'Style=linear-26', 'Style=linear-27', 'Style=linear-28', 'Style=linear-29', 'Style=linear-3',
+  'Style=linear-30', 'Style=linear-31', 'Style=linear-32', 'Style=linear-33', 'Style=linear-34', 'Style=linear-35', 'Style=linear-36', 'Style=linear-37',
+  'Style=linear-38', 'Style=linear-39', 'Style=linear-4', 'Style=linear-40', 'Style=linear-41', 'Style=linear-42', 'Style=linear-43', 'Style=linear-5',
+  'Style=linear-6', 'Style=linear-7', 'Style=linear-8', 'Style=linear-9', 'Style=outline', 'Style=outline, Property 2=grid-lock', 'Style=outline-1', 'Style=outline-10',
+  'Style=outline-11', 'Style=outline-12', 'Style=outline-13', 'Style=outline-14', 'Style=outline-15', 'Style=outline-16', 'Style=outline-17', 'Style=outline-18',
+  'Style=outline-19', 'Style=outline-2', 'Style=outline-20', 'Style=outline-21', 'Style=outline-22', 'Style=outline-23', 'Style=outline-24', 'Style=outline-25',
+  'Style=outline-26', 'Style=outline-27', 'Style=outline-28', 'Style=outline-29', 'Style=outline-3', 'Style=outline-30', 'Style=outline-31', 'Style=outline-32',
+  'Style=outline-33', 'Style=outline-34', 'Style=outline-35', 'Style=outline-36', 'Style=outline-37', 'Style=outline-38', 'Style=outline-39', 'Style=outline-4',
+  'Style=outline-40', 'Style=outline-41', 'Style=outline-42', 'Style=outline-43', 'Style=outline-5', 'Style=outline-6', 'Style=outline-7', 'Style=outline-8',
+  'Style=outline-9', 'Style=twotone', 'Style=twotone, Property 2=grid-lock', 'Style=twotone-1', 'Style=twotone-10', 'Style=twotone-11', 'Style=twotone-12', 'Style=twotone-13',
+  'Style=twotone-14', 'Style=twotone-15', 'Style=twotone-16', 'Style=twotone-17', 'Style=twotone-18', 'Style=twotone-19', 'Style=twotone-2', 'Style=twotone-20',
+  'Style=twotone-21', 'Style=twotone-22', 'Style=twotone-23', 'Style=twotone-24', 'Style=twotone-25', 'Style=twotone-26', 'Style=twotone-27', 'Style=twotone-28',
+  'Style=twotone-29', 'Style=twotone-3', 'Style=twotone-30', 'Style=twotone-31', 'Style=twotone-32', 'Style=twotone-33', 'Style=twotone-34', 'Style=twotone-35',
+  'Style=twotone-36', 'Style=twotone-37', 'Style=twotone-38', 'Style=twotone-39', 'Style=twotone-4', 'Style=twotone-40', 'Style=twotone-41', 'Style=twotone-42',
+  'Style=twotone-43', 'Style=twotone-5', 'Style=twotone-6', 'Style=twotone-7', 'Style=twotone-8', 'Style=twotone-9', 'ad', 'ad-2',
+  'ad-off', 'additem', 'angle', 'artboard', 'artboard-off', 'backward-item', 'backward-item-1', 'bezier',
+  'bezier-1', 'blend', 'blend-2', 'blur', 'blur-1', 'blur-off', 'border-all', 'border-bottom',
+  'border-corners', 'border-horizontal', 'border-inner', 'border-left', 'border-none', 'border-outer', 'border-radius', 'border-right',
+  'border-sides', 'border-style', 'border-style-2', 'border-top', 'border-vertical', 'bounce-left', 'bounce-right', 'box-align-bottom',
+  'box-align-bottom-left', 'box-align-bottom-right', 'box-align-left', 'box-align-right', 'box-align-top', 'box-align-top-left', 'box-align-top-right', 'box-margin',
+  'box-model', 'box-model-2', 'box-model-2-off', 'box-model-off', 'box-padding', 'brush', 'brush-1', 'brush-2',
+  'brush-3', 'brush-off', 'bucket', 'bucket-circle', 'bucket-circle-1', 'bucket-droplet', 'bucket-off', 'bucket-square',
+  'bucket-square-1', 'circle-half-2', 'color-filter', 'color-picker', 'color-picker-off', 'color-swatch', 'color-swatch-off', 'colorfilter',
+  'colors-square', 'colors-square-1', 'component', 'component-1', 'components', 'components-off', 'container', 'container-off',
+  'copy', 'copy-success', 'crop', 'cut', 'designtools', 'dimensions', 'drag-drop', 'drag-drop-2',
+  'droplet', 'droplet-filled-2', 'droplet-half', 'droplet-half-2', 'droplet-half-filled', 'droplet-off', 'ease-in', 'ease-in-control-point',
+  'ease-in-out', 'ease-in-out-control-points', 'ease-out', 'ease-out-control-point', 'edit', 'edit-circle', 'edit-circle-off', 'edit-off',
+  'eraser', 'eraser-1', 'flash-circle', 'flash-circle-1', 'flip-horizontal', 'flip-vertical', 'forward-item', 'forward-item-1',
+  'frame', 'frame-off', 'glass', 'group', 'group-1', 'group-2', 'group-3', 'hierarchy',
+  'hierarchy-2', 'hierarchy-3', 'hierarchy-off', 'inner-shadow-bottom', 'inner-shadow-bottom-left', 'inner-shadow-bottom-right', 'inner-shadow-left', 'inner-shadow-right',
+  'inner-shadow-top', 'inner-shadow-top-left', 'inner-shadow-top-right', 'lasso', 'lasso-off', 'lasso-polygon', 'layer', 'layers-difference',
+  'layers-intersect', 'layers-intersect-2', 'layers-linked', 'layers-subtract', 'layers-union', 'layout', 'layout-2', 'layout-align-bottom',
+  'layout-align-center', 'layout-align-left', 'layout-align-middle', 'layout-align-right', 'layout-align-top', 'layout-board', 'layout-board-split', 'layout-bottombar',
+  'layout-bottombar-collapse', 'layout-bottombar-expand', 'layout-cards', 'layout-collage', 'layout-columns', 'layout-dashboard', 'layout-distribute-horizontal', 'layout-distribute-vertical',
+  'layout-grid', 'layout-grid-add', 'layout-grid-remove', 'layout-kanban', 'layout-list', 'layout-navbar', 'layout-navbar-collapse', 'layout-navbar-expand',
+  'layout-off', 'layout-rows', 'layout-sidebar', 'layout-sidebar-left-collapse', 'layout-sidebar-left-expand', 'layout-sidebar-right', 'layout-sidebar-right-collapse', 'layout-sidebar-right-expand',
+  'lifebuoy', 'line', 'magicpen', 'main-component', 'main-component-1', 'mask', 'mask-1', 'mask-2',
+  'mask-3', 'mask-off', 'omega-circle', 'omega-circle-1', 'omega-square', 'omega-square-1', 'paint', 'paint-off',
+  'paintbucket', 'palette', 'palette-off', 'path', 'path-2', 'path-square', 'pen-add', 'pen-add-1',
+  'pen-close', 'pen-close-1', 'pen-remove', 'pen-remove-1', 'pen-tool', 'pen-tool-1', 'pen-tool-2', 'pen-tool-2-1',
+  'pencil', 'pencil-minus', 'pencil-off', 'pencil-plus', 'polygon', 'polygon-off', 'recovery-convert', 'resize',
+  'ruler', 'ruler&pen', 'scissor', 'scissor-1', 'scissors', 'scissors-off', 'section', 'shape',
+  'shape-2', 'shape-3', 'shape-off', 'shapes', 'shapes-1', 'shapes-2', 'size', 'slice',
+  'square-half', 'square-toggle', 'square-toggle-horizontal', 'squares-diagonal', 'squares-filled', 'stack', 'stack-2', 'stack-3',
+  'stack-pop', 'stack-push', 'template', 'template-off', 'text-resize', 'tools', 'tools-off', 'ux-circle',
+  'vector', 'vector-bezier', 'vector-bezier-2', 'vector-bezier-arc', 'vector-bezier-circle', 'vector-off', 'vector-spline', 'vector-triangle',
+  'vector-triangle-off'
 ];
 
 // Documents icons – filenames: "Type=<name>, Theme=White.svg"
 const DOCUMENTS_ICONS: string[] = [
-  'archive','archive-off','book','book-2','book-download','book-off','book-upload',
-  'bookmark','bookmark-edit','bookmark-minus','bookmark-off','bookmark-plus',
-  'bookmark-question','bookmarks','bookmarks-off','books','books-off','certificate',
-  'certificate-2','certificate-2-off','certificate-off','chalkboard','chalkboard-off',
-  'clipboard','clipboard-check','clipboard-copy','clipboard-data','clipboard-heart',
-  'clipboard-list','clipboard-off','clipboard-plus','clipboard-text',
-  'clipboard-typography','clipboard-x','file','file-3d','file-alert','file-analytics',
-  'file-arrow-left','file-arrow-right','file-barcode','file-broken','file-certificate',
-  'file-chart','file-check','file-code','file-code-2','file-cv','file-database',
-  'file-delta','file-description','file-diff','file-digit','file-dislike','file-dollar',
-  'file-dots','file-download','file-euro','file-export','file-function',
-  'file-horizontal','file-import','file-infinity','file-info','file-invoice',
-  'file-lambda','file-like','file-minus','file-music','file-off','file-orientation',
-  'file-pencil','file-percent','file-phone','file-plus','file-power','file-report',
-  'file-rss','file-scissors','file-search','file-settings','file-shredder',
-  'file-signal','file-spreadsheet','file-stack','file-star','file-symlink',
-  'file-text','file-text-ai','file-time','file-typography','file-unknown',
-  'file-upload','file-vector','file-x','file-zip','files','files-off','folder',
-  'folder-minus','folder-off','folder-plus','folder-x','folders','folders-off',
-  'news','news-off','note','note-off','notebook','notebook-off','notes','notes-off',
-  'presentation','presentation-analytics','presentation-off','receipt','receipt-2',
-  'receipt-off','receipt-refund','receipt-tax','report','report-analytics',
-  'report-medical','report-money','report-off','report-search','rubber-stamp',
-  'rubber-stamp-off','script','script-minus','script-plus','script-x',
+  'Style=bold', 'Style=bold-1', 'Style=bold-2', 'Style=bold-3', 'Style=bold-4', 'Style=bold-5', 'Style=bold-6', 'Style=bold-7',
+  'Style=broken', 'Style=broken-1', 'Style=broken-2', 'Style=broken-3', 'Style=broken-4', 'Style=broken-5', 'Style=broken-6', 'Style=broken-7',
+  'Style=bulk', 'Style=bulk-1', 'Style=bulk-2', 'Style=bulk-3', 'Style=bulk-4', 'Style=bulk-5', 'Style=bulk-6', 'Style=bulk-7',
+  'Style=linear', 'Style=linear-1', 'Style=linear-2', 'Style=linear-3', 'Style=linear-4', 'Style=linear-5', 'Style=linear-6', 'Style=linear-7',
+  'Style=outline', 'Style=outline-1', 'Style=outline-2', 'Style=outline-3', 'Style=outline-4', 'Style=outline-5', 'Style=outline-6', 'Style=outline-7',
+  'Style=twotone', 'Style=twotone-1', 'Style=twotone-2', 'Style=twotone-3', 'Style=twotone-4', 'Style=twotone-5', 'Style=twotone-6', 'Style=twotone-7',
+  'archive', 'archive-off', 'book', 'book-2', 'book-download', 'book-off', 'book-upload', 'bookmark',
+  'bookmark-edit', 'bookmark-minus', 'bookmark-off', 'bookmark-plus', 'bookmark-question', 'bookmarks', 'bookmarks-off', 'books',
+  'books-off', 'certificate', 'certificate-2', 'certificate-2-off', 'certificate-off', 'chalkboard', 'chalkboard-off', 'clipboard',
+  'clipboard-check', 'clipboard-copy', 'clipboard-data', 'clipboard-heart', 'clipboard-list', 'clipboard-off', 'clipboard-plus', 'clipboard-text',
+  'clipboard-typography', 'clipboard-x', 'file', 'file-3d', 'file-alert', 'file-analytics', 'file-arrow-left', 'file-arrow-right',
+  'file-barcode', 'file-broken', 'file-certificate', 'file-chart', 'file-check', 'file-code', 'file-code-2', 'file-cv',
+  'file-database', 'file-delta', 'file-description', 'file-diff', 'file-digit', 'file-dislike', 'file-dollar', 'file-dots',
+  'file-download', 'file-euro', 'file-export', 'file-function', 'file-horizontal', 'file-import', 'file-infinity', 'file-info',
+  'file-invoice', 'file-lambda', 'file-like', 'file-minus', 'file-music', 'file-off', 'file-orientation', 'file-pencil',
+  'file-percent', 'file-phone', 'file-plus', 'file-power', 'file-report', 'file-rss', 'file-scissors', 'file-search',
+  'file-settings', 'file-shredder', 'file-signal', 'file-spreadsheet', 'file-stack', 'file-star', 'file-symlink', 'file-text',
+  'file-text-ai', 'file-time', 'file-typography', 'file-unknown', 'file-upload', 'file-vector', 'file-x', 'file-zip',
+  'files', 'files-off', 'folder', 'folder-minus', 'folder-off', 'folder-plus', 'folder-x', 'folders',
+  'folders-off', 'news', 'news-off', 'note', 'note-off', 'notebook', 'notebook-off', 'notes',
+  'notes-off', 'presentation', 'presentation-analytics', 'presentation-off', 'receipt', 'receipt-2', 'receipt-off', 'receipt-refund',
+  'receipt-tax', 'report', 'report-analytics', 'report-medical', 'report-money', 'report-off', 'report-search', 'rubber-stamp',
+  'rubber-stamp-off', 'script', 'script-minus', 'script-plus', 'script-x'
 ];
 
 // System icons – filenames: "Type=<name>, Theme=White.svg"
@@ -1826,26 +1929,42 @@ const LETTERS_ICONS: string[] = [
 
 // Map icons – filenames: "Type=<name>, Theme=White.svg"
 const MAP_ICONS: string[] = [
-  'anchor','anchor-off','beach','beach-off','bed','bed-off','compass','compass-off',
-  'current-location','current-location-off','directions','directions-off','flag',
-  'flag-2','flag-2-off','flag-3','flag-off','gas-station-off','geometry','globe',
-  'globe-off','gps','live-view','location','location-broken','location-off','map',
-  'map-2','map-off','map-pin','map-pin-off','map-pins','medical-cross',
-  'medical-cross-off','navigation','navigation-off','north-star','parking',
-  'parking-off','pennant','pennant-2','pennant-off','pin','pinned','pinned-off',
-  'planet','planet-off','pokeball','pokeball-off','radar','radar-2','radar-off',
-  'road','road-off','road-sign','rocket','rocket-off','route','route-off',
-  'satellite','satellite-off','school','school-off','stairs','stairs-down',
-  'stairs-up','target','target-off','tent','tent-off','tools-kitchen','tools-kitchen-2',
-  'tools-kitchen-2-off','tools-kitchen-off','traffic-cone','traffic-cone-off',
-  'traffic-lights','traffic-lights-off','tree','trees','viewfinder','viewfinder-off',
-  'world','world-bolt','world-cancel','world-check','world-code','world-cog',
-  'world-dollar','world-down','world-download','world-exclamation','world-heart',
-  'world-latitude','world-longitude','world-minus','world-off','world-pause',
-  'world-pin','world-plus','world-question','world-search','world-share','world-star',
-  'world-up','world-upload','world-www','world-x','zoom-cancel','zoom-check',
-  'zoom-code','zoom-exclamation','zoom-in','zoom-in-area','zoom-money','zoom-out',
-  'zoom-out-area','zoom-pan','zoom-question','zoom-replace','zoom-reset',
+  'Style=bold', 'Style=bold-1', 'Style=bold-10', 'Style=bold-11', 'Style=bold-12', 'Style=bold-13', 'Style=bold-14', 'Style=bold-15',
+  'Style=bold-16', 'Style=bold-17', 'Style=bold-18', 'Style=bold-19', 'Style=bold-2', 'Style=bold-20', 'Style=bold-21', 'Style=bold-22',
+  'Style=bold-23', 'Style=bold-24', 'Style=bold-25', 'Style=bold-26', 'Style=bold-3', 'Style=bold-4', 'Style=bold-5', 'Style=bold-6',
+  'Style=bold-7', 'Style=bold-8', 'Style=bold-9', 'Style=broken', 'Style=broken-1', 'Style=broken-10', 'Style=broken-11', 'Style=broken-12',
+  'Style=broken-13', 'Style=broken-14', 'Style=broken-15', 'Style=broken-16', 'Style=broken-17', 'Style=broken-18', 'Style=broken-19', 'Style=broken-2',
+  'Style=broken-20', 'Style=broken-21', 'Style=broken-22', 'Style=broken-23', 'Style=broken-24', 'Style=broken-25', 'Style=broken-26', 'Style=broken-3',
+  'Style=broken-4', 'Style=broken-5', 'Style=broken-6', 'Style=broken-7', 'Style=broken-8', 'Style=broken-9', 'Style=bulk', 'Style=bulk-1',
+  'Style=bulk-10', 'Style=bulk-11', 'Style=bulk-12', 'Style=bulk-13', 'Style=bulk-14', 'Style=bulk-15', 'Style=bulk-16', 'Style=bulk-17',
+  'Style=bulk-18', 'Style=bulk-19', 'Style=bulk-2', 'Style=bulk-20', 'Style=bulk-21', 'Style=bulk-22', 'Style=bulk-23', 'Style=bulk-24',
+  'Style=bulk-25', 'Style=bulk-26', 'Style=bulk-3', 'Style=bulk-4', 'Style=bulk-5', 'Style=bulk-6', 'Style=bulk-7', 'Style=bulk-8',
+  'Style=bulk-9', 'Style=linear', 'Style=linear-1', 'Style=linear-10', 'Style=linear-11', 'Style=linear-12', 'Style=linear-13', 'Style=linear-14',
+  'Style=linear-15', 'Style=linear-16', 'Style=linear-17', 'Style=linear-18', 'Style=linear-19', 'Style=linear-2', 'Style=linear-20', 'Style=linear-21',
+  'Style=linear-22', 'Style=linear-23', 'Style=linear-24', 'Style=linear-25', 'Style=linear-26', 'Style=linear-3', 'Style=linear-4', 'Style=linear-5',
+  'Style=linear-6', 'Style=linear-7', 'Style=linear-8', 'Style=linear-9', 'Style=outline', 'Style=outline-1', 'Style=outline-10', 'Style=outline-11',
+  'Style=outline-12', 'Style=outline-13', 'Style=outline-14', 'Style=outline-15', 'Style=outline-16', 'Style=outline-17', 'Style=outline-18', 'Style=outline-19',
+  'Style=outline-2', 'Style=outline-20', 'Style=outline-21', 'Style=outline-22', 'Style=outline-23', 'Style=outline-24', 'Style=outline-25', 'Style=outline-26',
+  'Style=outline-3', 'Style=outline-4', 'Style=outline-5', 'Style=outline-6', 'Style=outline-7', 'Style=outline-8', 'Style=outline-9', 'Style=twotone',
+  'Style=twotone-1', 'Style=twotone-10', 'Style=twotone-11', 'Style=twotone-12', 'Style=twotone-13', 'Style=twotone-14', 'Style=twotone-15', 'Style=twotone-16',
+  'Style=twotone-17', 'Style=twotone-18', 'Style=twotone-19', 'Style=twotone-2', 'Style=twotone-20', 'Style=twotone-21', 'Style=twotone-22', 'Style=twotone-23',
+  'Style=twotone-24', 'Style=twotone-25', 'Style=twotone-26', 'Style=twotone-3', 'Style=twotone-4', 'Style=twotone-5', 'Style=twotone-6', 'Style=twotone-7',
+  'Style=twotone-8', 'Style=twotone-9', 'anchor', 'anchor-off', 'beach', 'beach-off', 'bed', 'bed-off',
+  'compass', 'compass-off', 'current-location', 'current-location-off', 'directions', 'directions-off', 'flag', 'flag-2',
+  'flag-2-off', 'flag-3', 'flag-off', 'gas-station-off', 'geometry', 'globe', 'globe-off', 'gps',
+  'live-view', 'location', 'location-broken', 'location-off', 'map', 'map-2', 'map-off', 'map-pin',
+  'map-pin-off', 'map-pins', 'medical-cross', 'medical-cross-off', 'navigation', 'navigation-off', 'north-star', 'parking',
+  'parking-off', 'pennant', 'pennant-2', 'pennant-off', 'pin', 'pinned', 'pinned-off', 'planet',
+  'planet-off', 'pokeball', 'pokeball-off', 'radar', 'radar-2', 'radar-off', 'road', 'road-off',
+  'road-sign', 'rocket', 'rocket-off', 'route', 'route-off', 'satellite', 'satellite-off', 'school',
+  'school-off', 'stairs', 'stairs-down', 'stairs-up', 'target', 'target-off', 'tent', 'tent-off',
+  'tools-kitchen', 'tools-kitchen-2', 'tools-kitchen-2-off', 'tools-kitchen-off', 'traffic-cone', 'traffic-cone-off', 'traffic-lights', 'traffic-lights-off',
+  'tree', 'trees', 'viewfinder', 'viewfinder-off', 'world', 'world-bolt', 'world-cancel', 'world-check',
+  'world-code', 'world-cog', 'world-dollar', 'world-down', 'world-download', 'world-exclamation', 'world-heart', 'world-latitude',
+  'world-longitude', 'world-minus', 'world-off', 'world-pause', 'world-pin', 'world-plus', 'world-question', 'world-search',
+  'world-share', 'world-star', 'world-up', 'world-upload', 'world-www', 'world-x', 'zoom-cancel', 'zoom-check',
+  'zoom-code', 'zoom-exclamation', 'zoom-in', 'zoom-in-area', 'zoom-money', 'zoom-out', 'zoom-out-area', 'zoom-pan',
+  'zoom-question', 'zoom-replace', 'zoom-reset'
 ];
 
 // Text icons – filenames: "Type=<name>, Theme=White.svg"
@@ -2076,19 +2195,22 @@ const MEDIA_ICONS: string[] = [
 
 // Vehicles icons – filenames: "Type=<name>, Theme=White.svg"
 const VEHICLES_ICONS: string[] = [
-  'aerial-lift','air-balloon','ambulance','backhoe','battery-automotive',
-  'bike','bike-off','bulldozer','bus','bus-off','bus-stop','camper','car',
-  'car-crane','car-crash','car-off','car-turbine','caravan','charging-pile',
-  'crane','crane-off','drone','drone-off','engine','engine-off','firetruck',
-  'forklift','garden-cart','garden-cart-off','gas-station','helicopter',
-  'helicopter-landing','moped','motorbike','parachute','parachute-off',
-  'plane','plane-arrival','plane-departure','plane-inflight','plane-off',
-  'plane-tilt','rollercoaster','rollercoaster-off','sailboat','sailboat-2',
-  'sailboat-off','scooter','scooter-electric','ship','ship-off','skateboard',
-  'skateboard-off','sleigh','speedboat','steering-wheel','steering-wheel-off',
-  'submarine','tank','tir','track','tractor','train','trolley','truck',
-  'truck-off','wheelchair','wheelchair-off','wiper','wiper-wash','wrecking-ball',
-  'zeppelin','zeppelin-off',
+  'Style=bold', 'Style=bold-1', 'Style=bold-2', 'Style=bold-3', 'Style=bold-4', 'Style=bold-5', 'Style=bold-6', 'Style=bold-7',
+  'Style=broken', 'Style=broken-1', 'Style=broken-2', 'Style=broken-3', 'Style=broken-4', 'Style=broken-5', 'Style=broken-6', 'Style=broken-7',
+  'Style=bulk', 'Style=bulk-1', 'Style=bulk-2', 'Style=bulk-3', 'Style=bulk-4', 'Style=bulk-5', 'Style=bulk-6', 'Style=bulk-7',
+  'Style=linear', 'Style=linear-1', 'Style=linear-2', 'Style=linear-3', 'Style=linear-4', 'Style=linear-5', 'Style=linear-6', 'Style=linear-7',
+  'Style=outline', 'Style=outline-1', 'Style=outline-2', 'Style=outline-3', 'Style=outline-4', 'Style=outline-5', 'Style=outline-6', 'Style=outline-7',
+  'Style=twotone', 'Style=twotone-1', 'Style=twotone-2', 'Style=twotone-3', 'Style=twotone-4', 'Style=twotone-5', 'Style=twotone-6', 'Style=twotone-7',
+  'aerial-lift', 'air-balloon', 'ambulance', 'backhoe', 'battery-automotive', 'bike', 'bike-off', 'bulldozer',
+  'bus', 'bus-off', 'bus-stop', 'camper', 'car', 'car-crane', 'car-crash', 'car-off',
+  'car-turbine', 'caravan', 'charging-pile', 'crane', 'crane-off', 'drone', 'drone-off', 'engine',
+  'engine-off', 'firetruck', 'forklift', 'garden-cart', 'garden-cart-off', 'gas-station', 'helicopter', 'helicopter-landing',
+  'moped', 'motorbike', 'parachute', 'parachute-off', 'plane', 'plane-arrival', 'plane-departure', 'plane-inflight',
+  'plane-off', 'plane-tilt', 'rollercoaster', 'rollercoaster-off', 'sailboat', 'sailboat-2', 'sailboat-off', 'scooter',
+  'scooter-electric', 'ship', 'ship-off', 'skateboard', 'skateboard-off', 'sleigh', 'speedboat', 'steering-wheel',
+  'steering-wheel-off', 'submarine', 'tank', 'tir', 'track', 'tractor', 'train', 'trolley',
+  'truck', 'truck-off', 'wheelchair', 'wheelchair-off', 'wiper', 'wiper-wash', 'wrecking-ball', 'zeppelin',
+  'zeppelin-off'
 ];
 
 // Numbers icons – filenames: "Type=<name>, Theme=White.svg"
@@ -2337,13 +2459,21 @@ const FOOD_ICONS: string[] = [
 
 // E-commerce icons – filenames: "Type=<name>, Theme=White.svg"
 const ECOMMERCE_ICONS: string[] = [
-  'basket','basket-off','cash','cash-banknote','cash-banknote-off','cash-off',
-  'coin','coin-bitcoin','coin-euro','coin-monero','coin-off','coin-pound',
-  'coin-rupee','coin-yen','coin-yuan','discount','discount-2','discount-2-off',
-  'discount-off','package','package-off','shopping-bag','shopping-cart',
-  'shopping-cart-discount','shopping-cart-off','shopping-cart-plus',
-  'shopping-cart-x','tag','tag-off','tags','tags-off','transfer-in',
-  'transfer-out','truck-delivery','truck-loading','truck-return',
+  'Style=bold', 'Style=bold-1', 'Style=bold-10', 'Style=bold-11', 'Style=bold-12', 'Style=bold-13', 'Style=bold-2', 'Style=bold-3',
+  'Style=bold-4', 'Style=bold-5', 'Style=bold-6', 'Style=bold-7', 'Style=bold-8', 'Style=bold-9', 'Style=broken', 'Style=broken-1',
+  'Style=broken-10', 'Style=broken-11', 'Style=broken-12', 'Style=broken-13', 'Style=broken-2', 'Style=broken-3', 'Style=broken-4', 'Style=broken-5',
+  'Style=broken-6', 'Style=broken-7', 'Style=broken-8', 'Style=broken-9', 'Style=bulk', 'Style=bulk-1', 'Style=bulk-10', 'Style=bulk-11',
+  'Style=bulk-12', 'Style=bulk-13', 'Style=bulk-2', 'Style=bulk-3', 'Style=bulk-4', 'Style=bulk-5', 'Style=bulk-6', 'Style=bulk-7',
+  'Style=bulk-8', 'Style=bulk-9', 'Style=linear', 'Style=linear-1', 'Style=linear-10', 'Style=linear-11', 'Style=linear-12', 'Style=linear-13',
+  'Style=linear-2', 'Style=linear-3', 'Style=linear-4', 'Style=linear-5', 'Style=linear-6', 'Style=linear-7', 'Style=linear-8', 'Style=linear-9',
+  'Style=outline', 'Style=outline-1', 'Style=outline-10', 'Style=outline-11', 'Style=outline-12', 'Style=outline-13', 'Style=outline-2', 'Style=outline-3',
+  'Style=outline-4', 'Style=outline-5', 'Style=outline-6', 'Style=outline-7', 'Style=outline-8', 'Style=outline-9', 'Style=twotone', 'Style=twotone-1',
+  'Style=twotone-10', 'Style=twotone-11', 'Style=twotone-12', 'Style=twotone-13', 'Style=twotone-2', 'Style=twotone-3', 'Style=twotone-4', 'Style=twotone-5',
+  'Style=twotone-6', 'Style=twotone-7', 'Style=twotone-8', 'Style=twotone-9', 'basket', 'basket-off', 'cash', 'cash-banknote',
+  'cash-banknote-off', 'cash-off', 'coin', 'coin-bitcoin', 'coin-euro', 'coin-monero', 'coin-off', 'coin-pound',
+  'coin-rupee', 'coin-yen', 'coin-yuan', 'discount', 'discount-2', 'discount-2-off', 'discount-off', 'package',
+  'package-off', 'shopping-bag', 'shopping-cart', 'shopping-cart-discount', 'shopping-cart-off', 'shopping-cart-plus', 'shopping-cart-x', 'tag',
+  'tag-off', 'tags', 'tags-off', 'transfer-in', 'transfer-out', 'truck-delivery', 'truck-loading', 'truck-return'
 ];
 
 // Non-categorized icons – filenames: "Type=<name>, Theme=White.svg"
@@ -2495,6 +2625,17 @@ const NON_CATEGORIZED_ICONS: string[] = [
   'wallet-off','wallpaper','wallpaper-off','wand','wand-off','wave-saw-tool',
   'wave-sine','wave-square','webhook','webhook-off','weight','whirl','windmill',
   'windmill-off','window','window-off','windsock','woman','wood','x','zzz',
+];
+
+const SEARCH_ICONS: string[] = [
+  'Style=bold', 'Style=bold-1', 'Style=bold-2', 'Style=bold-3', 'Style=bold-4', 'Style=bold-5', 'Style=bold-6', 'Style=bold-7',
+  'Style=bold-8', 'Style=bold-9', 'Style=broken', 'Style=broken-1', 'Style=broken-2', 'Style=broken-3', 'Style=broken-4', 'Style=broken-5',
+  'Style=broken-6', 'Style=broken-7', 'Style=broken-8', 'Style=broken-9', 'Style=bulk', 'Style=bulk-1', 'Style=bulk-2', 'Style=bulk-3',
+  'Style=bulk-4', 'Style=bulk-5', 'Style=bulk-6', 'Style=bulk-7', 'Style=bulk-8', 'Style=bulk-9', 'Style=linear', 'Style=linear-1',
+  'Style=linear-2', 'Style=linear-3', 'Style=linear-4', 'Style=linear-5', 'Style=linear-6', 'Style=linear-7', 'Style=linear-8', 'Style=linear-9',
+  'Style=outline', 'Style=outline-1', 'Style=outline-2', 'Style=outline-3', 'Style=outline-4', 'Style=outline-5', 'Style=outline-6', 'Style=outline-7',
+  'Style=outline-8', 'Style=outline-9', 'Style=twotone', 'Style=twotone-1', 'Style=twotone-2', 'Style=twotone-3', 'Style=twotone-4', 'Style=twotone-5',
+  'Style=twotone-6', 'Style=twotone-7', 'Style=twotone-8', 'Style=twotone-9'
 ];
 
 // Mood icons – filenames: "Type=<name>, Theme=White.svg"
@@ -2808,18 +2949,70 @@ const ESSENTIAL_ICONS: string[] = [
   'Style=twotone-98', 'Style=twotone-99'
 ];
 
+// Tools icons – filenames: "<name>.svg"
+const TOOLS_ICONS: string[] = [
+  'Style=bold', 'Style=bold-1', 'Style=bold-10', 'Style=bold-11', 'Style=bold-12', 'Style=bold-13', 'Style=bold-14', 'Style=bold-15',
+  'Style=bold-16', 'Style=bold-17', 'Style=bold-18', 'Style=bold-19', 'Style=bold-2', 'Style=bold-20', 'Style=bold-21', 'Style=bold-22',
+  'Style=bold-23', 'Style=bold-24', 'Style=bold-25', 'Style=bold-26', 'Style=bold-27', 'Style=bold-28', 'Style=bold-29', 'Style=bold-3',
+  'Style=bold-30', 'Style=bold-31', 'Style=bold-32', 'Style=bold-33', 'Style=bold-34', 'Style=bold-35', 'Style=bold-36', 'Style=bold-37',
+  'Style=bold-38', 'Style=bold-39', 'Style=bold-4', 'Style=bold-40', 'Style=bold-41', 'Style=bold-42', 'Style=bold-43', 'Style=bold-44',
+  'Style=bold-45', 'Style=bold-46', 'Style=bold-47', 'Style=bold-48', 'Style=bold-49', 'Style=bold-5', 'Style=bold-6', 'Style=bold-7',
+  'Style=bold-8', 'Style=bold-9', 'Style=broken', 'Style=broken-1', 'Style=broken-10', 'Style=broken-11', 'Style=broken-12', 'Style=broken-13',
+  'Style=broken-14', 'Style=broken-15', 'Style=broken-16', 'Style=broken-17', 'Style=broken-18', 'Style=broken-19', 'Style=broken-2', 'Style=broken-20',
+  'Style=broken-21', 'Style=broken-22', 'Style=broken-23', 'Style=broken-24', 'Style=broken-25', 'Style=broken-26', 'Style=broken-27', 'Style=broken-28',
+  'Style=broken-29', 'Style=broken-3', 'Style=broken-30', 'Style=broken-31', 'Style=broken-32', 'Style=broken-33', 'Style=broken-34', 'Style=broken-35',
+  'Style=broken-36', 'Style=broken-37', 'Style=broken-38', 'Style=broken-39', 'Style=broken-4', 'Style=broken-40', 'Style=broken-41', 'Style=broken-42',
+  'Style=broken-43', 'Style=broken-44', 'Style=broken-45', 'Style=broken-46', 'Style=broken-47', 'Style=broken-48', 'Style=broken-49', 'Style=broken-5',
+  'Style=broken-6', 'Style=broken-7', 'Style=broken-8', 'Style=broken-9', 'Style=bulk', 'Style=bulk-1', 'Style=bulk-10', 'Style=bulk-11',
+  'Style=bulk-12', 'Style=bulk-13', 'Style=bulk-14', 'Style=bulk-15', 'Style=bulk-16', 'Style=bulk-17', 'Style=bulk-18', 'Style=bulk-19',
+  'Style=bulk-2', 'Style=bulk-20', 'Style=bulk-21', 'Style=bulk-22', 'Style=bulk-23', 'Style=bulk-24', 'Style=bulk-25', 'Style=bulk-26',
+  'Style=bulk-27', 'Style=bulk-28', 'Style=bulk-29', 'Style=bulk-3', 'Style=bulk-30', 'Style=bulk-31', 'Style=bulk-32', 'Style=bulk-33',
+  'Style=bulk-34', 'Style=bulk-35', 'Style=bulk-36', 'Style=bulk-37', 'Style=bulk-38', 'Style=bulk-39', 'Style=bulk-4', 'Style=bulk-40',
+  'Style=bulk-41', 'Style=bulk-42', 'Style=bulk-43', 'Style=bulk-44', 'Style=bulk-45', 'Style=bulk-46', 'Style=bulk-47', 'Style=bulk-48',
+  'Style=bulk-49', 'Style=bulk-5', 'Style=bulk-6', 'Style=bulk-7', 'Style=bulk-8', 'Style=bulk-9', 'Style=linear', 'Style=linear-1',
+  'Style=linear-10', 'Style=linear-11', 'Style=linear-12', 'Style=linear-13', 'Style=linear-14', 'Style=linear-15', 'Style=linear-16', 'Style=linear-17',
+  'Style=linear-18', 'Style=linear-19', 'Style=linear-2', 'Style=linear-20', 'Style=linear-21', 'Style=linear-22', 'Style=linear-23', 'Style=linear-24',
+  'Style=linear-25', 'Style=linear-26', 'Style=linear-27', 'Style=linear-28', 'Style=linear-29', 'Style=linear-3', 'Style=linear-30', 'Style=linear-31',
+  'Style=linear-32', 'Style=linear-33', 'Style=linear-34', 'Style=linear-35', 'Style=linear-36', 'Style=linear-37', 'Style=linear-38', 'Style=linear-39',
+  'Style=linear-4', 'Style=linear-40', 'Style=linear-41', 'Style=linear-42', 'Style=linear-43', 'Style=linear-44', 'Style=linear-45', 'Style=linear-46',
+  'Style=linear-47', 'Style=linear-48', 'Style=linear-49', 'Style=linear-5', 'Style=linear-6', 'Style=linear-7', 'Style=linear-8', 'Style=linear-9',
+  'Style=outline', 'Style=outline-1', 'Style=outline-10', 'Style=outline-11', 'Style=outline-12', 'Style=outline-13', 'Style=outline-14', 'Style=outline-15',
+  'Style=outline-16', 'Style=outline-17', 'Style=outline-18', 'Style=outline-19', 'Style=outline-2', 'Style=outline-20', 'Style=outline-21', 'Style=outline-22',
+  'Style=outline-23', 'Style=outline-24', 'Style=outline-25', 'Style=outline-26', 'Style=outline-27', 'Style=outline-28', 'Style=outline-29', 'Style=outline-3',
+  'Style=outline-30', 'Style=outline-31', 'Style=outline-32', 'Style=outline-33', 'Style=outline-34', 'Style=outline-35', 'Style=outline-36', 'Style=outline-37',
+  'Style=outline-38', 'Style=outline-39', 'Style=outline-4', 'Style=outline-40', 'Style=outline-41', 'Style=outline-42', 'Style=outline-43', 'Style=outline-44',
+  'Style=outline-45', 'Style=outline-46', 'Style=outline-47', 'Style=outline-48', 'Style=outline-49', 'Style=outline-5', 'Style=outline-6', 'Style=outline-7',
+  'Style=outline-8', 'Style=outline-9', 'Style=twotone', 'Style=twotone-1', 'Style=twotone-10', 'Style=twotone-11', 'Style=twotone-12', 'Style=twotone-13',
+  'Style=twotone-14', 'Style=twotone-15', 'Style=twotone-16', 'Style=twotone-17', 'Style=twotone-18', 'Style=twotone-19', 'Style=twotone-2', 'Style=twotone-20',
+  'Style=twotone-21', 'Style=twotone-22', 'Style=twotone-23', 'Style=twotone-24', 'Style=twotone-25', 'Style=twotone-26', 'Style=twotone-27', 'Style=twotone-28',
+  'Style=twotone-29', 'Style=twotone-3', 'Style=twotone-30', 'Style=twotone-31', 'Style=twotone-32', 'Style=twotone-33', 'Style=twotone-34', 'Style=twotone-35',
+  'Style=twotone-36', 'Style=twotone-37', 'Style=twotone-38', 'Style=twotone-39', 'Style=twotone-4', 'Style=twotone-40', 'Style=twotone-41', 'Style=twotone-42',
+  'Style=twotone-43', 'Style=twotone-44', 'Style=twotone-45', 'Style=twotone-46', 'Style=twotone-47', 'Style=twotone-48', 'Style=twotone-49', 'Style=twotone-5',
+  'Style=twotone-6', 'Style=twotone-7', 'Style=twotone-8', 'Style=twotone-9'
+];
+
 // Weather icons – filenames: "Type=<name>, Theme=White.svg"
 const WEATHER_ICONS: string[] = [
-  'cloud','cloud-fog','cloud-off','cloud-rain','cloud-snow','cloud-storm',
-  'comet','flare','haze','mist','mist-off','moon','moon-2','moon-off',
-  'moon-stars','rainbow','rainbow-off','snowflake','snowflake-off','sun',
-  'sun-high','sun-low','sun-moon','sun-off','sun-wind','sunrise','sunset',
-  'sunset-2','temperature','temperature-celsius','temperature-fahrenheit',
-  'temperature-minus','temperature-off','temperature-plus','tornado',
-  'uv-index','wind','wind-off',
-  // New Weather Icons (Simple .svg format)
-  'cloud-cross','cloud-drizzle','cloud-lightning','cloud-minus','cloud-notif',
-  'cloud-plus','cloud-sunny','drop','flash','sun-1','sun-fog','wind-2',
+  'Style=bold', 'Style=bold-1', 'Style=bold-10', 'Style=bold-11', 'Style=bold-12', 'Style=bold-13', 'Style=bold-14', 'Style=bold-15',
+  'Style=bold-16', 'Style=bold-17', 'Style=bold-2', 'Style=bold-3', 'Style=bold-4', 'Style=bold-5', 'Style=bold-6', 'Style=bold-7',
+  'Style=bold-8', 'Style=bold-9', 'Style=broken', 'Style=broken-1', 'Style=broken-10', 'Style=broken-11', 'Style=broken-12', 'Style=broken-13',
+  'Style=broken-14', 'Style=broken-15', 'Style=broken-16', 'Style=broken-17', 'Style=broken-2', 'Style=broken-3', 'Style=broken-4', 'Style=broken-5',
+  'Style=broken-6', 'Style=broken-7', 'Style=broken-8', 'Style=broken-9', 'Style=bulk', 'Style=bulk-1', 'Style=bulk-10', 'Style=bulk-11',
+  'Style=bulk-12', 'Style=bulk-13', 'Style=bulk-14', 'Style=bulk-15', 'Style=bulk-16', 'Style=bulk-17', 'Style=bulk-2', 'Style=bulk-3',
+  'Style=bulk-4', 'Style=bulk-5', 'Style=bulk-6', 'Style=bulk-7', 'Style=bulk-8', 'Style=bulk-9', 'Style=linear', 'Style=linear-1',
+  'Style=linear-10', 'Style=linear-11', 'Style=linear-12', 'Style=linear-13', 'Style=linear-14', 'Style=linear-15', 'Style=linear-16', 'Style=linear-17',
+  'Style=linear-2', 'Style=linear-3', 'Style=linear-4', 'Style=linear-5', 'Style=linear-6', 'Style=linear-7', 'Style=linear-8', 'Style=linear-9',
+  'Style=outline', 'Style=outline-1', 'Style=outline-10', 'Style=outline-11', 'Style=outline-12', 'Style=outline-13', 'Style=outline-14', 'Style=outline-15',
+  'Style=outline-16', 'Style=outline-17', 'Style=outline-2', 'Style=outline-3', 'Style=outline-4', 'Style=outline-5', 'Style=outline-6', 'Style=outline-7',
+  'Style=outline-8', 'Style=outline-9', 'Style=twotone', 'Style=twotone-1', 'Style=twotone-10', 'Style=twotone-11', 'Style=twotone-12', 'Style=twotone-13',
+  'Style=twotone-14', 'Style=twotone-15', 'Style=twotone-16', 'Style=twotone-17', 'Style=twotone-2', 'Style=twotone-3', 'Style=twotone-4', 'Style=twotone-5',
+  'Style=twotone-6', 'Style=twotone-7', 'Style=twotone-8', 'Style=twotone-9', 'cloud', 'cloud-cross', 'cloud-drizzle', 'cloud-fog',
+  'cloud-lightning', 'cloud-minus', 'cloud-notif', 'cloud-off', 'cloud-plus', 'cloud-rain', 'cloud-snow', 'cloud-storm',
+  'cloud-sunny', 'comet', 'drop', 'flare', 'flash', 'haze', 'mist', 'mist-off',
+  'moon', 'moon-2', 'moon-off', 'moon-stars', 'rainbow', 'rainbow-off', 'snowflake', 'snowflake-off',
+  'sun', 'sun-1', 'sun-fog', 'sun-high', 'sun-low', 'sun-moon', 'sun-off', 'sun-wind',
+  'sunrise', 'sunset', 'sunset-2', 'temperature', 'temperature-celsius', 'temperature-fahrenheit', 'temperature-minus', 'temperature-off',
+  'temperature-plus', 'tornado', 'uv-index', 'wind', 'wind-2', 'wind-off'
 ];
 
 interface Category {
@@ -2878,51 +3071,122 @@ const arrowPathFn = (name: string, _variant?: string) => {
   return `/Assets/Arrow Icons/${name}.svg`;
 };
 
-// Building icons use: "Type=<name>, Theme=White.svg"
-const buildingPathFn = (name: string, _variant?: string) =>
-  `/Assets/Building Icons/Type=${name}, Theme=White.svg`;
+// Building icons use: "Type=<name>, Theme=White.svg" for legacy ones, or simple "<name>.svg" for new ones
+const buildingLegacySet = new Set([
+  'building', 'building-arch', 'building-bank', 'building-bridge', 'building-bridge-2', 'building-broadcast-tower', 'building-carousel', 'building-castle',
+  'building-church', 'building-circus', 'building-community', 'building-cottage', 'building-estate', 'building-factory', 'building-factory-2', 'building-fortress',
+  'building-hospital', 'building-lighthouse', 'building-monument', 'building-mosque', 'building-pavilion', 'building-skyscraper', 'building-stadium', 'building-store',
+  'building-tunnel', 'building-warehouse', 'building-wind-turbine', 'fence', 'fence-off', 'home', 'home-2', 'home-bolt',
+  'home-cancel', 'home-check', 'home-cog', 'home-dollar', 'home-dot', 'home-down', 'home-eco', 'home-edit',
+  'home-exclamation', 'home-heart', 'home-link', 'home-minus', 'home-move', 'home-off', 'home-plus', 'home-question',
+  'home-ribbon', 'home-search', 'home-share', 'home-shield', 'home-signal', 'home-star', 'home-stats', 'home-up',
+  'home-x', 'smart-home', 'smart-home-off', 'tower', 'tower-off'
+]);
 
-// Device icons use: "Type=White, Theme=<name>.svg"
-const devicePathFn = (name: string, _variant?: string) =>
-  `/Assets/Device Icons/Type=White, Theme=${name}.svg`;
+const buildingPathFn = (name: string, _variant?: string) => {
+  if (buildingLegacySet.has(name)) {
+    return `/Assets/Building Icons/Type=${name}, Theme=White.svg`;
+  }
+  return `/Assets/Building Icons/${name}.svg`;
+};
+
+// Device icons use: "Type=White, Theme=<name>.svg" for legacy ones, or simple "<name>.svg" for new ones
+const deviceLegacySet = new Set([
+  'access-point', 'access-point-off', 'antenna-bars-1', 'antenna-bars-2', 'antenna-bars-3',
+  'antenna-bars-4', 'antenna-bars-5', 'battery', 'battery-1', 'battery-2',
+  'battery-3', 'battery-4', 'battery-charging', 'battery-charging-2', 'battery-eco',
+  'battery-off', 'bluetooth', 'bluetooth-connected', 'bluetooth-off', 'broadcast',
+  'broadcast-off', 'browser', 'browser-check', 'browser-off', 'browser-plus',
+  'browser-x', 'cardboards', 'cardboards-off', 'cell-signal-1', 'cell-signal-2',
+  'cell-signal-3', 'cell-signal-4', 'cell-signal-5', 'cell-signal-off', 'cpu',
+  'cpu-2', 'cpu-off', 'device-airpods', 'device-airpods-case', 'device-analytics',
+  'device-audio-tape', 'device-camera-phone', 'device-cctv', 'device-cctv-off', 'device-computer-camera',
+  'device-computer-camera-off', 'device-desktop', 'device-desktop-analytics', 'device-desktop-bolt', 'device-desktop-cancel',
+  'device-desktop-check', 'device-desktop-code', 'device-desktop-cog', 'device-desktop-dollar', 'device-desktop-down',
+  'device-desktop-exclamation', 'device-desktop-heart', 'device-desktop-minus', 'device-desktop-off', 'device-desktop-pause',
+  'device-desktop-pin', 'device-desktop-plus', 'device-desktop-question', 'device-desktop-search', 'device-desktop-share',
+  'device-desktop-star', 'device-desktop-up', 'device-desktop-x', 'device-floppy', 'device-gamepad',
+  'device-gamepad-2', 'device-heart-monitor', 'device-imac', 'device-imac-bolt', 'device-imac-cancel',
+  'device-imac-check', 'device-imac-code', 'device-imac-cog', 'device-imac-dollar', 'device-imac-down',
+  'device-imac-exclamation', 'device-imac-heart', 'device-imac-minus', 'device-imac-off', 'device-imac-pause',
+  'device-imac-pin', 'device-imac-plus', 'device-imac-question', 'device-imac-search', 'device-imac-share',
+  'device-imac-star', 'device-imac-up', 'device-imac-x', 'device-ipad', 'device-ipad-bolt',
+  'device-ipad-cancel', 'device-ipad-check', 'device-ipad-code', 'device-ipad-cog', 'device-ipad-dollar',
+  'device-ipad-down', 'device-ipad-exclamation', 'device-ipad-heart', 'device-ipad-horizontal', 'device-ipad-horizontal-bolt',
+  'device-ipad-horizontal-cancel', 'device-ipad-horizontal-check', 'device-ipad-horizontal-code', 'device-ipad-horizontal-cog', 'device-ipad-horizontal-dollar',
+  'device-ipad-horizontal-down', 'device-ipad-horizontal-exclamation', 'device-ipad-horizontal-heart', 'device-ipad-horizontal-minus', 'device-ipad-horizontal-off',
+  'device-ipad-horizontal-pause', 'device-ipad-horizontal-pin', 'device-ipad-horizontal-plus', 'device-ipad-horizontal-question', 'device-ipad-horizontal-search',
+  'device-ipad-horizontal-share', 'device-ipad-horizontal-star', 'device-ipad-horizontal-up', 'device-ipad-horizontal-x', 'device-ipad-minus',
+  'device-ipad-off', 'device-ipad-pause', 'device-ipad-pin', 'device-ipad-plus', 'device-ipad-question',
+  'device-ipad-search', 'device-ipad-share', 'device-ipad-star', 'device-ipad-up', 'device-ipad-x',
+  'device-landline-phone', 'device-laptop', 'device-laptop-off', 'device-mobile', 'device-mobile-bolt',
+  'device-mobile-cancel', 'device-mobile-charging', 'device-mobile-check', 'device-mobile-code', 'device-mobile-cog',
+  'device-mobile-dollar', 'device-mobile-down', 'device-mobile-exclamation', 'device-mobile-heart', 'device-mobile-message',
+  'device-mobile-minus', 'device-mobile-off', 'device-mobile-pause', 'device-mobile-pin', 'device-mobile-plus',
+  'device-mobile-question', 'device-mobile-rotated', 'device-mobile-search', 'device-mobile-share', 'device-mobile-star',
+  'device-mobile-up', 'device-mobile-vibration', 'device-mobile-x', 'device-nintendo', 'device-nintendo-off',
+  'device-remote', 'device-sd-card', 'device-sim', 'device-sim-1', 'device-sim-2',
+  'device-sim-3', 'device-speaker', 'device-speaker-off', 'device-tablet', 'device-tablet-bolt',
+  'device-tablet-cancel', 'device-tablet-check', 'device-tablet-code', 'device-tablet-cog', 'device-tablet-dollar',
+  'device-tablet-down', 'device-tablet-exclamation', 'device-tablet-heart', 'device-tablet-minus', 'device-tablet-off',
+  'device-tablet-pause', 'device-tablet-pin', 'device-tablet-plus', 'device-tablet-question', 'device-tablet-search',
+  'device-tablet-share', 'device-tablet-star', 'device-tablet-up', 'device-tablet-x', 'device-tv',
+  'device-tv-off', 'device-tv-old', 'device-watch', 'device-watch-bolt', 'device-watch-cancel',
+  'device-watch-check', 'device-watch-code', 'device-watch-cog', 'device-watch-dollar', 'device-watch-down',
+  'device-watch-exclamation', 'device-watch-heart', 'device-watch-minus', 'device-watch-off', 'device-watch-pause',
+  'device-watch-pin', 'device-watch-plus', 'device-watch-question', 'device-watch-search', 'device-watch-share',
+  'device-watch-star', 'device-watch-stats', 'device-watch-stats-2', 'device-watch-up', 'device-watch-x',
+  'devices', 'devices-2', 'devices-bolt', 'devices-cancel', 'devices-check',
+  'devices-code', 'devices-cog', 'devices-dollar', 'devices-down', 'devices-exclamation',
+  'devices-heart', 'devices-minus', 'devices-off', 'devices-pause', 'devices-pc',
+  'devices-pc-off', 'devices-pin', 'devices-plus', 'devices-question', 'devices-search',
+  'devices-share', 'devices-star', 'devices-up', 'devices-x', 'disc',
+  'disc-off', 'dual-screen', 'fridge', 'fridge-off', 'keyboard',
+  'keyboard-hide', 'keyboard-off', 'keyboard-show', 'mouse', 'mouse-2',
+  'mouse-off', 'nfc', 'nfc-off', 'phone', 'phone-call',
+  'phone-calling', 'phone-check', 'phone-incoming', 'phone-off', 'phone-outgoing',
+  'phone-pause', 'phone-plus', 'phone-x', 'playstation-circle', 'playstation-square',
+  'playstation-triangle', 'playstation-x', 'plug', 'plug-connected', 'plug-connected-x',
+  'plug-off', 'plug-x', 'power', 'printer', 'printer-off',
+  'qrcode', 'qrcode-off', 'router', 'router-off', 'screen-share',
+  'screen-share-off', 'server', 'server-2', 'server-bolt', 'server-cog',
+  'server-off', 'shredder', 'signal-3g', 'signal-4g', 'signal-4g-plus',
+  'signal-5g', 'viewport-narrow', 'viewport-wide', 'vinyl', 'wash-machine',
+  'wifi', 'wifi-0', 'wifi-1', 'wifi-2', 'wifi-off',
+  'xbox-a', 'xbox-b', 'xbox-x', 'xbox-y'
+]);
+
+const devicePathFn = (name: string, _variant?: string) => {
+  if (deviceLegacySet.has(name)) {
+    return `/Assets/Device Icons/Type=White, Theme=${name}.svg`;
+  }
+  return `/Assets/Device Icons/${name}.svg`;
+};
 
 const designLegacySet = new Set([
-  'ad','ad-2','ad-off','angle','artboard','artboard-off','blur','blur-off',
-  'border-all','border-bottom','border-corners','border-horizontal','border-inner',
-  'border-left','border-none','border-outer','border-radius','border-right',
-  'border-sides','border-style','border-style-2','border-top','border-vertical',
-  'bounce-left','bounce-right','box-align-bottom','box-align-bottom-left',
-  'box-align-bottom-right','box-align-left','box-align-right','box-align-top',
-  'box-align-top-left','box-align-top-right','box-margin','box-model','box-model-2',
-  'box-model-2-off','box-model-off','box-padding','brush','brush-off','bucket',
-  'bucket-droplet','bucket-off','circle-half-2','color-filter','color-picker',
-  'color-picker-off','color-swatch','color-swatch-off','components','components-off',
-  'container','container-off','crop','cut','dimensions','drag-drop','drag-drop-2',
-  'droplet','droplet-filled-2','droplet-half','droplet-half-2','droplet-half-filled',
-  'droplet-off','ease-in','ease-in-control-point','ease-in-out','ease-in-out-control-points',
-  'ease-out','ease-out-control-point','edit','edit-circle','edit-circle-off','edit-off',
-  'flip-horizontal','flip-vertical','frame','frame-off','hierarchy','hierarchy-2',
-  'hierarchy-3','hierarchy-off','inner-shadow-bottom','inner-shadow-bottom-left',
-  'inner-shadow-bottom-right','inner-shadow-left','inner-shadow-right','inner-shadow-top',
-  'inner-shadow-top-left','inner-shadow-top-right','lasso','lasso-off','lasso-polygon',
-  'layers-difference','layers-intersect','layers-intersect-2','layers-linked',
-  'layers-subtract','layers-union','layout','layout-2','layout-align-bottom',
-  'layout-align-center','layout-align-left','layout-align-middle','layout-align-right',
-  'layout-align-top','layout-board','layout-board-split','layout-bottombar',
-  'layout-bottombar-collapse','layout-bottombar-expand','layout-cards','layout-collage',
-  'layout-columns','layout-dashboard','layout-distribute-horizontal','layout-distribute-vertical',
-  'layout-grid','layout-grid-add','layout-grid-remove','layout-kanban','layout-list',
-  'layout-navbar','layout-navbar-collapse','layout-navbar-expand','layout-off','layout-rows',
-  'layout-sidebar','layout-sidebar-left-collapse','layout-sidebar-left-expand',
-  'layout-sidebar-right','layout-sidebar-right-collapse','layout-sidebar-right-expand',
-  'line','mask','mask-off','paint','paint-off','palette','palette-off','pencil',
-  'pencil-minus','pencil-off','pencil-plus','polygon','polygon-off','resize',
-  'scissors','scissors-off','section','shape','shape-2','shape-3','shape-off','slice',
-  'square-half','square-toggle','square-toggle-horizontal','squares-diagonal',
-  'squares-filled','stack','stack-2','stack-3','stack-pop','stack-push','template',
-  'template-off','text-resize','tools','tools-off','ux-circle','vector','vector-bezier',
-  'vector-bezier-2','vector-bezier-arc','vector-bezier-circle','vector-off',
-  'vector-spline','vector-triangle','vector-triangle-off'
+  'ad', 'ad-2', 'ad-off', 'angle', 'artboard', 'artboard-off', 'blur', 'blur-off',
+  'border-all', 'border-bottom', 'border-corners', 'border-horizontal', 'border-inner', 'border-left', 'border-none', 'border-outer',
+  'border-radius', 'border-right', 'border-sides', 'border-style', 'border-style-2', 'border-top', 'border-vertical', 'bounce-left',
+  'bounce-right', 'box-align-bottom', 'box-align-bottom-left', 'box-align-bottom-right', 'box-align-left', 'box-align-right', 'box-align-top', 'box-align-top-left',
+  'box-align-top-right', 'box-margin', 'box-model', 'box-model-2', 'box-model-2-off', 'box-model-off', 'box-padding', 'brush',
+  'brush-off', 'bucket', 'bucket-droplet', 'bucket-off', 'circle-half-2', 'color-filter', 'color-picker', 'color-picker-off',
+  'color-swatch', 'color-swatch-off', 'components', 'components-off', 'container', 'container-off', 'crop', 'cut',
+  'dimensions', 'drag-drop', 'drag-drop-2', 'droplet', 'droplet-filled-2', 'droplet-half', 'droplet-half-2', 'droplet-half-filled',
+  'droplet-off', 'ease-in', 'ease-in-control-point', 'ease-in-out', 'ease-in-out-control-points', 'ease-out', 'ease-out-control-point', 'edit',
+  'edit-circle', 'edit-circle-off', 'edit-off', 'flip-horizontal', 'flip-vertical', 'frame', 'frame-off', 'hierarchy',
+  'hierarchy-2', 'hierarchy-3', 'hierarchy-off', 'inner-shadow-bottom', 'inner-shadow-bottom-left', 'inner-shadow-bottom-right', 'inner-shadow-left', 'inner-shadow-right',
+  'inner-shadow-top', 'inner-shadow-top-left', 'inner-shadow-top-right', 'lasso', 'lasso-off', 'lasso-polygon', 'layers-difference', 'layers-intersect',
+  'layers-intersect-2', 'layers-linked', 'layers-subtract', 'layers-union', 'layout', 'layout-2', 'layout-align-bottom', 'layout-align-center',
+  'layout-align-left', 'layout-align-middle', 'layout-align-right', 'layout-align-top', 'layout-board', 'layout-board-split', 'layout-bottombar', 'layout-bottombar-collapse',
+  'layout-bottombar-expand', 'layout-cards', 'layout-collage', 'layout-columns', 'layout-dashboard', 'layout-distribute-horizontal', 'layout-distribute-vertical', 'layout-grid',
+  'layout-grid-add', 'layout-grid-remove', 'layout-kanban', 'layout-list', 'layout-navbar', 'layout-navbar-collapse', 'layout-navbar-expand', 'layout-off',
+  'layout-rows', 'layout-sidebar', 'layout-sidebar-left-collapse', 'layout-sidebar-left-expand', 'layout-sidebar-right', 'layout-sidebar-right-collapse', 'layout-sidebar-right-expand', 'line',
+  'mask', 'mask-off', 'paint', 'paint-off', 'palette', 'palette-off', 'pencil', 'pencil-minus',
+  'pencil-off', 'pencil-plus', 'polygon', 'polygon-off', 'resize', 'scissors', 'scissors-off', 'section',
+  'shape', 'shape-2', 'shape-3', 'shape-off', 'slice', 'square-half', 'square-toggle', 'square-toggle-horizontal',
+  'squares-diagonal', 'squares-filled', 'stack', 'stack-2', 'stack-3', 'stack-pop', 'stack-push', 'template',
+  'template-off', 'text-resize', 'tools', 'tools-off', 'ux-circle', 'vector', 'vector-bezier', 'vector-bezier-2',
+  'vector-bezier-arc', 'vector-bezier-circle', 'vector-off', 'vector-spline', 'vector-triangle', 'vector-triangle-off'
 ]);
 
 // Design icons use: "Type=<name>, Theme=White.svg" for legacy ones, or simple "<name>.svg" for new ones
@@ -2933,9 +3197,33 @@ const designPathFn = (name: string, _variant?: string) => {
   return `/Assets/Design Icons/${name}.svg`;
 };
 
-// Documents icons use: "Type=<name>, Theme=White.svg"
-const documentsPathFn = (name: string, _variant?: string) =>
-  `/Assets/Documents Icons/Type=${name}, Theme=White.svg`;
+// Documents icons use: "Type=<name>, Theme=White.svg" for legacy ones, or simple "<name>.svg" for new ones
+const documentsLegacySet = new Set([
+  'archive', 'archive-off', 'book', 'book-2', 'book-download', 'book-off', 'book-upload', 'bookmark',
+  'bookmark-edit', 'bookmark-minus', 'bookmark-off', 'bookmark-plus', 'bookmark-question', 'bookmarks', 'bookmarks-off', 'books',
+  'books-off', 'certificate', 'certificate-2', 'certificate-2-off', 'certificate-off', 'chalkboard', 'chalkboard-off', 'clipboard',
+  'clipboard-check', 'clipboard-copy', 'clipboard-data', 'clipboard-heart', 'clipboard-list', 'clipboard-off', 'clipboard-plus', 'clipboard-text',
+  'clipboard-typography', 'clipboard-x', 'file', 'file-3d', 'file-alert', 'file-analytics', 'file-arrow-left', 'file-arrow-right',
+  'file-barcode', 'file-broken', 'file-certificate', 'file-chart', 'file-check', 'file-code', 'file-code-2', 'file-cv',
+  'file-database', 'file-delta', 'file-description', 'file-diff', 'file-digit', 'file-dislike', 'file-dollar', 'file-dots',
+  'file-download', 'file-euro', 'file-export', 'file-function', 'file-horizontal', 'file-import', 'file-infinity', 'file-info',
+  'file-invoice', 'file-lambda', 'file-like', 'file-minus', 'file-music', 'file-off', 'file-orientation', 'file-pencil',
+  'file-percent', 'file-phone', 'file-plus', 'file-power', 'file-report', 'file-rss', 'file-scissors', 'file-search',
+  'file-settings', 'file-shredder', 'file-signal', 'file-spreadsheet', 'file-stack', 'file-star', 'file-symlink', 'file-text',
+  'file-text-ai', 'file-time', 'file-typography', 'file-unknown', 'file-upload', 'file-vector', 'file-x', 'file-zip',
+  'files', 'files-off', 'folder', 'folder-minus', 'folder-off', 'folder-plus', 'folder-x', 'folders',
+  'folders-off', 'news', 'news-off', 'note', 'note-off', 'notebook', 'notebook-off', 'notes',
+  'notes-off', 'presentation', 'presentation-analytics', 'presentation-off', 'receipt', 'receipt-2', 'receipt-off', 'receipt-refund',
+  'receipt-tax', 'report', 'report-analytics', 'report-medical', 'report-money', 'report-off', 'report-search', 'rubber-stamp',
+  'rubber-stamp-off', 'script', 'script-minus', 'script-plus', 'script-x'
+]);
+
+const documentsPathFn = (name: string, _variant?: string) => {
+  if (documentsLegacySet.has(name)) {
+    return `/Assets/Documents Icons/Type=${name}, Theme=White.svg`;
+  }
+  return `/Assets/Documents Icons/${name}.svg`;
+};
 
 // System icons use: "Type=<name>, Theme=White.svg"
 const systemPathFn = (name: string, _variant?: string) => {
@@ -2949,9 +3237,32 @@ const systemPathFn = (name: string, _variant?: string) => {
 const lettersPathFn = (name: string, _variant?: string) =>
   `/Assets/Letters Icons/Type=${name}, Theme=White.svg`;
 
-// Map icons use: "Type=<name>, Theme=White.svg"
-const mapPathFn = (name: string, _variant?: string) =>
-  `/Assets/Map Icons/Type=${name}, Theme=White.svg`;
+// Map icons use: "Type=<name>, Theme=White.svg" for legacy ones, or simple "<name>.svg" for new ones
+const mapLegacySet = new Set([
+  'anchor', 'anchor-off', 'beach', 'beach-off', 'bed', 'bed-off', 'compass', 'compass-off',
+  'current-location', 'current-location-off', 'directions', 'directions-off', 'flag', 'flag-2', 'flag-2-off', 'flag-3',
+  'flag-off', 'gas-station-off', 'geometry', 'globe', 'globe-off', 'gps', 'live-view', 'location',
+  'location-broken', 'location-off', 'map', 'map-2', 'map-off', 'map-pin', 'map-pin-off', 'map-pins',
+  'medical-cross', 'medical-cross-off', 'navigation', 'navigation-off', 'north-star', 'parking', 'parking-off', 'pennant',
+  'pennant-2', 'pennant-off', 'pin', 'pinned', 'pinned-off', 'planet', 'planet-off', 'pokeball',
+  'pokeball-off', 'radar', 'radar-2', 'radar-off', 'road', 'road-off', 'road-sign', 'rocket',
+  'rocket-off', 'route', 'route-off', 'satellite', 'satellite-off', 'school', 'school-off', 'stairs',
+  'stairs-down', 'stairs-up', 'target', 'target-off', 'tent', 'tent-off', 'tools-kitchen', 'tools-kitchen-2',
+  'tools-kitchen-2-off', 'tools-kitchen-off', 'traffic-cone', 'traffic-cone-off', 'traffic-lights', 'traffic-lights-off', 'tree', 'trees',
+  'viewfinder', 'viewfinder-off', 'world', 'world-bolt', 'world-cancel', 'world-check', 'world-code', 'world-cog',
+  'world-dollar', 'world-down', 'world-download', 'world-exclamation', 'world-heart', 'world-latitude', 'world-longitude', 'world-minus',
+  'world-off', 'world-pause', 'world-pin', 'world-plus', 'world-question', 'world-search', 'world-share', 'world-star',
+  'world-up', 'world-upload', 'world-www', 'world-x', 'zoom-cancel', 'zoom-check', 'zoom-code', 'zoom-exclamation',
+  'zoom-in', 'zoom-in-area', 'zoom-money', 'zoom-out', 'zoom-out-area', 'zoom-pan', 'zoom-question', 'zoom-replace',
+  'zoom-reset'
+]);
+
+const mapPathFn = (name: string, _variant?: string) => {
+  if (mapLegacySet.has(name)) {
+    return `/Assets/Map Icons/Type=${name}, Theme=White.svg`;
+  }
+  return `/Assets/Map Icons/${name}.svg`;
+};
 
 // Text icons use: "Type=<name>, Theme=White.svg"
 const textPathFn = (name: string, _variant?: string) =>
@@ -2989,9 +3300,26 @@ const mediaPathFn = (name: string, _variant?: string) => {
   return `/Assets/Media Icons/${name}.svg`;
 };
 
-// Vehicles icons use: "Type=<name>, Theme=White.svg"
-const vehiclesPathFn = (name: string, _variant?: string) =>
-  `/Assets/Vehicles Icons/Type=${name}, Theme=White.svg`;
+// Vehicles icons use: "Type=<name>, Theme=White.svg" for legacy ones, or simple "<name>.svg" for new ones
+const vehiclesLegacySet = new Set([
+  'aerial-lift', 'air-balloon', 'ambulance', 'backhoe', 'battery-automotive', 'bike', 'bike-off', 'bulldozer',
+  'bus', 'bus-off', 'bus-stop', 'camper', 'car', 'car-crane', 'car-crash', 'car-off',
+  'car-turbine', 'caravan', 'charging-pile', 'crane', 'crane-off', 'drone', 'drone-off', 'engine',
+  'engine-off', 'firetruck', 'forklift', 'garden-cart', 'garden-cart-off', 'gas-station', 'helicopter', 'helicopter-landing',
+  'moped', 'motorbike', 'parachute', 'parachute-off', 'plane', 'plane-arrival', 'plane-departure', 'plane-inflight',
+  'plane-off', 'plane-tilt', 'rollercoaster', 'rollercoaster-off', 'sailboat', 'sailboat-2', 'sailboat-off', 'scooter',
+  'scooter-electric', 'ship', 'ship-off', 'skateboard', 'skateboard-off', 'sleigh', 'speedboat', 'steering-wheel',
+  'steering-wheel-off', 'submarine', 'tank', 'tir', 'track', 'tractor', 'train', 'trolley',
+  'truck', 'truck-off', 'wheelchair', 'wheelchair-off', 'wiper', 'wiper-wash', 'wrecking-ball', 'zeppelin',
+  'zeppelin-off'
+]);
+
+const vehiclesPathFn = (name: string, _variant?: string) => {
+  if (vehiclesLegacySet.has(name)) {
+    return `/Assets/Vehicles Icons/Type=${name}, Theme=White.svg`;
+  }
+  return `/Assets/Vehicles Icons/${name}.svg`;
+};
 
 // Numbers icons use: "Type=<name>, Theme=White.svg"
 const numbersPathFn = (name: string, _variant?: string) =>
@@ -3021,9 +3349,21 @@ const currencyPathFn = (name: string, _variant?: string) => {
 const foodPathFn = (name: string, _variant?: string) =>
   `/Assets/Food Icons/Type=${name}, Theme=White.svg`;
 
-// E-commerce icons use: "Type=<name>, Theme=White.svg"
-const ecommercePathFn = (name: string, _variant?: string) =>
-  `/Assets/E-commerce Icons/Type=${name}, Theme=White.svg`;
+// E-commerce icons use: "Type=<name>, Theme=White.svg" for legacy ones, or simple "<name>.svg" for new ones
+const ecommerceLegacySet = new Set([
+  'basket', 'basket-off', 'cash', 'cash-banknote', 'cash-banknote-off', 'cash-off', 'coin', 'coin-bitcoin',
+  'coin-euro', 'coin-monero', 'coin-off', 'coin-pound', 'coin-rupee', 'coin-yen', 'coin-yuan', 'discount',
+  'discount-2', 'discount-2-off', 'discount-off', 'package', 'package-off', 'shopping-bag', 'shopping-cart', 'shopping-cart-discount',
+  'shopping-cart-off', 'shopping-cart-plus', 'shopping-cart-x', 'tag', 'tag-off', 'tags', 'tags-off', 'transfer-in',
+  'transfer-out', 'truck-delivery', 'truck-loading', 'truck-return'
+]);
+
+const ecommercePathFn = (name: string, _variant?: string) => {
+  if (ecommerceLegacySet.has(name)) {
+    return `/Assets/E-commerce Icons/Type=${name}, Theme=White.svg`;
+  }
+  return `/Assets/E-commerce Icons/${name}.svg`;
+};
 
 // Non-categorized icons use: "Type=<name>, Theme=White.svg"
 const nonCategorizedPathFn = (name: string, _variant?: string) =>
@@ -3055,13 +3395,11 @@ const contentPathFn = (name: string, _variant?: string) =>
   `/Assets/Content Icons/${name}.svg`;
 
 const weatherLegacySet = new Set([
-  'cloud','cloud-fog','cloud-off','cloud-rain','cloud-snow','cloud-storm',
-  'comet','flare','haze','mist','mist-off','moon','moon-2','moon-off',
-  'moon-stars','rainbow','rainbow-off','snowflake','snowflake-off','sun',
-  'sun-high','sun-low','sun-moon','sun-off','sun-wind','sunrise','sunset',
-  'sunset-2','temperature','temperature-celsius','temperature-fahrenheit',
-  'temperature-minus','temperature-off','temperature-plus','tornado',
-  'uv-index','wind','wind-off'
+  'cloud', 'cloud-fog', 'cloud-off', 'cloud-rain', 'cloud-snow', 'cloud-storm', 'comet', 'flare',
+  'haze', 'mist', 'mist-off', 'moon', 'moon-2', 'moon-off', 'moon-stars', 'rainbow',
+  'rainbow-off', 'snowflake', 'snowflake-off', 'sun', 'sun-high', 'sun-low', 'sun-moon', 'sun-off',
+  'sun-wind', 'sunrise', 'sunset', 'sunset-2', 'temperature', 'temperature-celsius', 'temperature-fahrenheit', 'temperature-minus',
+  'temperature-off', 'temperature-plus', 'tornado', 'uv-index', 'wind', 'wind-off'
 ]);
 
 const systemLegacySet = new Set([
@@ -3122,6 +3460,14 @@ const systemLegacySet = new Set([
   'window-minimize'
 ]);
 
+// Tools icons use: "<name>.svg"
+const toolsPathFn = (name: string, _variant?: string) =>
+  `/Assets/Tools Icons/${name}.svg`;
+
+// Search icons use: "<name>.svg"
+const searchPathFn = (name: string, _variant?: string) =>
+  `/Assets/Search Icons/${name}.svg`;
+
 // Weather icons use: "Type=<name>, Theme=White.svg" for legacy ones, or simple "<name>.svg" for new ones
 const weatherPathFn = (name: string, _variant?: string) => {
   if (weatherLegacySet.has(name)) {
@@ -3174,7 +3520,9 @@ const CATEGORIES: Category[] = [
   { id: 'mood',      label: 'Mood Icons',      folder: 'Mood Icons',      icons: MOOD_ICONS,      pathFn: moodPathFn },
   { id: 'communication', label: 'Communication Icons', folder: 'Communication Icons', icons: COMMUNICATION_ICONS, pathFn: communicationPathFn },
   { id: 'content',   label: 'Content Icons',   folder: 'Content Icons',   icons: CONTENT_ICONS,   pathFn: contentPathFn },
+  { id: 'tools',     label: 'Tools Icons',     folder: 'Tools Icons',     icons: TOOLS_ICONS,     pathFn: toolsPathFn },
   { id: 'weather',   label: 'Weather Icons',   folder: 'Weather Icons',   icons: WEATHER_ICONS,   pathFn: weatherPathFn },
+  { id: 'search',     label: 'Search Icons',    folder: 'Search Icons',    icons: SEARCH_ICONS,    pathFn: searchPathFn },
 ];
 
 const TOTAL_COUNT = CATEGORIES.reduce((acc, c) => (c.id === 'all' ? acc : acc + c.icons.length), 0);
@@ -3243,7 +3591,9 @@ const IconBrowser: React.FC = () => {
         ...buildIconList(CATEGORIES.find(c => c.id === 'mood')!),
         ...buildIconList(CATEGORIES.find(c => c.id === 'communication')!),
         ...buildIconList(CATEGORIES.find(c => c.id === 'content')!),
-        ...buildIconList(CATEGORIES.find(c => c.id === 'weather')!)
+        ...buildIconList(CATEGORIES.find(c => c.id === 'tools')!),
+        ...buildIconList(CATEGORIES.find(c => c.id === 'weather')!),
+        ...buildIconList(CATEGORIES.find(c => c.id === 'search')!),
       ]
     : buildIconList(cat);
 
