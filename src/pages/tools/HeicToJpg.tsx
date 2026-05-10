@@ -224,7 +224,7 @@ const HeicToJpg: React.FC = () => {
         <div className="h-4 w-px bg-neutral-200" />
 
         <div className="flex items-center gap-2">
-          <img src="/icons/HEIC to JPG.svg" alt="HEIC to JPG" className="w-4 h-4" />
+          <img src="/Icons/HEIC to JPG.svg" alt="HEIC to JPG" className="w-4 h-4" />
           <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-800">
             HEIC → JPG
           </span>

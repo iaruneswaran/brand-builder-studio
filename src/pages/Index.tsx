@@ -1,44 +1,40 @@
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { 
-  ArrowUpRight, 
-  Zap
-} from 'lucide-react';
 
 const tools = [
   {
     id: 'palette',
     title: 'Brand Palette',
     description: 'Generate high-end, harmonious color systems for your brand.',
-    icon: '/icons/Brand Palette.svg',
+    icon: '/Icons/Brand Palette.svg',
     path: '/tools/brand-palette'
   },
   {
     id: 'icons',
     title: 'Icon Browser',
     description: 'Explore and export thousands of premium vector icons.',
-    icon: '/icons/Icon Browser.svg',
+    icon: '/Icons/Icon Browser.svg',
     path: '/tools/icon-browser'
   },
   {
     id: 'pdf',
     title: 'Image to PDF',
     description: 'Convert multiple images into professional PDF documents.',
-    icon: '/icons/Image to PDF.svg',
+    icon: '/Icons/Image to PDF.svg',
     path: '/tools/image-to-pdf'
   },
   {
     id: 'heic',
     title: 'HEIC to JPG',
     description: 'Fast, high-quality conversion for modern image formats.',
-    icon: '/icons/HEIC to JPG.svg',
+    icon: '/Icons/HEIC to JPG.svg',
     path: '/tools/heic-to-jpg'
   },
   {
     id: 'qr',
     title: 'QR Generator',
     description: 'Create custom, high-resolution QR codes for any brand.',
-    icon: '/icons/QR Generator.svg',
+    icon: '/Icons/QR Generator.svg',
     path: '/tools/qr-generator'
   }
 ];
@@ -79,7 +75,7 @@ const Index = () => {
                     {tool.description}
                   </p>
                   <div className="flex items-center gap-2 text-xs font-black tracking-widest uppercase group-hover:translate-x-2 transition-transform">
-                    Launch Tool <ArrowUpRight size={14} />
+                    Launch Tool <img src="/Icons/ArrowUpRight.svg" alt="" className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                   </div>
                 </div>
 
@@ -90,7 +86,7 @@ const Index = () => {
 
             {/* Placeholder / Extra Box */}
             <div className="hidden lg:flex p-10 border-r border-b border-foreground/10 bg-primary/5 flex-col justify-between">
-              <Zap className="text-primary mb-4" size={32} />
+              <img src="/Icons/Zap.svg" alt="" className="w-8 h-8 mb-4 text-primary" />
               <div className="text-xl font-bold tracking-tighter leading-tight">
                 "Design is the silent ambassador of your brand."
               </div>

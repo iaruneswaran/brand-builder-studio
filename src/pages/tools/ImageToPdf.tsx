@@ -277,7 +277,7 @@ const ImageToPdf: React.FC = () => {
         <div className="h-4 w-px bg-neutral-200" />
 
         <div className="flex items-center gap-2">
-          <img src="/icons/Image to PDF.svg" alt="Image to PDF" className="w-4 h-4" />
+          <img src="/Icons/Image to PDF.svg" alt="Image to PDF" className="w-4 h-4" />
           <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-800">Image to PDF</span>
         </div>
 

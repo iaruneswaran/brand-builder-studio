@@ -3671,10 +3671,10 @@ const IconBrowser: React.FC = () => {
           <span className="hidden sm:inline">Back</span>
         </button>
 
-        <div className="h-4 w-px bg-neutral-200 hidden sm:block" />
+        <div className="h-4 w-px bg-neutral-200" />
 
         <div className="flex items-center gap-2">
-          <img src="/icons/Icon Browser.svg" alt="Icon Browser" className="w-4 h-4 shrink-0" />
+          <img src="/Icons/Icon Browser.svg" alt="Icon Browser" className="w-4 h-4 shrink-0" />
           <span className="hidden sm:inline text-[11px] font-bold uppercase tracking-wider text-neutral-800 shrink-0">Icon Browser</span>
           <span className="px-1.5 py-0.5 text-[9px] font-bold bg-violet-100 text-violet-700 rounded-full shrink-0">
             {TOTAL_COUNT.toLocaleString()}+
