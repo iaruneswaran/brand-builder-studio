@@ -20,7 +20,7 @@ const BrandPalette = () => {
   const currentPalette = palettes[activePalette];
 
   return (
-    <div className="h-screen w-screen overflow-hidden flex flex-col bg-background">
+    <div className="h-screen w-screen overflow-hidden flex flex-col bg-background select-none">
       <header className="shrink-0 bg-white border-b border-neutral-200 flex items-center h-12 px-3 gap-2 shadow-sm z-20 relative">
         <button
           onClick={() => navigate('/')}
