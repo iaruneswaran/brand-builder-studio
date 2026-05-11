@@ -102,7 +102,7 @@ const Index = () => {
       <footer className="h-16 md:h-20 border-t border-foreground/10 px-6 md:px-12 bg-white flex items-center flex-shrink-0">
         <div className="max-w-7xl mx-auto w-full flex items-center">
           <div className="flex items-center">
-            <span className="font-bold tracking-tighter text-base md:text-lg uppercase">Brand Development Studio</span>
+            <span className="font-bold tracking-tighter text-base md:text-lg uppercase">BUILDER STUDIO</span>
           </div>
           
         </div>
