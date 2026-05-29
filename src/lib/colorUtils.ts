@@ -425,9 +425,179 @@ colors: {
 }`;
 }
 
+// ─── Massively expanded color generation engine ───────────────────────────────
+// 12 distinct color profiles, each with curated hue zones, saturation curves,
+// and lightness bands. Golden-ratio hue stepping ensures maximum diversity.
+
+const _goldenAngle = 137.508;
+let _hueCounter = Math.random() * 360;
+
+/** Pick a random float in [min, max] */
+function _rf(min: number, max: number) {
+  return min + Math.random() * (max - min);
+}
+
+/** Pick a random integer in [min, max] inclusive */
+function _ri(min: number, max: number) {
+  return Math.floor(_rf(min, max + 1));
+}
+
+type ColorProfile = () => [number, number, number]; // [h, s, l]
+
+const COLOR_PROFILES: ColorProfile[] = [
+  // 1. Neon Burst — hyper-saturated vivid hues
+  () => {
+    const hueZones = [0, 30, 60, 90, 150, 180, 200, 270, 300, 330];
+    const h = hueZones[_ri(0, hueZones.length - 1)] + _rf(-12, 12);
+    return [(h + 360) % 360, _rf(88, 100), _rf(48, 62)];
+  },
+
+  // 2. Jewel Tones — deep, rich, gemstone colors
+  () => {
+    const zones = [
+      [205, 230], // sapphire
+      [150, 170], // emerald
+      [270, 295], // amethyst
+      [340, 360], // ruby
+      [25,  45],  // topaz
+      [185, 205], // aquamarine
+    ];
+    const zone = zones[_ri(0, zones.length - 1)];
+    return [_rf(zone[0], zone[1]), _rf(72, 92), _rf(28, 48)];
+  },
+
+  // 3. Pastel Dream — soft, airy, high-lightness
+  () => {
+    const h = (_hueCounter += _goldenAngle) % 360;
+    return [h, _rf(35, 65), _rf(72, 87)];
+  },
+
+  // 4. Earthy Warmth — terracotta, clay, ochre, moss
+  () => {
+    const zones = [
+      [10, 30],   // terracotta / burnt sienna
+      [30, 52],   // ochre / amber
+      [52, 72],   // golden yellow
+      [85, 110],  // olive / moss
+      [18, 38],   // rust
+    ];
+    const zone = zones[_ri(0, zones.length - 1)];
+    return [_rf(zone[0], zone[1]), _rf(42, 70), _rf(32, 54)];
+  },
+
+  // 5. Sunset Gradient — fiery reds, oranges, magentas
+  () => {
+    const h = _rf(340, 400) % 360; // 340–360 + 0–40
+    const s = _rf(75, 98);
+    const l = _rf(40, 60);
+    return [h, s, l];
+  },
+
+  // 6. Ocean Depths — cerulean, teal, deep blue, cyan
+  () => {
+    const zones = [
+      [175, 200], // cyan / turquoise
+      [200, 225], // cerulean
+      [225, 250], // cobalt
+      [160, 180], // teal
+      [190, 215], // sky
+    ];
+    const zone = zones[_ri(0, zones.length - 1)];
+    return [_rf(zone[0], zone[1]), _rf(60, 95), _rf(30, 55)];
+  },
+
+  // 7. Forest & Nature — deep greens, sage, pine, lime
+  () => {
+    const zones = [
+      [90, 120],  // lime / chartreuse
+      [120, 145], // pure green
+      [145, 165], // forest / pine
+      [75, 95],   // yellow-green
+      [130, 155], // emerald
+    ];
+    const zone = zones[_ri(0, zones.length - 1)];
+    return [_rf(zone[0], zone[1]), _rf(50, 85), _rf(25, 50)];
+  },
+
+  // 8. Berry & Bloom — plum, violet, fuchsia, rose
+  () => {
+    const zones = [
+      [280, 310], // violet / purple
+      [310, 335], // magenta / fuchsia
+      [335, 355], // rose / hot pink
+      [260, 285], // indigo / periwinkle
+      [295, 320], // orchid
+    ];
+    const zone = zones[_ri(0, zones.length - 1)];
+    return [_rf(zone[0], zone[1]), _rf(65, 95), _rf(38, 62)];
+  },
+
+  // 9. Metallic Shimmer — muted gold, bronze, steel, rose gold
+  () => {
+    const palettes = [
+      [38,  45, 52, 62],   // gold
+      [20,  30, 38, 50],   // bronze
+      [210, 220, 25, 40],  // steel blue
+      [340, 10,  38, 55],  // rose gold
+      [55,  65,  48, 60],  // champagne
+    ];
+    const p = palettes[_ri(0, palettes.length - 1)];
+    return [_rf(p[0], p[1]), _rf(p[2], p[3]), _rf(42, 62)];
+  },
+
+  // 10. Aurora Borealis — electric green, teal, violet, cyan
+  () => {
+    const h = _rf(130, 320); // wide sweep through cool spectrum
+    // Bias toward green-teal and violet-purple
+    const zones = [130, 165, 175, 195, 255, 285, 305];
+    const base = zones[_ri(0, zones.length - 1)];
+    return [base + _rf(-8, 8), _rf(70, 100), _rf(45, 70)];
+  },
+
+  // 11. Cyberpunk / Synthwave — electric blue, hot pink, acid yellow, neon purple
+  () => {
+    const palettes: Array<[number, number, number, number, number, number]> = [
+      [180, 200, 88, 100, 48, 65],  // electric cyan
+      [300, 320, 85, 100, 45, 62],  // hot pink / neon magenta
+      [55,  70,  88, 100, 52, 68],  // acid yellow / chartreuse
+      [255, 275, 82, 98,  42, 62],  // electric violet
+      [160, 178, 80, 98,  45, 65],  // neon green
+      [8,   20,  88, 100, 48, 65],  // electric red / coral
+    ];
+    const p = palettes[_ri(0, palettes.length - 1)];
+    return [_rf(p[0], p[1]), _rf(p[2], p[3]), _rf(p[4], p[5])];
+  },
+
+  // 12. Classic Brand Colors — clean, professional, timeless
+  () => {
+    // Inspired by iconic brand hues with slight variation
+    const anchors = [
+      [211, 82, 54],  // Facebook blue
+      [0,   78, 55],  // Coca-Cola red
+      [120, 62, 38],  // Starbucks green
+      [37,  96, 50],  // Amazon amber
+      [264, 80, 52],  // Instagram purple
+      [195, 85, 42],  // Twitter / X cyan
+      [14,  88, 52],  // YouTube red-orange
+      [166, 72, 42],  // Spotify green
+      [217, 76, 48],  // LinkedIn blue
+      [26,  95, 52],  // Etsy orange
+    ];
+    const a = anchors[_ri(0, anchors.length - 1)];
+    return [a[0] + _rf(-15, 15), a[1] + _rf(-12, 12), a[2] + _rf(-8, 8)] as [number, number, number];
+  },
+];
+
 export function randomHex(): string {
-  const h = Math.floor(Math.random() * 360);
-  const s = 50 + Math.floor(Math.random() * 40);
-  const l = 40 + Math.floor(Math.random() * 20);
-  return hslToHex(h, s, l);
+  // 1. Pick a random profile
+  const profile = COLOR_PROFILES[_ri(0, COLOR_PROFILES.length - 1)];
+  // 2. Also advance golden-ratio counter for profile #3 (pastel)
+  _hueCounter = (_hueCounter + _goldenAngle) % 360;
+  // 3. Generate [h, s, l]
+  const [h, s, l] = profile();
+  // 4. Clamp to valid ranges
+  const ch = ((h % 360) + 360) % 360;
+  const cs = Math.max(0, Math.min(100, s));
+  const cl = Math.max(0, Math.min(100, l));
+  return hslToHex(ch, cs, cl);
 }
