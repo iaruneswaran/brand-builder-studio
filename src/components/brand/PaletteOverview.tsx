@@ -167,11 +167,11 @@ const PaletteOverview = ({ palettes, activePalette, onSelectPalette }: PaletteOv
             <motion.button
               key={i}
               onClick={() => onSelectPalette(i)}
-              whileHover={{ backgroundColor: i === activePalette ? undefined : "rgba(0,0,0,0.02)" }}
+              whileHover={{ backgroundColor: i === activePalette ? undefined : "hsl(262 20% 97%)" }}
               whileTap={{ scale: 0.98 }}
               className={`flex-1 h-12 text-[10px] font-bold uppercase tracking-widest transition-all relative ${i === activePalette
                 ? ''
-                : 'bg-white text-muted-foreground'
+                : 'bg-white text-muted-foreground hover:text-foreground'
                 }`}
             >
               <span className="relative z-10" style={{ color: i === activePalette ? '#ffffff' : undefined }}>
@@ -226,8 +226,8 @@ const PaletteOverview = ({ palettes, activePalette, onSelectPalette }: PaletteOv
                 animate={{ opacity: 1, y: 0, scaleY: 1 }}
                 exit={{ opacity: 0, y: -8, scaleY: 0.9 }}
                 transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
-                style={{ transformOrigin: 'top right' }}
-                className="bg-black shadow-2xl min-w-[200px] overflow-hidden"
+                style={{ transformOrigin: 'top right', background: 'hsl(262 30% 10%)' }}
+                className="shadow-2xl min-w-[200px] overflow-hidden"
               >
                 {palettes.map((p, i) => (
                   <button
@@ -237,13 +237,14 @@ const PaletteOverview = ({ palettes, activePalette, onSelectPalette }: PaletteOv
                       setMenuOpen(false);
                     }}
                     className={`w-full flex items-center justify-between px-5 py-3 text-left text-[11px] font-bold uppercase tracking-widest transition-colors ${i === activePalette
-                      ? 'bg-white text-black'
-                      : 'text-white/70 hover:bg-white/10 hover:text-white'
+                      ? 'text-black'
+                      : 'text-white/70 hover:text-white'
                       }`}
+                    style={i === activePalette ? { background: 'hsl(262 84% 95%)' } : undefined}
                   >
                     <span>{p.name}</span>
                     {i === activePalette && (
-                      <span className="w-1.5 h-1.5 rounded-full bg-black shrink-0" />
+                      <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: 'hsl(262 84% 50%)' }} />
                     )}
                   </button>
                 ))}

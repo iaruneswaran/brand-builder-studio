@@ -5,69 +5,78 @@
 
 @layer base {
   :root {
-    --background: 0 0% 98%;
-    --foreground: 240 10% 4%;
+    /* Subtle off-white with a touch of violet warmth — not flat white */
+    --background: 262 20% 98.5%;
+    --foreground: 240 15% 6%;
 
     --card: 0 0% 100%;
-    --card-foreground: 240 10% 4%;
+    --card-foreground: 240 15% 6%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 4%;
+    --popover-foreground: 240 15% 6%;
 
-    /* Premium Electric Violet Scale */
-    --primary-50: 262 80% 98%;
-    --primary-100: 262 80% 95%;
-    --primary-200: 262 80% 88%;
-    --primary-300: 262 80% 75%;
-    --primary-400: 262 80% 60%;
-    --primary-500: 262 80% 48%; /* Electric Violet */
-    --primary-600: 262 80% 40%;
+    /* Premium Electric Violet Scale — richer saturation for punch */
+    --primary-50:  262 90% 98.5%;
+    --primary-100: 262 85% 95.5%;
+    --primary-200: 262 82% 89%;
+    --primary-300: 262 80% 77%;
+    --primary-400: 262 82% 63%;
+    --primary-500: 262 84% 50%;   /* Electric Violet — core brand */
+    --primary-600: 262 84% 41%;
     --primary-700: 262 80% 32%;
-    --primary-800: 262 80% 24%;
-    --primary-900: 262 80% 15%;
+    --primary-800: 262 76% 22%;
+    --primary-900: 262 72% 13%;
 
     --primary: var(--primary-500);
     --primary-foreground: 0 0% 100%;
 
-    /* Deep Charcoal / Neutral */
-    --secondary-300: 240 5% 85%;
-    --secondary-500: 240 5% 15%;
-    --secondary-700: 240 5% 5%;
+    /* Deep Charcoal / Neutral — slightly violet-tinted for cohesion */
+    --secondary-300: 250 8% 82%;
+    --secondary-500: 250 8% 18%;
+    --secondary-700: 250 10% 8%;
 
     --secondary: var(--secondary-500);
     --secondary-foreground: 0 0% 98%;
 
-    --muted: 240 5% 94%;
-    --muted-foreground: 240 5% 45%;
+    /* Muted — more colour, better contrast, less flat */
+    --muted: 262 15% 93.5%;
+    --muted-foreground: 250 10% 40%;
 
-    --accent-a-400: 172 100% 45%; /* Electric Teal */
-    --accent-a-600: 172 100% 30%;
+    /* Accent A — Electric Cyan-Teal, punchy complement to violet */
+    --accent-a-400: 174 88% 42%;
+    --accent-a-600: 174 88% 29%;
+
+    /* Accent B — Warm Amber, rich secondary signal */
+    --accent-b-400: 36 95% 52%;
+    --accent-b-600: 36 90% 38%;
 
     --accent: var(--accent-a-400);
-    --accent-foreground: 240 10% 4%;
+    --accent-foreground: 240 15% 6%;
 
-    --neutral-50: 0 0% 100%;
-    --neutral-100: 240 5% 96%;
-    --neutral-200: 240 5% 90%;
-    --neutral-300: 240 5% 80%;
-    --neutral-400: 240 5% 60%;
-    --neutral-500: 240 5% 45%;
-    --neutral-600: 240 5% 30%;
-    --neutral-700: 240 5% 20%;
-    --neutral-800: 240 5% 10%;
-    --neutral-900: 240 10% 4%;
+    /* Neutral scale — violet-hue tinted for visual harmony */
+    --neutral-50:  262 14% 99%;
+    --neutral-100: 262 10% 96%;
+    --neutral-200: 262 8%  91%;
+    --neutral-300: 262 6%  81%;
+    --neutral-400: 262 5%  62%;
+    --neutral-500: 262 5%  46%;
+    --neutral-600: 262 6%  31%;
+    --neutral-700: 262 8%  20%;
+    --neutral-800: 262 10% 11%;
+    --neutral-900: 262 14% 5%;
 
-    --success: 142 70% 45%;
-    --warning: 45 95% 50%;
-    --danger: 0 85% 55%;
-    --info: 217 91% 50%;
+    /* Semantic feedback — tuned for vibrancy on light bg */
+    --success: 148 72% 40%;
+    --warning: 38 96% 48%;
+    --danger:  2  82% 52%;
+    --info:    220 90% 52%;
 
     --destructive: var(--danger);
     --destructive-foreground: 0 0% 100%;
 
     --radius: 0px;
 
-    /* 2026 Layered Hard Shadows - More pronounced */
+    /* 2026 Layered Hard Shadows */
     --shadow-sm: 2px 2px 0 rgba(0, 0, 0, 1);
     --shadow-md: 4px 4px 0 rgba(0, 0, 0, 1), 8px 8px 0 rgba(0, 0, 0, 0.05);
     --shadow-lg: 6px 6px 0 rgba(0, 0, 0, 1), 12px 12px 0 rgba(0, 0, 0, 0.08), 18px 18px 0 rgba(0, 0, 0, 0.03);

@@ -86,21 +86,26 @@ function adjustLuminance(h: number, s: number, targetLuminance: number): string 
 
 function generateCurvedScale(h: number, s: number, baseL: number, originalHex?: string): PaletteScale {
   const getL = (step: number) => {
-    // Custom Bezier-like curve for scales
+    // Smooth Bezier-like lightness curve
     if (step === 500) return baseL;
     if (step < 500) {
       const t = step / 500;
-      return baseL + (97 - baseL) * (1 - Math.pow(t, 1.5));
+      // Slower initial climb → richer mid-light range
+      return baseL + (97 - baseL) * (1 - Math.pow(t, 1.35));
     } else {
       const t = (step - 500) / 400;
-      return baseL - (baseL - 10) * Math.pow(t, 1.2);
+      return baseL - (baseL - 8) * Math.pow(t, 1.15);
     }
   };
 
   const getS = (step: number) => {
     if (step === 500) return s;
-    if (step < 500) return s * (0.3 + 0.7 * (step / 500));
-    return s + (100 - s) * ((step - 500) / 400) * 0.2;
+    if (step < 500) {
+      // Keep more saturation in lighter steps (floor raised from 30% → 50%)
+      return s * (0.5 + 0.5 * (step / 500));
+    }
+    // Darks get a slight saturation push for richness
+    return Math.min(100, s + (100 - s) * ((step - 500) / 400) * 0.18);
   };
 
   const steps = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900] as const;
@@ -116,28 +121,28 @@ function generateCurvedScale(h: number, s: number, baseL: number, originalHex?: 
 }
 
 function generateTintedNeutrals(h: number, s: number): PaletteScale {
-  // Infuse 4-12% of base saturation into neutrals based on base saturation
-  const tintS = Math.max(2, Math.min(12, s * 0.15));
+  // Infuse 8–18% of base saturation into neutrals for hue-cohesive grays
+  const tintS = Math.max(4, Math.min(18, s * 0.22));
   return {
-    50: hslToHex(h, tintS * 0.5, 98),
-    100: hslToHex(h, tintS * 0.8, 96),
-    200: hslToHex(h, tintS, 90),
-    300: hslToHex(h, tintS, 80),
-    400: hslToHex(h, tintS, 65),
-    500: hslToHex(h, tintS, 50),
-    600: hslToHex(h, tintS, 35),
-    700: hslToHex(h, tintS, 22),
-    800: hslToHex(h, tintS, 12),
-    900: hslToHex(h, tintS, 6),
+    50:  hslToHex(h, tintS * 0.45, 99),
+    100: hslToHex(h, tintS * 0.7,  96.5),
+    200: hslToHex(h, tintS,        91),
+    300: hslToHex(h, tintS,        80),
+    400: hslToHex(h, tintS,        64),
+    500: hslToHex(h, tintS,        50),
+    600: hslToHex(h, tintS,        34),
+    700: hslToHex(h, tintS,        21),
+    800: hslToHex(h, tintS,        11),
+    900: hslToHex(h, tintS,         5),
   };
 }
 
 function generateFeedback(baseH: number): FeedbackColors {
   return {
-    success: hslToHex(142, 70, 45), // More vibrant "best matched" emerald
-    warning: hslToHex(45, 95, 50),   // Sharp golden yellow
-    danger: hslToHex(0, 85, 55),     // Professional red
-    info: hslToHex((baseH + 190) % 360, 80, 50),
+    success: hslToHex(148, 72, 40), // Deep emerald — readable on white
+    warning: hslToHex(38, 96, 48),  // Warm amber — punchy, not garish
+    danger:  hslToHex(2, 82, 52),   // Clean crimson
+    info:    hslToHex((baseH + 190) % 360, 82, 50),
   };
 }
 
@@ -161,14 +166,14 @@ export function getWCAGLevel(ratio: number): string {
 function calibrateHarmony(baseHex: string, h: number, satFactor: number = 1): { s: number, l: number } {
   const baseHSL = hexToHSL(baseHex);
   const baseLum = getLuminance(baseHex);
-  const targetS = Math.min(95, baseHSL.s * satFactor);
+  const targetS = Math.min(96, baseHSL.s * satFactor);
 
-  // Find L that matches perceived weight but stays within functional range
-  let low = 20, high = 80, bestL = 50;
-  for (let i = 0; i < 8; i++) {
+  // Wider search range for more distinct harmony stops
+  let low = 12, high = 85, bestL = 50;
+  for (let i = 0; i < 10; i++) {
     const mid = (low + high) / 2;
     const lum = getLuminance(hslToHex(h, targetS, mid));
-    if (Math.abs(lum - baseLum) < 0.05) { bestL = mid; break; }
+    if (Math.abs(lum - baseLum) < 0.04) { bestL = mid; break; }
     if (lum < baseLum) low = mid; else high = mid;
     bestL = mid;
   }

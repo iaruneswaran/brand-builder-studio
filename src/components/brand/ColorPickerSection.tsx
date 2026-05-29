@@ -114,11 +114,11 @@ const ColorPickerSection = ({ baseColor, onColorChange }: ColorPickerSectionProp
         </div>
 
         {/* HSL sliders */}
-        <div className="col-span-9 flex flex-col justify-center h-14 px-6 bg-neutral-50/50 backdrop-blur-sm">
+        <div className="col-span-9 flex flex-col justify-center h-14 px-6 backdrop-blur-sm" style={{ backgroundColor: 'hsl(262 12% 96%)' }}>
           <div className="flex items-center gap-4 h-full">
             {sliders.map((s) => (
               <div key={s.prop} className="flex-1 flex items-center gap-3 group/slider">
-                <span className="text-[10px] font-bold text-neutral-900 w-4">{s.label}</span>
+                <span className="text-[10px] font-bold w-4" style={{ color: 'hsl(250 10% 40%)' }}>{s.label}</span>
                 <div className="relative flex-1 group">
                   <div
                     className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[2px] opacity-40 group-hover:opacity-100 transition-opacity"
@@ -132,7 +132,7 @@ const ColorPickerSection = ({ baseColor, onColorChange }: ColorPickerSectionProp
                     className="relative z-10"
                   />
                 </div>
-                <span className="text-[10px] font-mono font-bold text-neutral-900 w-12 text-right shrink-0">
+                <span className="text-[10px] font-mono font-bold w-12 text-right shrink-0" style={{ color: 'hsl(240 15% 12%)' }}>
                   {Math.round(hsl[s.prop as keyof typeof hsl])}{s.unit}
                 </span>
               </div>
@@ -208,12 +208,12 @@ const ColorPickerSection = ({ baseColor, onColorChange }: ColorPickerSectionProp
         </div>
 
         {/* Row 2: HSL sliders in 3-column grid */}
-        <div className="grid grid-cols-3 gap-0 bg-neutral-50/60 px-3 py-2 border-t border-neutral-100">
+        <div className="grid grid-cols-3 gap-0 px-3 py-2 border-t" style={{ backgroundColor: 'hsl(262 12% 96%)', borderColor: 'hsl(262 8% 91%)' }}>
           {sliders.map((s) => (
             <div key={s.prop} className="flex flex-col gap-1 px-2">
               <div className="flex justify-between items-center">
-                <span className="text-[10px] font-bold text-neutral-700 uppercase tracking-wider">{s.label}</span>
-                <span className="text-[10px] font-mono font-bold text-neutral-900">
+                <span className="text-[10px] font-bold uppercase tracking-wider" style={{ color: 'hsl(250 10% 40%)' }}>{s.label}</span>
+                <span className="text-[10px] font-mono font-bold" style={{ color: 'hsl(240 15% 12%)' }}>
                   {Math.round(hsl[s.prop as keyof typeof hsl])}{s.unit}
                 </span>
               </div>
