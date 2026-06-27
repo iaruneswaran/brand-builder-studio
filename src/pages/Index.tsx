@@ -36,6 +36,13 @@ const tools = [
     description: 'Create custom, high-resolution QR codes for any brand.',
     icon: '/Icons/QR Generator.svg',
     path: '/tools/qr-generator'
+  },
+  {
+    id: 'html-css',
+    title: 'HTML CSS Finder',
+    description: 'Quickly find styles connected to specific HTML lines.',
+    icon: '/Icons/Chevrons Horizontal.svg',
+    path: '/tools/html-css-finder'
   }
 ];
 
@@ -43,14 +50,14 @@ const Index = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="h-screen bg-background text-foreground font-sans selection:bg-primary selection:text-primary-foreground md:overflow-hidden bg-grid-pattern flex flex-col">
+    <div className="min-h-screen md:h-screen bg-background text-foreground font-sans selection:bg-primary selection:text-primary-foreground md:overflow-hidden bg-grid-pattern flex flex-col">
 
 
 
-      <main className="flex-1 flex flex-col justify-center px-6 md:px-12 py-4 md:py-8 min-h-0 overflow-y-auto md:overflow-hidden">
-        <div className="max-w-7xl mx-auto w-full h-full flex flex-col justify-center">
+      <main className="flex-1 flex flex-col justify-center px-6 md:px-12 py-6 md:py-8 min-h-0 overflow-y-auto md:overflow-hidden">
+        <div className="max-w-7xl mx-auto w-full md:h-full flex flex-col justify-center">
           {/* Tools Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border-t border-l h-full max-h-[800px]" style={{ borderColor: 'hsl(262 8% 88%)', backgroundColor: 'hsl(262 20% 98.5%)' }}>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border-t border-l md:h-full md:max-h-[800px] w-full" style={{ borderColor: 'hsl(262 8% 88%)', backgroundColor: 'hsl(262 20% 98.5%)' }}>
             {tools.map((tool, index) => (
               <motion.div
                 key={tool.id}
@@ -69,6 +76,7 @@ const Index = () => {
                       src={tool.icon} 
                       alt={tool.title} 
                       className="w-5 h-5 lg:w-6 lg:h-6" 
+                      style={tool.id === 'html-css' ? { transform: 'scale(1.22)' } : undefined}
                     />
                   </div>
                   <h3 className="text-xl lg:text-2xl font-bold uppercase tracking-tighter mb-2 lg:mb-4 transition-colors" style={{ color: 'hsl(240 15% 6%)' }}>
@@ -86,17 +94,6 @@ const Index = () => {
                 <div className="absolute top-0 right-0 w-32 h-32 -mr-16 -mt-16 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity" style={{ backgroundColor: 'hsl(262 84% 50% / 0.15)' }}></div>
               </motion.div>
             ))}
-
-            {/* Placeholder / Extra Box */}
-            <div className="hidden lg:flex p-10 border-r border-b flex-col justify-center" style={{ borderColor: 'hsl(262 8% 88%)', backgroundColor: 'hsl(262 20% 98.5%)' }}>
-              <img src="/Icons/Zap.svg" alt="" className="w-8 h-8 mb-4 text-primary" />
-              <div className="text-xl font-bold tracking-tighter leading-tight mb-2" style={{ color: 'hsl(240 15% 6%)' }}>
-                "Design is the silent ambassador of your brand."
-              </div>
-              <div className="text-xs font-bold tracking-widest uppercase" style={{ color: 'hsl(250 10% 40%)', opacity: 0.6 }}>
-                — Paul Rand
-              </div>
-            </div>
           </div>
         </div>
       </main>

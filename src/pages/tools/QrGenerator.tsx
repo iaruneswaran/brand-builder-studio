@@ -34,6 +34,7 @@ const QrGenerator: React.FC = () => {
   const [hasContent, setHasContent] = useState(false);
   const [exportFormat, setExportFormat] = useState<'png' | 'jpg' | 'svg' | 'eps'>('png');
   const [formatOpen, setFormatOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const generate = useCallback(async () => {
     const canvas = canvasRef.current;
@@ -149,6 +150,120 @@ const QrGenerator: React.FC = () => {
     setText(PRESETS[idx].placeholder);
   };
 
+  const renderSettings = () => (
+    <div className="flex flex-col gap-5 h-full">
+      <div className="flex-1 overflow-y-auto space-y-5 pr-1 scrollbar-thin">
+        {/* Content input */}
+        <div className="space-y-1.5 mb-5">
+          <label className="text-[11px] font-semibold text-neutral-600">Content</label>
+          <textarea
+            value={text}
+            onChange={e => setText(e.target.value)}
+            placeholder={PRESETS[preset].placeholder}
+            rows={3}
+            className="w-full px-3 py-2 text-[11px] font-semibold bg-neutral-50 border border-neutral-200 rounded-lg focus:outline-none focus:border-violet-400 resize-none text-neutral-800 placeholder:text-neutral-400"
+          />
+        </div>
+
+        {/* Error correction */}
+        <div className="space-y-2 mb-5">
+          <label className="text-[11px] font-semibold text-neutral-600">Error Correction</label>
+          <div className="grid grid-cols-4 gap-1">
+            {(['L', 'M', 'Q', 'H'] as ErrorLevel[]).map(lvl => (
+              <button
+                key={lvl}
+                onClick={() => setErrorLevel(lvl)}
+                className={`py-1.5 rounded-lg text-[11px] font-bold border transition-all ${
+                  errorLevel === lvl
+                    ? 'bg-violet-600 text-white border-violet-600'
+                    : 'bg-neutral-50 text-neutral-600 border-neutral-200 hover:border-violet-300'
+                }`}
+              >
+                {lvl}
+              </button>
+            ))}
+          </div>
+          <p className="text-[10px] text-neutral-400">
+            {errorLevel === 'L' && 'Low — 7% recovery'}
+            {errorLevel === 'M' && 'Medium — 15% recovery'}
+            {errorLevel === 'Q' && 'Quartile — 25% recovery'}
+            {errorLevel === 'H' && 'High — 30% recovery'}
+          </p>
+        </div>
+
+        {/* Colors */}
+        <div className="space-y-3 mb-5">
+          <label className="text-[11px] font-semibold text-neutral-600">Colors</label>
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 flex-1">
+              <input
+                type="color"
+                value={fgColor}
+                onChange={e => setFgColor(e.target.value)}
+                className="w-8 h-8 rounded-lg cursor-pointer overflow-hidden"
+                style={{ padding: 0, border: 'none' }}
+                title="Foreground color"
+              />
+              <div>
+                <p className="text-[10px] font-bold text-neutral-600">Foreground</p>
+                <p className="text-[10px] text-neutral-400 font-mono">{fgColor.toUpperCase()}</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 flex-1">
+              <input
+                type="color"
+                value={bgColor}
+                onChange={e => setBgColor(e.target.value)}
+                className="w-8 h-8 rounded-lg cursor-pointer overflow-hidden"
+                style={{ padding: 0, border: 'none' }}
+                title="Background color"
+              />
+              <div>
+                <p className="text-[10px] font-bold text-neutral-600">Background</p>
+                <p className="text-[10px] text-neutral-400 font-mono">{bgColor.toUpperCase()}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Margin */}
+        <div className="space-y-2 mb-5">
+          <label className="text-[11px] font-semibold text-neutral-600">Quiet Zone (Margin)</label>
+          <div className="grid grid-cols-3 gap-1.5">
+            {[1, 2, 4].map(m => (
+              <button
+                key={m}
+                onClick={() => setMargin(m)}
+                className={`py-1.5 rounded-lg text-[11px] font-bold border transition-all ${
+                  margin === m
+                    ? 'bg-violet-600 text-white border-violet-600'
+                    : 'bg-neutral-50 text-neutral-600 border-neutral-200 hover:border-violet-300'
+                }`}
+              >
+                {m === 1 ? 'Tight' : m === 2 ? 'Normal' : 'Wide'}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Summary */}
+      <div className="bg-neutral-50 border border-neutral-200 rounded-xl p-3 text-[11px] space-y-1">
+        <p className="font-bold text-neutral-700">Summary</p>
+        <p className="text-neutral-500">Type: {PRESETS[preset].label}</p>
+        <p className="text-neutral-500">Error correction: {errorLevel}</p>
+        <p className="text-neutral-500">Export: {size} × {size}px</p>
+        <p className="text-neutral-500">Margin: {margin === 1 ? 'Tight' : margin === 2 ? 'Normal' : 'Wide'}</p>
+      </div>
+
+      <div className="mt-auto pt-4 border-t border-neutral-100 shrink-0">
+        <p className="text-[9px] text-neutral-400 text-center leading-relaxed">
+          All processing happens locally in your browser. No data is uploaded.
+        </p>
+      </div>
+    </div>
+  );
+
   return (
     <div className="h-screen w-screen overflow-hidden flex flex-col bg-neutral-50 text-foreground select-none">
 
@@ -169,179 +284,61 @@ const QrGenerator: React.FC = () => {
           <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-800">QR Generator</span>
         </div>
 
-        <div className="flex-1" />
-
-        {hasContent && (
-          <div className="flex items-center gap-2">
-            <button
-              onClick={handleCopy}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-[10px] font-bold text-neutral-600 border border-neutral-200 rounded-lg hover:bg-neutral-50 transition-colors"
-            >
-              {copied ? <Check size={11} className="text-emerald-500" /> : <Copy size={11} />}
-              {copied ? 'Copied!' : 'Copy'}
-            </button>
-
-            {/* Format selector + Download */}
-            <div className="flex rounded-lg overflow-hidden border border-violet-600 shadow-sm">
-              <button
-                onClick={handleDownload}
-                className="flex items-center gap-1.5 px-3 py-1.5 text-[10px] font-bold bg-violet-600 text-white hover:bg-violet-700 transition-colors"
-              >
-                <Download size={11} /> Download {exportFormat.toUpperCase()}
-              </button>
-              <div className="relative" ref={dropdownRef}>
-                <button
-                  onClick={() => setFormatOpen(o => !o)}
-                  className="flex items-center px-2 py-1.5 bg-violet-700 text-white hover:bg-violet-800 transition-colors border-l border-violet-500"
-                >
-                  <ChevronDown size={11} />
-                </button>
-                {formatOpen && (
-                  <div className="absolute right-0 top-full mt-1 bg-white border border-neutral-200 rounded-xl shadow-2xl z-[100] w-28 overflow-hidden">
-                    {(['png','jpg','svg','eps'] as const).map(fmt => (
-                      <button
-                        key={fmt}
-                        onClick={() => { setExportFormat(fmt); setFormatOpen(false); }}
-                        className={`w-full px-3 py-2 text-[11px] font-bold text-left transition-colors ${
-                          exportFormat === fmt ? 'bg-violet-50 text-violet-700' : 'text-neutral-700 hover:bg-neutral-50'
-                        }`}
-                      >
-                        {fmt.toUpperCase()}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        )}
       </header>
 
       {/* ══ BODY ══ */}
       <div className="flex-1 min-h-0 flex overflow-hidden">
 
-        {/* ─── Left: Settings ─── */}
-        <aside className="w-72 shrink-0 bg-white border-r border-neutral-200 overflow-y-auto p-5 flex flex-col gap-5">
-
-          <div>
-            <p className="text-[10px] font-bold uppercase tracking-widest text-neutral-400 mb-4">QR Settings</p>
-
-
-
-            {/* Content input */}
-            <div className="space-y-1.5 mb-5">
-              <label className="text-[11px] font-semibold text-neutral-600">Content</label>
-              <textarea
-                value={text}
-                onChange={e => setText(e.target.value)}
-                placeholder={PRESETS[preset].placeholder}
-                rows={3}
-                className="w-full px-3 py-2 text-[11px] font-semibold bg-neutral-50 border border-neutral-200 rounded-lg focus:outline-none focus:border-violet-400 resize-none text-neutral-800 placeholder:text-neutral-400"
-              />
-            </div>
-
-            {/* Error correction */}
-            <div className="space-y-2 mb-5">
-              <label className="text-[11px] font-semibold text-neutral-600">Error Correction</label>
-              <div className="grid grid-cols-4 gap-1">
-                {(['L', 'M', 'Q', 'H'] as ErrorLevel[]).map(lvl => (
-                  <button
-                    key={lvl}
-                    onClick={() => setErrorLevel(lvl)}
-                    className={`py-1.5 rounded-lg text-[11px] font-bold border transition-all ${
-                      errorLevel === lvl
-                        ? 'bg-violet-600 text-white border-violet-600'
-                        : 'bg-neutral-50 text-neutral-600 border-neutral-200 hover:border-violet-300'
-                    }`}
-                  >
-                    {lvl}
-                  </button>
-                ))}
-              </div>
-              <p className="text-[10px] text-neutral-400">
-                {errorLevel === 'L' && 'Low — 7% recovery'}
-                {errorLevel === 'M' && 'Medium — 15% recovery'}
-                {errorLevel === 'Q' && 'Quartile — 25% recovery'}
-                {errorLevel === 'H' && 'High — 30% recovery'}
-              </p>
-            </div>
-
-            {/* Colors */}
-            <div className="space-y-3 mb-5">
-              <label className="text-[11px] font-semibold text-neutral-600">Colors</label>
-              <div className="flex items-center gap-3">
-                <div className="flex items-center gap-2 flex-1">
-                  <input
-                    type="color"
-                    value={fgColor}
-                    onChange={e => setFgColor(e.target.value)}
-                    className="w-8 h-8 rounded-lg cursor-pointer overflow-hidden"
-                    style={{ padding: 0, border: 'none' }}
-                    title="Foreground color"
-                  />
-                  <div>
-                    <p className="text-[10px] font-bold text-neutral-600">Foreground</p>
-                    <p className="text-[10px] text-neutral-400 font-mono">{fgColor.toUpperCase()}</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2 flex-1">
-                  <input
-                    type="color"
-                    value={bgColor}
-                    onChange={e => setBgColor(e.target.value)}
-                    className="w-8 h-8 rounded-lg cursor-pointer overflow-hidden"
-                    style={{ padding: 0, border: 'none' }}
-                    title="Background color"
-                  />
-                  <div>
-                    <p className="text-[10px] font-bold text-neutral-600">Background</p>
-                    <p className="text-[10px] text-neutral-400 font-mono">{bgColor.toUpperCase()}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Margin */}
-            <div className="space-y-2 mb-5">
-              <label className="text-[11px] font-semibold text-neutral-600">Quiet Zone (Margin)</label>
-              <div className="grid grid-cols-3 gap-1.5">
-                {[1, 2, 4].map(m => (
-                  <button
-                    key={m}
-                    onClick={() => setMargin(m)}
-                    className={`py-1.5 rounded-lg text-[11px] font-bold border transition-all ${
-                      margin === m
-                        ? 'bg-violet-600 text-white border-violet-600'
-                        : 'bg-neutral-50 text-neutral-600 border-neutral-200 hover:border-violet-300'
-                    }`}
-                  >
-                    {m === 1 ? 'Tight' : m === 2 ? 'Normal' : 'Wide'}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-
-          </div>
-
-          {/* Summary */}
-          <div className="bg-neutral-50 border border-neutral-200 rounded-xl p-3 text-[11px] space-y-1">
-            <p className="font-bold text-neutral-700">Summary</p>
-            <p className="text-neutral-500">Type: {PRESETS[preset].label}</p>
-            <p className="text-neutral-500">Error correction: {errorLevel}</p>
-            <p className="text-neutral-500">Export: {size} × {size}px</p>
-            <p className="text-neutral-500">Margin: {margin === 1 ? 'Tight' : margin === 2 ? 'Normal' : 'Wide'}</p>
-          </div>
-
-          <div className="mt-auto pt-4 border-t border-neutral-100">
-            <p className="text-[9px] text-neutral-400 text-center leading-relaxed">
-              All processing happens locally in your browser. No data is uploaded.
-            </p>
-          </div>
+        {/* ─── Left: Settings (Desktop) ─── */}
+        <aside className="hidden md:flex w-72 shrink-0 bg-white border-r border-neutral-200 overflow-hidden p-5 flex-col gap-5">
+          <p className="text-[10px] font-bold uppercase tracking-widest text-neutral-400 mb-1">QR Settings</p>
+          {renderSettings()}
         </aside>
 
+        {/* Mobile Settings Drawer Overlay */}
+        {isMobileMenuOpen && (
+          <>
+            {/* Backdrop */}
+            <div
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="fixed inset-0 bg-black/40 z-30 md:hidden"
+            />
+            {/* Drawer Panel */}
+            <aside
+              className="fixed top-0 bottom-0 left-0 w-72 max-w-[85vw] bg-white z-40 p-5 shadow-2xl flex flex-col gap-5 border-r border-neutral-200 md:hidden"
+            >
+              {/* Drawer Header */}
+              <div className="flex items-center justify-between border-b border-neutral-100 pb-3">
+                <span className="text-[11px] font-bold uppercase tracking-widest text-neutral-400">Settings</span>
+                <button
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="p-1 rounded-lg text-neutral-400 hover:bg-neutral-100 hover:text-neutral-600 transition-colors"
+                >
+                  <X size={16} />
+                </button>
+              </div>
+              
+              <div className="flex-1 min-h-0">
+                {renderSettings()}
+              </div>
+            </aside>
+          </>
+        )}
+
         {/* ─── Right: Preview ─── */}
-        <main className="flex-1 overflow-hidden flex flex-col items-center justify-center bg-neutral-50 gap-6 p-8">
+        <main className="flex-1 overflow-hidden flex flex-col items-center justify-center bg-neutral-50 gap-6 p-8 relative">
+          {/* Mobile Hamburger Settings Trigger Button */}
+          <button
+            onClick={() => setIsMobileMenuOpen(true)}
+            className="flex md:hidden absolute top-4 left-4 z-20 items-center justify-center text-neutral-500 hover:text-neutral-800 transition-colors"
+            title="QR Settings"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
           <AnimatePresence mode="wait">
             {text.trim() ? (
               <motion.div

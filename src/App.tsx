@@ -11,6 +11,7 @@ import IconBrowser from "./pages/tools/IconBrowser";
 
 import HeicToJpg from "./pages/tools/HeicToJpg";
 import QrGenerator from "./pages/tools/QrGenerator";
+import HtmlCssFinder from "./pages/tools/HtmlCssFinder";
 
 
 import NotFound from "./pages/NotFound";
@@ -32,6 +33,7 @@ const App = () => (
 
           <Route path="/tools/heic-to-jpg" element={<HeicToJpg />} />
           <Route path="/tools/qr-generator" element={<QrGenerator />} />
+          <Route path="/tools/html-css-finder" element={<HtmlCssFinder />} />
 
 
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

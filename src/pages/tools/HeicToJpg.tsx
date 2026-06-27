@@ -78,6 +78,7 @@ const HeicToJpg: React.FC = () => {
   const [isDragging, setIsDragging] = useState(false);
   const [quality, setQuality] = useState<number>(0.92);
   const [isConverting, setIsConverting] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   /* ─── file ingestion ─── */
   const addFiles = useCallback((incoming: FileList | File[]) => {
@@ -199,6 +200,99 @@ const HeicToJpg: React.FC = () => {
     { label: 'Medium', value: 0.75 },
     { label: 'Low', value: 0.5 },
   ];
+  const renderSettings = () => (
+    <div className="flex flex-col gap-5 h-full">
+      <div className="flex-1 overflow-y-auto space-y-5 pr-1 scrollbar-thin">
+        {/* Output Quality */}
+        <div className="space-y-2">
+          <label className="text-[11px] font-semibold text-neutral-600">
+            JPEG Quality
+          </label>
+          <div className="grid grid-cols-3 gap-1.5">
+            {qualityLevels.map(q => (
+              <button
+                key={q.label}
+                onClick={() => setQuality(q.value)}
+                className={`px-2 py-1.5 rounded-lg text-[11px] font-bold border transition-all ${
+                  quality === q.value
+                    ? 'bg-violet-600 text-white border-violet-600'
+                    : 'bg-neutral-50 text-neutral-600 border-neutral-200 hover:border-violet-300'
+                }`}
+              >
+                {q.label}
+              </button>
+            ))}
+          </div>
+          <p className="text-[10px] text-neutral-400">
+            {quality === 0.92 && 'Best visual quality, larger file size'}
+            {quality === 0.75 && 'Balanced quality and file size'}
+            {quality === 0.5  && 'Smaller files, some quality loss'}
+          </p>
+        </div>
+
+        {/* Format info */}
+        <div className="bg-neutral-50 border border-neutral-200 rounded-xl p-3 space-y-1">
+          <p className="text-[10px] font-bold text-neutral-500 uppercase tracking-wider">Output</p>
+          <p className="text-[11px] text-neutral-700 font-semibold">JPEG (.jpg)</p>
+          <p className="text-[10px] text-neutral-500">Quality: {qualityLabel} ({Math.round(quality * 100)}%)</p>
+        </div>
+
+        {/* Stats */}
+        {files.length > 0 && (
+          <div className="bg-neutral-50 border border-neutral-200 rounded-xl p-3 text-[11px] space-y-2">
+            <p className="font-bold text-neutral-700">Summary</p>
+            <div className="space-y-1">
+              <div className="flex justify-between">
+                <span className="text-neutral-500">Total files</span>
+                <span className="font-semibold text-neutral-700">{files.length}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-neutral-500">Converted</span>
+                <span className="font-semibold text-emerald-600">{doneCount}</span>
+              </div>
+              {pendingCount > 0 && (
+                <div className="flex justify-between">
+                  <span className="text-neutral-500">Pending</span>
+                  <span className="font-semibold text-violet-600">{pendingCount}</span>
+                </div>
+              )}
+              {files.filter(f => f.status === 'error').length > 0 && (
+                <div className="flex justify-between">
+                  <span className="text-neutral-500">Failed</span>
+                  <span className="font-semibold text-red-500">
+                    {files.filter(f => f.status === 'error').length}
+                  </span>
+                </div>
+              )}
+            </div>
+
+            {/* Size savings */}
+            {doneCount > 0 && (() => {
+              const origKB = files.filter(f => f.status === 'done').reduce((s, f) => s + f.sizeKB, 0);
+              const outKB  = files.filter(f => f.status === 'done').reduce((s, f) => s + (f.outputSizeKB ?? 0), 0);
+              const savings = origKB - outKB;
+              return (
+                <div className="pt-1 border-t border-neutral-200">
+                  <div className="flex justify-between">
+                    <span className="text-neutral-500">Size change</span>
+                    <span className={`font-semibold ${savings > 0 ? 'text-emerald-600' : 'text-neutral-600'}`}>
+                      {savings > 0 ? `-${savings} KB` : `+${Math.abs(savings)} KB`}
+                    </span>
+                  </div>
+                </div>
+              );
+            })()}
+          </div>
+        )}
+      </div>
+
+      <div className="mt-auto pt-4 border-t border-neutral-100 shrink-0">
+        <p className="text-[9px] text-neutral-400 text-center leading-relaxed">
+          All processing happens locally in your browser.<br />No files are uploaded to any server.
+        </p>
+      </div>
+    </div>
+  );
 
   /* ─── Render ─── */
   return (
@@ -234,14 +328,14 @@ const HeicToJpg: React.FC = () => {
 
         {files.length > 0 && (
           <div className="flex items-center gap-2">
-            <span className="text-[10px] text-neutral-400 font-semibold">
+            <span className="text-[10px] text-neutral-400 font-semibold hidden md:inline">
               {files.length} file{files.length !== 1 ? 's' : ''}
             </span>
             <button
               onClick={clearAll}
               className="flex items-center gap-1 px-2 py-1 text-[10px] font-bold text-red-500 rounded-lg border border-red-200 hover:bg-red-50 transition-colors"
             >
-              <Trash2 size={10} /> Clear
+              <Trash2 size={10} /> <span className="hidden sm:inline">Clear</span>
             </button>
           </div>
         )}
@@ -275,104 +369,44 @@ const HeicToJpg: React.FC = () => {
       {/* ══ BODY ══ */}
       <div className="flex-1 min-h-0 flex overflow-hidden">
 
-        {/* ─── Left: settings panel ─── */}
-        <aside className="w-72 shrink-0 bg-white border-r border-neutral-200 overflow-hidden p-5 flex flex-col gap-5">
-          <div>
-            <p className="text-[10px] font-bold uppercase tracking-widest text-neutral-400 mb-4">
-              Conversion Settings
-            </p>
-
-            {/* Output Quality */}
-            <div className="space-y-2 mb-5">
-              <label className="text-[11px] font-semibold text-neutral-600">
-                JPEG Quality
-              </label>
-              <div className="grid grid-cols-3 gap-1.5">
-                {qualityLevels.map(q => (
-                  <button
-                    key={q.label}
-                    onClick={() => setQuality(q.value)}
-                    className={`px-2 py-1.5 rounded-lg text-[11px] font-bold border transition-all ${
-                      quality === q.value
-                        ? 'bg-violet-600 text-white border-violet-600'
-                        : 'bg-neutral-50 text-neutral-600 border-neutral-200 hover:border-violet-300'
-                    }`}
-                  >
-                    {q.label}
-                  </button>
-                ))}
-              </div>
-              <p className="text-[10px] text-neutral-400">
-                {quality === 0.92 && 'Best visual quality, larger file size'}
-                {quality === 0.75 && 'Balanced quality and file size'}
-                {quality === 0.5  && 'Smaller files, some quality loss'}
-              </p>
-            </div>
-
-            {/* Format info */}
-            <div className="bg-neutral-50 border border-neutral-200 rounded-xl p-3 space-y-1">
-              <p className="text-[10px] font-bold text-neutral-500 uppercase tracking-wider">Output</p>
-              <p className="text-[11px] text-neutral-700 font-semibold">JPEG (.jpg)</p>
-              <p className="text-[10px] text-neutral-500">Quality: {qualityLabel} ({Math.round(quality * 100)}%)</p>
-            </div>
-          </div>
-
-          {/* Stats */}
-          {files.length > 0 && (
-            <div className="bg-neutral-50 border border-neutral-200 rounded-xl p-3 text-[11px] space-y-2">
-              <p className="font-bold text-neutral-700">Summary</p>
-              <div className="space-y-1">
-                <div className="flex justify-between">
-                  <span className="text-neutral-500">Total files</span>
-                  <span className="font-semibold text-neutral-700">{files.length}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-neutral-500">Converted</span>
-                  <span className="font-semibold text-emerald-600">{doneCount}</span>
-                </div>
-                {pendingCount > 0 && (
-                  <div className="flex justify-between">
-                    <span className="text-neutral-500">Pending</span>
-                    <span className="font-semibold text-violet-600">{pendingCount}</span>
-                  </div>
-                )}
-                {files.filter(f => f.status === 'error').length > 0 && (
-                  <div className="flex justify-between">
-                    <span className="text-neutral-500">Failed</span>
-                    <span className="font-semibold text-red-500">
-                      {files.filter(f => f.status === 'error').length}
-                    </span>
-                  </div>
-                )}
-              </div>
-
-              {/* Size savings */}
-              {doneCount > 0 && (() => {
-                const origKB = files.filter(f => f.status === 'done').reduce((s, f) => s + f.sizeKB, 0);
-                const outKB  = files.filter(f => f.status === 'done').reduce((s, f) => s + (f.outputSizeKB ?? 0), 0);
-                const savings = origKB - outKB;
-                return (
-                  <div className="pt-1 border-t border-neutral-200">
-                    <div className="flex justify-between">
-                      <span className="text-neutral-500">Size change</span>
-                      <span className={`font-semibold ${savings > 0 ? 'text-emerald-600' : 'text-neutral-600'}`}>
-                        {savings > 0 ? `-${savings} KB` : `+${Math.abs(savings)} KB`}
-                      </span>
-                    </div>
-                  </div>
-                );
-              })()}
-            </div>
-          )}
-
-          <div className="mt-auto pt-4 border-t border-neutral-100">
-            <p className="text-[9px] text-neutral-400 text-center leading-relaxed">
-              All processing happens locally in your browser.<br />No files are uploaded to any server.
-            </p>
-          </div>
+        {/* ─── Left: settings panel (Desktop) ─── */}
+        <aside className="hidden md:flex w-72 shrink-0 bg-white border-r border-neutral-200 overflow-hidden p-5 flex-col gap-5">
+          <p className="text-[10px] font-bold uppercase tracking-widest text-neutral-400 mb-1">
+            Conversion Settings
+          </p>
+          {renderSettings()}
         </aside>
 
-        {/* ─── Right: file list + drop zone ─── */}
+        {/* Mobile Settings Drawer Overlay */}
+        {isMobileMenuOpen && (
+          <>
+            {/* Backdrop */}
+            <div
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="fixed inset-0 bg-black/40 z-30 md:hidden"
+            />
+            {/* Drawer Panel */}
+            <aside
+              className="fixed top-0 bottom-0 left-0 w-72 max-w-[85vw] bg-white z-40 p-5 shadow-2xl flex flex-col gap-5 border-r border-neutral-200 md:hidden"
+            >
+              {/* Drawer Header */}
+              <div className="flex items-center justify-between border-b border-neutral-100 pb-3">
+                <span className="text-[11px] font-bold uppercase tracking-widest text-neutral-400">Settings</span>
+                <button
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="p-1 rounded-lg text-neutral-400 hover:bg-neutral-100 hover:text-neutral-600 transition-colors"
+                >
+                  <X size={16} />
+                </button>
+              </div>
+              
+              <div className="flex-1 min-h-0">
+                {renderSettings()}
+              </div>
+            </aside>
+          </>
+        )}
+
         <main
           ref={dropRef}
           className="flex-1 overflow-y-auto p-4 relative"
@@ -380,6 +414,19 @@ const HeicToJpg: React.FC = () => {
           onDragLeave={() => setIsDragging(false)}
           onDrop={handleDrop}
         >
+          {/* Mobile Hamburger Settings Trigger Button */}
+          <button
+            onClick={() => setIsMobileMenuOpen(true)}
+            className="flex md:hidden absolute top-4 left-4 z-20 items-center justify-center text-neutral-500 hover:text-neutral-800 transition-colors"
+            title="Conversion Settings"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+
           <AnimatePresence>
             {isDragging && (
               <motion.div
@@ -415,7 +462,7 @@ const HeicToJpg: React.FC = () => {
           ) : (
             /* File grid */
             <div className="max-w-5xl mx-auto">
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center justify-between mb-4 pl-12 md:pl-0">
                 <p className="text-[11px] font-bold text-neutral-500 uppercase tracking-widest">
                   Files ({files.length})
                 </p>

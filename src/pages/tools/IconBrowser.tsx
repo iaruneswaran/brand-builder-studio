@@ -4373,7 +4373,7 @@ const IconBrowser: React.FC = () => {
             </div>
           </div>
 
-          <div className="flex lg:flex-col overflow-x-auto lg:overflow-y-auto custom-scrollbar p-2 lg:p-0 gap-2 lg:gap-0">
+          <div className="flex lg:flex-col overflow-x-auto lg:overflow-y-auto scrollbar-hide p-2 lg:p-0 gap-2 lg:gap-0">
             {(() => {
               const sorted = [...CATEGORIES].sort((a, b) => {
                 if (a.id === 'all') return -1;

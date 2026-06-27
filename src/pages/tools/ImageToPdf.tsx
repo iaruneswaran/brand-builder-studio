@@ -159,6 +159,7 @@ const ImageToPdf: React.FC = () => {
   const [margin, setMargin]           = useState(0); // 0 = Auto, 20 = Medium, 40 = Large
   const [quality, setQuality]         = useState<Quality>('high');
   const [filename, setFilename]       = useState('images');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   /* ─── file handling ─── */
   const addFiles = useCallback(async (files: FileList | File[]) => {
@@ -261,6 +262,136 @@ const ImageToPdf: React.FC = () => {
     estimatedSizeMB = Math.max(0.01, totalMB * multiplier).toFixed(2);
   }
 
+  const renderSettings = () => (
+    <div className="flex flex-col gap-4 h-full">
+      <div className="flex-1 overflow-y-auto space-y-4 pr-1 scrollbar-thin">
+        {/* Page Size */}
+        <div className="space-y-1">
+          <label className="text-[11px] font-semibold text-neutral-600">Page Size</label>
+          <div className="grid grid-cols-2 gap-1.5">
+            {(['A4', 'Letter', 'A3', 'fit'] as PageSize[]).map(s => (
+              <button
+                key={s}
+                onClick={() => setPageSize(s)}
+                className={`px-2 py-1.5 rounded-lg text-[11px] font-bold border transition-all ${
+                  pageSize === s
+                    ? 'bg-violet-600 text-white border-violet-600'
+                    : 'bg-neutral-50 text-neutral-600 border-neutral-200 hover:border-violet-300'
+                }`}
+              >
+                {s === 'fit' ? 'Fit Image' : s}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Orientation */}
+        {pageSize !== 'fit' && (
+          <div className="space-y-1">
+            <label className="text-[11px] font-semibold text-neutral-600">Orientation</label>
+            <div className="grid grid-cols-2 gap-1.5">
+              {(['portrait', 'landscape'] as Orientation[]).map(o => (
+                <button
+                  key={o}
+                  onClick={() => setOrientation(o)}
+                  className={`px-2 py-1.5 rounded-lg text-[11px] font-bold border capitalize transition-all ${
+                    orientation === o
+                      ? 'bg-violet-600 text-white border-violet-600'
+                      : 'bg-neutral-50 text-neutral-600 border-neutral-200 hover:border-violet-300'
+                  }`}
+                >
+                  {o}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Quality */}
+        <div className="space-y-1">
+          <label className="text-[11px] font-semibold text-neutral-600">Image Quality</label>
+          <div className="grid grid-cols-3 gap-1.5">
+            {(['high', 'medium', 'low'] as Quality[]).map(q => (
+              <button
+                key={q}
+                onClick={() => setQuality(q)}
+                className={`px-2 py-1.5 rounded-lg text-[11px] font-bold border capitalize transition-all ${
+                  quality === q
+                    ? 'bg-violet-600 text-white border-violet-600'
+                    : 'bg-neutral-50 text-neutral-600 border-neutral-200 hover:border-violet-300'
+                }`}
+              >
+                {q}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Margin */}
+        <div className="space-y-1">
+          <label className="text-[11px] font-semibold text-neutral-600">Margins</label>
+          <div className="grid grid-cols-3 gap-1.5">
+            {[
+              { label: 'Auto', value: 0 },
+              { label: 'Medium', value: 20 },
+              { label: 'Large', value: 40 }
+            ].map(m => (
+              <button
+                key={m.label}
+                onClick={() => setMargin(m.value)}
+                className={`px-2 py-1.5 rounded-lg text-[11px] font-bold border transition-all ${
+                  margin === m.value
+                    ? 'bg-violet-600 text-white border-violet-600'
+                    : 'bg-neutral-50 text-neutral-600 border-neutral-200 hover:border-violet-300'
+                }`}
+              >
+                {m.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Filename */}
+        <div className="space-y-1">
+          <label className="text-[11px] font-semibold text-neutral-600">Filename</label>
+          <div className="flex items-center gap-1 bg-neutral-50 border border-neutral-200 rounded-lg overflow-hidden">
+            <input
+              type="text"
+              value={filename}
+              onChange={e => setFilename(e.target.value)}
+              className="flex-1 px-2.5 py-1.5 text-[11px] font-semibold bg-transparent focus:outline-none text-neutral-800"
+              placeholder="my-document"
+            />
+            <span className="text-[10px] text-neutral-400 pr-2.5 font-semibold">.pdf</span>
+          </div>
+        </div>
+
+        {/* Summary */}
+        {images.length > 0 && (
+          <div className="bg-neutral-50 border border-neutral-200 rounded-xl p-3 text-[11px] space-y-1">
+            <p className="font-bold text-neutral-700">Summary</p>
+            <p className="text-neutral-500">{images.length} page{images.length !== 1 ? 's' : ''}</p>
+            <p className="text-neutral-500">{pageSize === 'fit' ? 'Fit to image' : `${pageSize} · ${orientation}`}</p>
+            <p className="text-neutral-500">Quality: {quality}</p>
+            <p className="text-neutral-500">Margin: {margin === 0 ? 'Auto' : margin === 20 ? 'Medium' : 'Large'} ({margin} pt)</p>
+            <div className="pt-2 mt-2 border-t border-neutral-200">
+              <p className="flex justify-between items-center font-bold text-neutral-700">
+                <span>Est. PDF Size:</span>
+                <span className="text-violet-600 bg-violet-100 px-1.5 py-0.5 rounded text-[10px]">~{estimatedSizeMB} MB</span>
+              </p>
+            </div>
+          </div>
+        )}
+      </div>
+
+      <div className="mt-auto pt-4 border-t border-neutral-100 shrink-0">
+        <p className="text-[9px] text-neutral-400 text-center leading-relaxed">
+          All processing happens locally in your browser. No files are uploaded.
+        </p>
+      </div>
+    </div>
+  );
+
   return (
     <div className="h-screen w-screen overflow-hidden flex flex-col bg-neutral-50 text-foreground select-none">
       <input ref={fileInputRef} type="file" accept="image/*" multiple className="hidden" onChange={handleFileChange} />
@@ -285,12 +416,12 @@ const ImageToPdf: React.FC = () => {
 
         {images.length > 0 && (
           <div className="flex items-center gap-2">
-            <span className="text-[10px] text-neutral-400 font-semibold">{images.length} image{images.length !== 1 ? 's' : ''}</span>
+            <span className="text-[10px] text-neutral-400 font-semibold hidden md:inline">{images.length} image{images.length !== 1 ? 's' : ''}</span>
             <button
               onClick={clearAll}
               className="flex items-center gap-1 px-2 py-1 text-[10px] font-bold text-red-500 rounded-lg border border-red-200 hover:bg-red-50 transition-colors"
             >
-              <Trash2 size={10} /> Clear
+              <Trash2 size={10} /> <span className="hidden sm:inline">Clear</span>
             </button>
           </div>
         )}
@@ -317,136 +448,41 @@ const ImageToPdf: React.FC = () => {
       {/* ══ BODY ══ */}
       <div className="flex-1 min-h-0 flex overflow-hidden">
 
-        {/* ─── Left: settings panel ─── */}
-        <aside className="w-80 shrink-0 bg-white border-r border-neutral-200 overflow-hidden p-5 flex flex-col gap-4">
-          <div>
-            <p className="text-[10px] font-bold uppercase tracking-widest text-neutral-400 mb-3">PDF Settings</p>
-
-            {/* Page Size */}
-            <div className="space-y-1 mb-4">
-              <label className="text-[11px] font-semibold text-neutral-600">Page Size</label>
-              <div className="grid grid-cols-2 gap-1.5">
-                {(['A4', 'Letter', 'A3', 'fit'] as PageSize[]).map(s => (
-                  <button
-                    key={s}
-                    onClick={() => setPageSize(s)}
-                    className={`px-2 py-1.5 rounded-lg text-[11px] font-bold border transition-all ${
-                      pageSize === s
-                        ? 'bg-violet-600 text-white border-violet-600'
-                        : 'bg-neutral-50 text-neutral-600 border-neutral-200 hover:border-violet-300'
-                    }`}
-                  >
-                    {s === 'fit' ? 'Fit Image' : s}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Orientation */}
-            {pageSize !== 'fit' && (
-              <div className="space-y-1 mb-4">
-                <label className="text-[11px] font-semibold text-neutral-600">Orientation</label>
-                <div className="grid grid-cols-2 gap-1.5">
-                  {(['portrait', 'landscape'] as Orientation[]).map(o => (
-                    <button
-                      key={o}
-                      onClick={() => setOrientation(o)}
-                      className={`px-2 py-1.5 rounded-lg text-[11px] font-bold border capitalize transition-all ${
-                        orientation === o
-                          ? 'bg-violet-600 text-white border-violet-600'
-                          : 'bg-neutral-50 text-neutral-600 border-neutral-200 hover:border-violet-300'
-                      }`}
-                    >
-                      {o}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Quality */}
-            <div className="space-y-1 mb-4">
-              <label className="text-[11px] font-semibold text-neutral-600">Image Quality</label>
-              <div className="grid grid-cols-3 gap-1.5">
-                {(['high', 'medium', 'low'] as Quality[]).map(q => (
-                  <button
-                    key={q}
-                    onClick={() => setQuality(q)}
-                    className={`px-2 py-1.5 rounded-lg text-[11px] font-bold border capitalize transition-all ${
-                      quality === q
-                        ? 'bg-violet-600 text-white border-violet-600'
-                        : 'bg-neutral-50 text-neutral-600 border-neutral-200 hover:border-violet-300'
-                    }`}
-                  >
-                    {q}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Margin */}
-            <div className="space-y-1 mb-4">
-              <label className="text-[11px] font-semibold text-neutral-600">Margins</label>
-              <div className="grid grid-cols-3 gap-1.5">
-                {[
-                  { label: 'Auto', value: 0 },
-                  { label: 'Medium', value: 20 },
-                  { label: 'Large', value: 40 }
-                ].map(m => (
-                  <button
-                    key={m.label}
-                    onClick={() => setMargin(m.value)}
-                    className={`px-2 py-1.5 rounded-lg text-[11px] font-bold border transition-all ${
-                      margin === m.value
-                        ? 'bg-violet-600 text-white border-violet-600'
-                        : 'bg-neutral-50 text-neutral-600 border-neutral-200 hover:border-violet-300'
-                    }`}
-                  >
-                    {m.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Filename */}
-            <div className="space-y-1">
-              <label className="text-[11px] font-semibold text-neutral-600">Filename</label>
-              <div className="flex items-center gap-1 bg-neutral-50 border border-neutral-200 rounded-lg overflow-hidden">
-                <input
-                  type="text"
-                  value={filename}
-                  onChange={e => setFilename(e.target.value)}
-                  className="flex-1 px-2.5 py-1.5 text-[11px] font-semibold bg-transparent focus:outline-none text-neutral-800"
-                  placeholder="my-document"
-                />
-                <span className="text-[10px] text-neutral-400 pr-2.5 font-semibold">.pdf</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Summary */}
-          {images.length > 0 && (
-            <div className="bg-neutral-50 border border-neutral-200 rounded-xl p-3 text-[11px] space-y-1">
-              <p className="font-bold text-neutral-700">Summary</p>
-              <p className="text-neutral-500">{images.length} page{images.length !== 1 ? 's' : ''}</p>
-              <p className="text-neutral-500">{pageSize === 'fit' ? 'Fit to image' : `${pageSize} · ${orientation}`}</p>
-              <p className="text-neutral-500">Quality: {quality}</p>
-              <p className="text-neutral-500">Margin: {margin === 0 ? 'Auto' : margin === 20 ? 'Medium' : 'Large'} ({margin} pt)</p>
-              <div className="pt-2 mt-2 border-t border-neutral-200">
-                <p className="flex justify-between items-center font-bold text-neutral-700">
-                  <span>Est. PDF Size:</span>
-                  <span className="text-violet-600 bg-violet-100 px-1.5 py-0.5 rounded text-[10px]">~{estimatedSizeMB} MB</span>
-                </p>
-              </div>
-            </div>
-          )}
-
-          <div className="mt-auto pt-4 border-t border-neutral-100">
-            <p className="text-[9px] text-neutral-400 text-center leading-relaxed">
-              All processing happens locally in your browser. No files are uploaded.
-            </p>
-          </div>
+        {/* ─── Left: settings panel (Desktop) ─── */}
+        <aside className="hidden md:flex w-80 shrink-0 bg-white border-r border-neutral-200 overflow-hidden p-5 flex-col gap-4">
+          <p className="text-[10px] font-bold uppercase tracking-widest text-neutral-400 mb-1">PDF Settings</p>
+          {renderSettings()}
         </aside>
+
+        {/* Mobile Settings Drawer Overlay */}
+        {isMobileMenuOpen && (
+          <>
+            {/* Backdrop */}
+            <div
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="fixed inset-0 bg-black/40 z-30 md:hidden"
+            />
+            {/* Drawer Panel */}
+            <aside
+              className="fixed top-0 bottom-0 left-0 w-80 max-w-[85vw] bg-white z-40 p-5 shadow-2xl flex flex-col gap-4 border-r border-neutral-200 md:hidden"
+            >
+              {/* Drawer Header */}
+              <div className="flex items-center justify-between border-b border-neutral-100 pb-3">
+                <span className="text-[11px] font-bold uppercase tracking-widest text-neutral-400">PDF Settings</span>
+                <button
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="p-1 rounded-lg text-neutral-400 hover:bg-neutral-100 hover:text-neutral-600 transition-colors"
+                >
+                  <X size={16} />
+                </button>
+              </div>
+              
+              <div className="flex-1 min-h-0">
+                {renderSettings()}
+              </div>
+            </aside>
+          </>
+        )}
 
         {/* ─── Right: image list + drop zone ─── */}
         <main
@@ -459,6 +495,19 @@ const ImageToPdf: React.FC = () => {
           onDragLeave={() => setIsDragging(false)}
           onDrop={handleDrop}
         >
+          {/* Mobile Hamburger Settings Trigger Button */}
+          <button
+            onClick={() => setIsMobileMenuOpen(true)}
+            className="flex md:hidden absolute top-4 left-4 z-20 items-center justify-center text-neutral-500 hover:text-neutral-800 transition-colors"
+            title="PDF Settings"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+
           <AnimatePresence>
             {isDragging && (
               <motion.div
@@ -495,7 +544,7 @@ const ImageToPdf: React.FC = () => {
             /* ── Square grid cards ── */
             <div className="max-w-4xl mx-auto">
               {/* Header row */}
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center justify-between mb-4 pl-12 md:pl-0">
                 <p className="text-[11px] font-bold text-neutral-500 uppercase tracking-widest">Pages ({images.length})</p>
                 <div className="flex items-center gap-2">
                   <button
