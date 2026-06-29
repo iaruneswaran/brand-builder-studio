@@ -23,16 +23,16 @@ const ComponentsSection = ({ palette }: ComponentsSectionProps) => {
           <div className="col-span-12 lg:col-span-4">
             <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground mb-6">Interactive — Buttons</p>
             <div className="space-y-4">
-              <button className="w-full h-12 font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-hard hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[4px_4px_0_rgba(0,0,0,0.2)] transition-all" style={{ backgroundColor: palette.primary[500], color: '#FAFAFA' }}>
+              <button className="w-full h-12 font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 hover:opacity-95 transition-all" style={{ backgroundColor: palette.primary[500], color: '#FAFAFA' }}>
                 Primary Button <ArrowRight className="w-4 h-4" />
               </button>
-              <button className="w-full h-12 font-bold text-xs uppercase tracking-widest border border-primary flex items-center justify-center gap-2 bg-transparent text-primary hover:bg-primary/5 transition-all shadow-hard-sm">
+              <button className="w-full h-12 font-bold text-xs uppercase tracking-widest border border-primary flex items-center justify-center gap-2 bg-transparent text-primary hover:bg-primary/5 transition-all">
                 Secondary Button
               </button>
               <button className="w-full h-12 font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 text-foreground hover:bg-neutral-100 transition-colors bg-transparent border border-transparent">
                 Ghost Button
               </button>
-              <button className="w-full h-12 font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-hard hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[4px_4px_0_rgba(0,0,0,0.2)] transition-all" style={{ backgroundColor: palette.accentA[600], color: '#FAFAFA' }}>
+              <button className="w-full h-12 font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 hover:opacity-95 transition-all" style={{ backgroundColor: palette.accentA[600], color: '#FAFAFA' }}>
                 Accent CTA <ArrowRight className="w-4 h-4" />
               </button>
               <button className="w-full h-12 font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 opacity-30 cursor-not-allowed bg-neutral-400 text-white">

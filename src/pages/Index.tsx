@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
 
 const tools = [
   {
@@ -85,8 +86,9 @@ const Index = () => {
                   <p className="text-xs lg:text-sm leading-relaxed mb-4 lg:mb-8 max-w-[240px]" style={{ color: 'hsl(250 10% 40%)' }}>
                     {tool.description}
                   </p>
-                  <div className="flex items-center gap-2 text-[10px] lg:text-xs font-black tracking-widest uppercase group-hover:translate-x-2 transition-transform" style={{ color: 'hsl(262 84% 50%)' }}>
-                    Launch Tool <img src="/Icons/ArrowUpRight.svg" alt="" className="w-3 h-3 lg:w-3.5 lg:h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  <div className="flex items-center gap-1.5 text-[10px] lg:text-xs font-black tracking-widest uppercase" style={{ color: 'hsl(250 10% 40%)' }}>
+                    <span>Launch Tool</span>
+                    <ArrowRight className="w-3 h-3 lg:w-3.5 lg:h-3.5 transition-all duration-200 group-hover:text-primary group-hover:translate-x-1" />
                   </div>
                 </div>
 

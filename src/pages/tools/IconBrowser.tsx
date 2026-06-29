@@ -4472,8 +4472,8 @@ const IconBrowser: React.FC = () => {
 
         {/* ─── RIGHT: Actions Panel ─── */}
         <aside className={`
-          absolute inset-x-0 bottom-0 z-30 max-h-[70vh] shadow-[0_-10px_40px_rgba(0,0,0,0.1)]
-          lg:relative lg:w-72 lg:max-h-none lg:shadow-none
+          absolute inset-x-0 bottom-0 z-30 max-h-[70vh]
+          lg:relative lg:w-72 lg:max-h-none
           shrink-0 bg-white border-t lg:border-t-0 lg:border-l border-neutral-200
           flex flex-col overflow-y-auto custom-scrollbar transition-transform duration-300
           ${selected ? 'translate-y-0' : 'translate-y-full lg:translate-y-0'}

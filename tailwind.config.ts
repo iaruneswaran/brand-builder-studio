@@ -23,6 +23,25 @@ export default {
       extrabold: '500',
     },
     extend: {
+      boxShadow: {
+        sm: 'none',
+        DEFAULT: 'none',
+        md: 'none',
+        lg: 'none',
+        xl: 'none',
+        '2xl': 'none',
+        inner: 'none',
+        none: 'none',
+      },
+      dropShadow: {
+        sm: 'none',
+        DEFAULT: 'none',
+        md: 'none',
+        lg: 'none',
+        xl: 'none',
+        '2xl': 'none',
+        none: 'none',
+      },
       spacing: {
         'grid': '8px',
         '32': '32px',

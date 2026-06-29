@@ -77,9 +77,9 @@
     --radius: 0px;
 
     /* 2026 Layered Hard Shadows */
-    --shadow-sm: 2px 2px 0 rgba(0, 0, 0, 1);
-    --shadow-md: 4px 4px 0 rgba(0, 0, 0, 1), 8px 8px 0 rgba(0, 0, 0, 0.05);
-    --shadow-lg: 6px 6px 0 rgba(0, 0, 0, 1), 12px 12px 0 rgba(0, 0, 0, 0.08), 18px 18px 0 rgba(0, 0, 0, 0.03);
+    --shadow-sm: none;
+    --shadow-md: none;
+    --shadow-lg: none;
 
     --transition-curve: cubic-bezier(0.16, 1, 0.3, 1);
   }

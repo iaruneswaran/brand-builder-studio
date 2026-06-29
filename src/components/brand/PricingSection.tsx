@@ -53,8 +53,8 @@ const PricingSection = ({ palette }: { palette: BrandPalette }) => {
                             </ul>
 
                             <button className={`w-full h-12 text-xs font-bold uppercase tracking-widest transition-all ${plan.popular
-                                ? 'bg-primary text-primary-foreground shadow-hard hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[4px_4px_0_rgba(0,0,0,0.2)]'
-                                : 'bg-white text-foreground shadow-hard-sm hover:bg-neutral-50'
+                                ? 'bg-primary text-primary-foreground hover:bg-primary/90'
+                                : 'bg-white border border-neutral-200 text-foreground hover:bg-neutral-50'
                                 }`}>
                                 {plan.buttonText}
                             </button>
