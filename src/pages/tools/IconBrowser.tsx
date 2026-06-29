@@ -4436,11 +4436,12 @@ const IconBrowser: React.FC = () => {
               </div>
             ) : (
                 <div className="p-3 grid grid-cols-[repeat(auto-fill,minmax(72px,1fr))] gap-1.5">
-                  {filtered.map(entry => {
+                  {filtered.map((entry, index) => {
                   const isSelected = selected?.name === entry.name && selected?.folder === entry.folder;
+                  const itemPath = iconPath(entry);
                   return (
                     <motion.button
-                      key={`${entry.folder}-${entry.name}`}
+                      key={`${entry.folder}-${entry.name}-${index}`}
                       initial={{ opacity: 0, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ duration: 0.05 }}
@@ -4452,13 +4453,14 @@ const IconBrowser: React.FC = () => {
                         }`}
                       >
                         <div className="w-9 h-9 flex items-center justify-center">
-                          <img
-                            src={iconPath(entry)}
-                            alt={entry.name}
-                            className="max-w-full max-h-full object-contain"
-                            loading="lazy"
-                            onError={e => { (e.target as HTMLImageElement).style.opacity = '0.3'; }}
-                          />
+                           <img
+                             key={itemPath}
+                             src={itemPath}
+                             alt={entry.name}
+                             className="max-w-full max-h-full object-contain"
+                             loading="lazy"
+                             onError={e => { (e.target as HTMLImageElement).style.opacity = '0.3'; }}
+                           />
                         </div>
                       </motion.button>
                     );
